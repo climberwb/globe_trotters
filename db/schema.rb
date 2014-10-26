@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019220604) do
+ActiveRecord::Schema.define(version: 20141026204609) do
+
+  create_table "team_tables", force: true do |t|
+    t.integer "captain_id"
+  end
+
+  create_table "teams", force: true do |t|
+    t.integer "captain_id"
+    t.string  "name"
+    t.string  "sport"
+    t.string  "location"
+  end
+
+  create_table "teams_tables", force: true do |t|
+    t.integer "captain_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
