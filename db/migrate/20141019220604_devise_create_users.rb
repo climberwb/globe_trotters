@@ -35,6 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
        ## Customization
        t.string :name
        t.string :type
+       t.integer :team_id
     end
 
     add_index :users, :email,                unique: true
