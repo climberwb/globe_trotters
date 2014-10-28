@@ -6,14 +6,14 @@ class User < ActiveRecord::Base
 
   
   # This is the captain's team relation
-  has_one :owned_team, class_name: "Team"
+  has_one :captain, class_name: "Team"
 
   # This is the teammates realtion
   belongs_to :team
 
-  belongs_to :captain, class_name: "User"
+  # belongs_to :captain, class_name: "User"
   
-  has_many :teammates, class_name: "User", foreign_key: "captain_id"
+  # has_many :teammates, class_name: "User", foreign_key: "captain_id"
 
   def teammate?
    role == 'teammate'
