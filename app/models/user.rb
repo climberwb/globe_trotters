@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   
   # This is the captain's team relation
-  has_one :captain, class_name: "Team"
+  has_one :my_team, class_name: "Team", foreign_key: "captain_id"
 
   # This is the teammates realtion
   belongs_to :team

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028031540) do
-
-  create_table "team_tables", force: true do |t|
-    t.integer "captain_id"
-  end
+ActiveRecord::Schema.define(version: 20141102161531) do
 
   create_table "teams", force: true do |t|
     t.string  "name"
@@ -23,8 +19,6 @@ ActiveRecord::Schema.define(version: 20141028031540) do
     t.string  "location"
     t.integer "captain_id"
   end
-
-  add_index "teams", ["captain_id"], name: "index_teams_on_captain_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -45,8 +39,8 @@ ActiveRecord::Schema.define(version: 20141028031540) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "type"
-    t.string   "role"
     t.integer  "team_id"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
