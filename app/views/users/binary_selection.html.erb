@@ -1,1 +1,26 @@
 <p>hellodsdlasjsdjasfjadhfadskasfkhdfahkafk</p>
+<h1>New Wiki</h1>
+ <div class= "row">
+   <div class = "col-md-4">
+     <p>Guidlines for wikis</p>
+     <ul>
+       <li>Keep it clean</li>
+       <li>Keep it safe</li>
+       <li>Keep it classy Sandiego </li>
+     </ul>
+   </div>
+ </div>
+<div class = "col-md-8">
+  <%= form_for @user do |f| %>
+    <div class = "form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title", id: 'wiki_title' %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit class: 'btn btn-success' ,id: 'wiki_submit'  %>
+    </div>
+  <% end %>
+  </div>
+
+</div>
+
