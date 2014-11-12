@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
    end
    def after_sign_in_path_for(resource)
         if User.where(email: params[:user][:email]).first.role == nil ## temporary solution
-          users_binary_selection_path(resource)
+          users_path(resource)
         end
     end
 end

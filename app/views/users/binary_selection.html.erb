@@ -11,10 +11,11 @@
    </div>
  </div>
 <div class = "col-md-8">
-  <%= form_for @user do |f| %>
+  <%= form_for @user, url: users_path(@user), html: { method: :post } do |f|
+ %>
     <div class = "form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title", id: 'wiki_title' %>
+      <%= f.label :role %>
+      <%= f.text_field :role, class: 'form-control', placeholder: "Enter wiki title", id: 'wiki_title' %>
     </div>
     <div class = "form-group">
       <%= f.submit class: 'btn btn-success' ,id: 'wiki_submit'  %>

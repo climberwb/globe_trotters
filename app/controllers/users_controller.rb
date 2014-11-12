@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
 
   def binary_selection
-    @user = User.find(current_user.id)
-    puts current_user.id
-    puts "efefefe"
+    @user = current_user
+    #@change_role = params[:user][:role]
+     puts "alot1"
+     
+    @user.update_attribute(:role, "bjhjej")
+    redirect_to root_path
   end
   
 
