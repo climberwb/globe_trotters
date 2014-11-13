@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
      devise_parameter_sanitizer.for(:sign_up) << :name
    end
    def after_sign_in_path_for(resource)
-        if User.where(email: params[:user][:email]).first.role == nil ## temporary solution
-          users_path(resource)
+        if User.where(email: params[:user][:email]).first.role  ## temporary solution
+          binary_selection_path(resource)
         end
     end
 end
