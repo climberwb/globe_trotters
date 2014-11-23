@@ -3,12 +3,23 @@ class RegistrationsController < Devise::RegistrationsController
     def after_sign_up_path_for(resource)
       welcome_about_path(resource)
     end
-    #  def after_sign_in_path_for(resource)
-    #     if User.where(email: params[:user][:email]).first.role == nil ## temporary solution
-    #       binary_selection_path(resource)
-    #     end
-    # end
-    # def after_inactive_sign_up_path_for(resource)
-    #   welcome_about_path
-    # end
+  #   def binary_selection
+  #       @user = current_user
+  #       # change_role = params[:user][:role]
+  #        puts "bloydf"
+  #        puts current_user.name
+  #        #binding.pry
+  #        #binding.pry
+  #       # @user.update_attribute(:role, params[:user][:role])
+  #       if @user.role != nil
+  #          redirect_to root_path
+  #       else
+  #         #current_user.update_attributes(params[:role])
+  #         puts 'hello'
+  #         if params[:format] != 13
+  #           @user.update_attribute(params[:user][:role])
+  #         end
+
+  #       end
+  # end
 end

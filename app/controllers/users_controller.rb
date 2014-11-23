@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
+  respond_to :json, :html
 
   def binary_selection
-    @user = current_user
-    # change_role = params[:user][:role]
-     puts "bloydf"
-     puts current_user.name
-     @user.update_attribute(:role, params[:role])
-    if @user.role != nil
-       redirect_to root_path
+    @user = User.find(params[:id])
+  end
+  def binary_selection_update
+    @user = User.find(params[:id])  
+    if @user.update_attribute(:role, params[:user][:role])
+      redirect_to root_path, notice: "#{@user.name} was updated."
+    else
+     # format.html { render action: "edit" }
     end
   end
 
@@ -15,10 +17,12 @@ class UsersController < ApplicationController
   end
   def show
   end
-  def create
-  end
+ 
   def update
+
   end
-
-
+   def create
+  end
+  def index
+  end
 end
