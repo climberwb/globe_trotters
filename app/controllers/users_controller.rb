@@ -6,8 +6,12 @@ class UsersController < ApplicationController
   end
   def binary_selection_update
     @user = User.find(params[:id])  
-    if @user.update_attribute(:role, params[:user][:role])
-      redirect_to root_path, notice: "#{@user.name} was updated."
+    if @user.update_attribute(:role, params[:user][:role]) 
+      if @user.role == "captain"
+      redirect_to new_user_team_path, notice: "#{@user.name} was updated."
+      else
+        redirect_to root_path, notice: "#{@user.name} was updated."
+      end
     else
      # format.html { render action: "edit" }
     end
