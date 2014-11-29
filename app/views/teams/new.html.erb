@@ -1,2 +1,35 @@
 <h1>Teams#new</h1>
 <p>Find me in app/views/teams/new.html.erb</p>
+<h1>Make a New Team</h1>
+ <div class= "row">
+   <div class = "col-md-4">
+     <p>Guidlines for wikis</p>
+     <ul>
+       <li>Keep it clean</li>
+       <li>Keep it safe</li>
+       <li>Keep it classy Sandiego </li>
+     </ul>
+   </div>
+ </div>
+<div class = "col-md-8">
+  <%= form_for :team, url: @team, html: { method: :post } do |f|
+ %><%= current_user %>
+    <div class = "form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <div class = "form-group">
+      <%= f.label :sport %>
+      <%= f.text_field :sport, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <div class = "form-group">
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
+    </div>
+  <% end %>
+  </div>
+
+</div>
