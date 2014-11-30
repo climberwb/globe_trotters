@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   put "/users/:id" => "users#binary_selection_update", as: 'binary_selection_update'
   
   resources :users
-  resources :users, :path => :captains, :as => :captains
+  
   resources :users, :path => :captains, :as => :captains do 
-    resources :teams
+    resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
-  resources :teams do
-    resources :users, :path => :teammates, :as => :teammates
+
+  resources :teams, :only => [:index, :show] do
+    resources :users, :path => :teammates, :as => :teammates, :controller => "teammates"
   end
   
   #get "/users" => "users#update", as: 'update'

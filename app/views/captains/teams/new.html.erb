@@ -1,4 +1,4 @@
-<h1>Teams#new</h1>
+<h1>Teams#new Under captains/teams/new.htm</h1>
 <p>Find me in app/views/teams/new.html.erb</p>
 <h1>Make a New Team</h1>
  <div class= "row">
@@ -12,7 +12,7 @@
    </div>
  </div>
 <div class = "col-md-8">
-  <%= form_for :team, url: @team do |f|
+  <%= form_for  :team, url: captain_teams_path(@captain, @team), method: :post  do |f|
  %><%= current_user %>
     <div class = "form-group">
       <%= f.label :name %>

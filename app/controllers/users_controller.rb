@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     url = @user.id
     if @user.update_attribute(:role, params[:user][:role]) 
       if @user.role == "captain"
-      redirect_to '/captains/'"#{url}"'/teams/new', notice: "#{@user.id} was updated."
+       # '/captains/'"#{url}"'/teams/new'
+      redirect_to new_captain_team_path(current_user.id), notice: "#{@user.id} was updated."
       else
         redirect_to root_path, notice: "#{@user.name} was updated."
       end
