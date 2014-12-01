@@ -9,7 +9,8 @@ class Captains::TeamsController < ApplicationController
     @team = Team.create(
               :name => params[:team][:name],
               :location  => params[:team][:location],
-              :sport  => params[:team][:sport]
+              :sport  => params[:team][:sport],
+              :captain_id => @captain
             )
     if @team.present?
       redirect_to @team # show view for team 
