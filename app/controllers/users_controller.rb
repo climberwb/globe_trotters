@@ -11,8 +11,8 @@ class UsersController < ApplicationController
       if @user.role == "captain"
        # '/captains/'"#{url}"'/teams/new'
       redirect_to new_captain_team_path(current_user.id), notice: "#{@user.id} was updated."
-      else
-        redirect_to root_path, notice: "#{@user.name} was updated."
+      elsif @user.role == "teammate"
+        redirect_to new_teammate_path
       end
     else
      # format.html { render action: "edit" }

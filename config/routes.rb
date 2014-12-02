@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :users, :path => :teammates, :as => :teammates, :controller => "teammates"
   end
   
+  resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show]
   #get "/users" => "users#update", as: 'update'
   
   get 'welcome/index'

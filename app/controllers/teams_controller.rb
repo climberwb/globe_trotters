@@ -8,7 +8,8 @@ class TeamsController < ApplicationController
               :name => params[:team][:name],
               :location  => params[:team][:location],
               :sport  => params[:team][:sport],
-              :captain_id => current_user.id
+              :captain_id => current_user.id,
+              :bio => params[:team][:bio]
             )
     if @team.present?
       redirect_to @team
