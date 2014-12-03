@@ -40,6 +40,9 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'figaro', '1.0'
 gem 'pundit'
+# this for putting thumbnails on profiles of teams and teammates
+gem 'carrierwave'
+gem 'mini_magick'
 # gem 'thin'
 
 # Use ActiveModel has_secure_password

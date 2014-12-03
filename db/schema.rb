@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202031404) do
+ActiveRecord::Schema.define(version: 20141203213938) do
 
   create_table "teams", force: true do |t|
     t.string  "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20141202031404) do
     t.integer  "team_id"
     t.string   "role"
     t.text     "bio"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
