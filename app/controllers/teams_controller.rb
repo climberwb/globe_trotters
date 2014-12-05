@@ -23,4 +23,11 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
   end
+  
+  def add_teammate_to_team
+    #@team = Team.find(params[:id])
+    #@team.teammates << current_user
+   # redirect_to team_path(10)
+  end
+
 end
