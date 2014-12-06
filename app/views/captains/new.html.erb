@@ -1,2 +1,27 @@
 <h1>Captains#new</h1>
 <p>Find me in app/views/captains/new.html.erb</p>
+<h1>Make a New captain</h1>
+ <div class= "row">
+   <div class = "col-md-4">
+     <p>Guidlines for wikis</p>
+     <ul>
+       <li>Keep it clean</li>
+       <li>Keep it safe</li>
+       <li>Keep it classy Sandiego </li>
+     </ul>
+   </div>
+ </div>
+<div class = "col-md-8">
+  <%= form_for  :captain, url: captains_path(@captain), method: :post  do |f|
+ %><%= current_user %>
+    <div class = "form-group">
+      <%= f.label :bio %>
+      <%= f.text_area :bio, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
+    </div>
+  <% end %>
+  </div>
+
+</div>

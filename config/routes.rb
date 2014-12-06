@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :users, :path => :captains, :as => :captains do
+  resources :users, :path => :captains, :as => :captains, :controller => "captains" do
     resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
 
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show, :add_teammate_to_team]
   #get "/users" => "users#update", as: 'update'
-
+  
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
   get '/school_sort' => "students#school_sort", :as => :sort_school
 
