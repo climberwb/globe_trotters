@@ -1,7 +1,11 @@
 <h1>Teams#show</h1>
 <p>Find me in app/views/teams/show.html.erb</p>
-<%= @team.name %>
-<%= @team.captain.name %>
-<%= @team.sport %>
-<%= @team.location %>
-<%= @team.teammates.all.first.name %>
+<p><span>team: </span><%= @team.name %></p>
+<p><span>captain: </span><%= @team.captain.name %></p>
+<p><span>sport: </span><%= @team.sport %></p>
+<p><span>location: </span><%= @team.location %></p>
+</br>
+<strong> list of teammates</strong>
+<% @team.teammates.each do |teammate| %>
+   <p><%= teammate.name %></p>
+<% end %>
