@@ -43,6 +43,7 @@ gem 'pundit'
 # this for putting thumbnails on profiles of teams and teammates
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog'
 # gem 'thin'
 
 # Use ActiveModel has_secure_password

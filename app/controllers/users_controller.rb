@@ -31,4 +31,7 @@ class UsersController < ApplicationController
   end
   def index
   end
+  def user_params
+   params.require(:user).permit(:name, :avatar)
+end
 end

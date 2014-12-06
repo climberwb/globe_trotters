@@ -24,3 +24,8 @@ class TeammatesController < ApplicationController
    redirect_to @team
   end
 end
+private 
+
+def teammate_params
+   params.require(:teammate).permit(:avatar)
+end
