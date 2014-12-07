@@ -13,12 +13,13 @@ class CaptainsController < ApplicationController
   end
 
   def new
-   #@captain = current_user
+   @captain = current_user
   end
   
   def create
-    @captain = current_user.update_attribute(
-              :bio, params[:captain][:bio]
+    @captain = current_user.update_attributes(
+              :bio => params[:captain][:bio],
+              :avatar => params[:captain][:avatar]
             )
     if @captain.present?
       #team1.teammates << @teammates
@@ -31,5 +32,6 @@ class CaptainsController < ApplicationController
     @captain = User.find(params[:id])
     @team = @captain.team
   end
+  
 
 end

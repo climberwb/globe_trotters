@@ -4,8 +4,9 @@ class TeammatesController < ApplicationController
   end
 
   def create
-    @teammate = current_user.update_attribute(
-              :bio, params[:teammate][:bio]
+    @teammate = current_user.update_attributes(
+              :bio => params[:teammate][:bio],
+              :avatar => params[:teammate][:avatar]
             )
     if @teammate.present?
       #team1.teammates << @teammates
