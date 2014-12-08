@@ -1,4 +1,10 @@
 <h1>Teams#show</h1>
+  <% if @team.avatar? %>
+        <div class="">
+          <p>Current avatar</p>
+          <%= image_tag( @team.avatar.profile.url ) %>
+        </div>
+  <% end %>
 <p>Find me in app/views/teams/show.html.erb</p>
 <p><span>team: </span><%= @team.name %></p>
 <p><span>captain: </span><%= link_to @team.captain.name, captain_path(@team.captain.id) %></p> 
