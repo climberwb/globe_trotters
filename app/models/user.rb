@@ -4,13 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-
+  
   # This is the captain's team relation
   has_one :my_team, class_name: "Team", foreign_key: "captain_id"
   #for avatar
   mount_uploader :avatar, AvatarUploader
   # This is the teammates realtion
   belongs_to :team
+
+  # chat relationship
+  has_many :conversations, :foreign_key => :sender_id
 
   # belongs_to :captain, class_name: "User"
 
