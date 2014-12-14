@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
 
   # chat relationship
   has_many :conversations, :foreign_key => :sender_id
-
+  has_many :messages
+  
   # belongs_to :captain, class_name: "User"
 
   # has_many :teammates, class_name: "User", foreign_key: "captain_id"

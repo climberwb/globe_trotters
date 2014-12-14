@@ -16,3 +16,10 @@
 //= require_tree .
 //= require bootstrap
 //alert('hello');
+
+$(function() {
+  var faye = new Faye.Client('http://localhost:9292/faye');
+  faye.subscribe('/messages/new', function (data) {
+    alert(data);
+  });
+});
