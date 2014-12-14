@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def team_captain?
-    role == 'team_captain'
+    role == 'captain'
   end
 
   def admin?
