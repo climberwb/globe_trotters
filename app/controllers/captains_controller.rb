@@ -3,7 +3,6 @@ class CaptainsController < ApplicationController
   end
 
   def create
-  endyou da
   end
   def destroy
   end

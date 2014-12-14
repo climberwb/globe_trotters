@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #get "/users" => "users#update", as: 'update'
   
   resources :messages
+  
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
   get '/school_sort' => "students#school_sort", :as => :sort_school
 
