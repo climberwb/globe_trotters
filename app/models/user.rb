@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-
+  
   # This is the captain's team relation
   has_one :my_team, class_name: "Team", foreign_key: "captain_id"
   #for avatar
@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   # This is the teammates realtion
   belongs_to :team
 
+  # chat relationship
+  has_many :conversations, :foreign_key => :sender_id
+  has_many :messages
+  
   # belongs_to :captain, class_name: "User"
 
   # has_many :teammates, class_name: "User", foreign_key: "captain_id"
@@ -21,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def team_captain?
-    role == 'team_captain'
+    role == 'captain'
   end
 
   def admin?

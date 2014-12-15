@@ -44,6 +44,9 @@ gem 'pundit'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'faye'
+gem 'faker'
+
 # gem 'thin'
 
 # Use ActiveModel has_secure_password
