@@ -17,15 +17,17 @@ Rails.application.routes.draw do
 
   resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show, :add_teammate_to_team]
   #get "/users" => "users#update", as: 'update'
-  
+
+  get "/messages/multi_team_chat" => "messages#index_multi_team_chat", as: 'multi_team_chat'
+  put "/messages/create_multi_team_chat" => "messages#create_multi_team_chat", as: 'create_multi_team_chat'
+
   resources :messages
-  
+
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
  # get '/school_sort' => "students#school_sort", :as => :sort_school
 
 
-  get "/messages/multi_team_chat" => "messages#index_multi_team_chat", as: 'multi_team_chat'
-  put "/messages/create_multi_team_chat" => "messages#create_multi_team_chat", as: 'create_multi_team_chat'
+
 
   get 'welcome/index'
   get 'welcome/about'
