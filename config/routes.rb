@@ -2,14 +2,21 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  
+
+
+  get "/users/admin_form" => "users#admin_form", as: 'admin_form'
   get "/users/:id" => "users#admin_show", as: 'admin_show'
-  get "/users/:id" => "users#admin_form", as: 'admin_form'
   put "/users/:id" => "users#admin_info_create", as: 'admin_info_create'
+
+
+
+
+
 
 
   get "/users/:id" => "users#binary_selection", as: 'binary_selection'
   put "/users/:id" => "users#binary_selection_update", as: 'binary_selection_update'
+
 
   resources :users
 
@@ -31,7 +38,7 @@ Rails.application.routes.draw do
 
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
  # get '/school_sort' => "students#school_sort", :as => :sort_school
-  
+
 
 
 
