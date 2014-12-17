@@ -1,0 +1,40 @@
+<h1>Admin Form</h1>
+ <div class= "row">
+   <div class = "col-md-4">
+     <p>Guidlines for wikis</p>
+     <ul>
+       <li>Keep it clean</li>
+       <li>Keep it safe</li>
+       <li>Keep it classy Sandiego </li>
+     </ul>
+   </div>
+ </div>
+  t.string  "name"
+    t.string  "sport"
+    t.string  "location"
+    t.integer "captain_id"
+<div class = "col-md-8">
+  <%= form_for :user, url: admin_info_create_path(@user), html: { method: :put } do |f|
+ %><div class = "form-group">
+      <%= f.label :bio %>
+      <%= f.text_area :bio, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <% if current_user.avatar? %>
+        <div class="form-group">
+          <p>Current avatar</p>
+          <%= image_tag( current_user.avatar.profile.url ) %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+      </div>
+    <div class = "form-group">
+      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
+    </div>
+  <% end %>
+  </div>
+
+</div>
+
