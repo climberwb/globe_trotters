@@ -1,8 +1,11 @@
 class Conversation < ActiveRecord::Base
   #belongs_to :sender, :foreign_key => :sender_id, class_name: 'User'
   #belongs_to :recipient, :foreign_key => :recipient_id, class_name: 'User'
-
   belongs_to :team
+  # group chat relation for team
+  belongs_to :home_team, class_name: "Team"
+  #has_one :home_team, class_name: "Team", foreign_key: "home_team_id"
+  #messages
   has_many :messages, dependent: :destroy
   validates_presence_of :messages
 
