@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   
   def index_multi_team_chat
     @conversation_id = params[:conversation_id]
+    @conversation = Conversation.all
   # @messages = Message.where(:conversation_id => @conversation_id) mikis code
     @messages = Message.where(:conversation_id => current_user.team.home_team_id)
     @team_chat = current_user.team.home_team_id

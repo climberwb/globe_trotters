@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
   
   def new
    @team = Team.new
+   @conversation = Conversation.new
   end
 
   def create
@@ -12,9 +13,11 @@ class TeamsController < ApplicationController
               :captain_id => current_user.id,
               :bio => params[:team][:bio]
             )
-    if @team.present?
+    @conversation = Conversation.create(:team_id => @team.id)
+    if @team.present? && @conversation.present?
       redirect_to @team
     end
+
   end
 
   def index
