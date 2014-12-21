@@ -46,6 +46,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'faye'
 gem 'faker'
+gem 'thin'
 
 # gem 'thin'
 
