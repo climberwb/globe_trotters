@@ -36,8 +36,14 @@ ActiveRecord::Schema.define(version: 20141219164729) do
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
-# Could not dump table "teams" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "teams", force: true do |t|
+    t.string  "name"
+    t.string  "sport"
+    t.string  "location"
+    t.integer "captain_id"
+    t.string  "avatar"
+    t.integer "home_team_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

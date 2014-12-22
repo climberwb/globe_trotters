@@ -7,7 +7,7 @@ class Conversation < ActiveRecord::Base
   #has_one :home_team, class_name: "Team", foreign_key: "home_team_id"
   #messages
   has_many :messages, dependent: :destroy
-  validates_presence_of :messages
+  #validates_presence_of :messages
 
   #validates_uniqueness_of :sender_id, :scope => :recipient_id
 

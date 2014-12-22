@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
   has_many :teammates, class_name: "User"
 
   has_one :conversation
-  validates_presence_of :conversation
+ # validates_presence_of :conversation
 
   mount_uploader :avatar, AvatarUploader
   # team has one team that would like to stay in contact with
