@@ -7,8 +7,8 @@
   <% end %>
   <%= link_to "team chat", messages_path %>
 <p>Find me in app/views/teams/show.html.erb</p>
-<p><span>team: <!-- </span><%= @team.name %></p> -->
- <p><span>captain: </span><%= link_to @team.captain.name, captain_path(@team.captain.id) %></p> 
+<p><span>team: <%= @team.name %></p>
+ <p><span>captain: </span><%= link_to @team.captain.name, captain_path(@team.captain.id) %></p>
 <p><span>sport: </span><%= @team.sport %></p>
 <p><span>location: </span><%= @team.location %></p>
 </br>

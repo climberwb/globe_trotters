@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get "/messages/multi_team_chat" => "messages#index_multi_team_chat", as: 'multi_team_chat'
   put "/messages/create_multi_team_chat" => "messages#create_multi_team_chat", as: 'create_multi_team_chat'
-
+  resources :conversations
   resources :messages
 
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
