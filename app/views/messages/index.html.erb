@@ -6,6 +6,6 @@
 <%=  @team_chat %>
 <%= form_for Message.new, :remote => true do |f| %>
   <%= f.text_field :body  %>
-  <%= f.hidden_field :conversation_id, :value => @team_chat %>
+  <%= f.hidden_field :conversation_id, :value => @conversation_id%>
   <%= f.submit "Send" %>
 <% end %>

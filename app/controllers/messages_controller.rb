@@ -15,10 +15,11 @@ class MessagesController < ApplicationController
   # end
 
   def index
-    @conversation_id = params[:conversation_id]
+    @conversation_id = params[:messages][:conversation_id]
   # @messages = Message.where(:conversation_id => @conversation_id) mikis code
-    @messages = Conversation.where(:team_id => current_user.team_id).where(:home_team_id => nil).first.messages #Message.where(:conversation_id => current_user.team_id)#Conversation.where(:team_id =>current_user.team_id).first.messages
-    @team_chat = Conversation.where(:team_id => current_user.team_id).first.id
+    @messages = Conversation.find(@conversation_id).messages
+    #@messages = Conversation.where(:team_id => current_user.team_id).where(:home_team_id => nil).first.messages #Message.where(:conversation_id => current_user.team_id)#Conversation.where(:team_id =>current_user.team_id).first.messages
+    #@team_chat = Conversation.where(:team_id => current_user.team_id).first.id
   end
 
   def create

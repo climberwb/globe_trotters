@@ -1,5 +1,18 @@
 hello I am index
 <% @conversations.each do |conversation|%>
-  <%= conversation.team.name%> 
-  <%=link_to conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %> 
+<ul>
+  <li><%=link_to conversation.team.nil? ? "#{conversation.home_team.name} && #{conversation.visiting_team.name}" : conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %>
+    <ul>
+      <% if conversation.team.nil? %>
+         <% conversation.home_team.teammates.each do |teammate| %>
+            <li><%= teammate.name %></li>
+          <%end%>
+      <% else %>
+           <% conversation.team.teammates.each do |teammate| %>
+            <li><%= teammate.name %></li>
+          <%end%>
+        <%end%>
+    </ul>
+  </li>
+</ul>
 <%end%>
