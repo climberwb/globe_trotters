@@ -7,8 +7,8 @@ class Team < ActiveRecord::Base
   has_one :conversation
 
   # team has one team that would like to stay in contact with
-  #has_one :visitor_team, class_name: "Team", foreign_key: "visiting_team_id"
-  #has_one :home_team, class_name: "Team"
+  # has_one :visiting_team, class_name: "Team", foreign_key: "visiting_team_id"
+  # has_one :home_team, class_name: "Team", foreign_key: "home_team_id"
 
   # validates_presence_of :conversation
 

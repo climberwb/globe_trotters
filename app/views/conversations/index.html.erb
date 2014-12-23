@@ -1,4 +1,5 @@
 hello I am index
 <% @conversations.each do |conversation|%>
-  <%= conversation.id%>
+  <%= conversation.team.name%> 
+  <%=link_to conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %> 
 <%end%>

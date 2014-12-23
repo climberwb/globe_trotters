@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219164729) do
+ActiveRecord::Schema.define(version: 20141223011736) do
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141219164729) do
     t.datetime "updated_at"
     t.integer  "team_id"
     t.integer  "home_team_id"
+    t.integer  "visiting_team_id"
   end
 
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
