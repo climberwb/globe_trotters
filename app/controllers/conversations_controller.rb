@@ -13,6 +13,12 @@ class ConversationsController < ApplicationController
   end
   def index
     @conversations =  Conversation.where("home_team_id = ? OR visiting_team_id = ? OR team_id = ?", current_user.team.id, current_user.team.id, current_user.team.id) #Conversation.where(:team_id => current_user.team.id)
+      if current_user.team ==  Conversation.where("home_team_id = ? OR visiting_team_id = ? ", current_user.team.id, current_user.team.id).first.home_team
+            @opposing_team = Conversation.where("home_team_id = ? OR visiting_team_id = ? ", current_user.team.id, current_user.team.id).first.visiting_team
+      else
+            @opposing_team = Conversation.where("home_team_id = ? OR visiting_team_id = ? ", current_user.team.id, current_user.team.id).first.home_team
+      end
+
     @hello = 'hello'
   end
 

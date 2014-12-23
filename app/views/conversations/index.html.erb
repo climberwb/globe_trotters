@@ -1,10 +1,11 @@
 hello I am index
+<%= @opposing_team %>
 <% @conversations.each do |conversation|%>
 <ul>
-  <li><%=link_to conversation.team.nil? ? "#{conversation.home_team.name} && #{conversation.visiting_team.name}" : conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %>
+  <li><%=link_to conversation.team.nil? ? @opposing_team.name : conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %>
     <ul>
       <% if conversation.team.nil? %>
-         <% conversation.home_team.teammates.each do |teammate| %>
+         <% @opposing_team.teammates.each do |teammate| %>
             <li><%= teammate.name %></li>
           <%end%>
       <% else %>
