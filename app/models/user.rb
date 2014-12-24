@@ -12,8 +12,10 @@ class User < ActiveRecord::Base
   # This is the teammates realtion
   belongs_to :team
 
-  # chat relationship
+  # chat relationship for user to user
   has_many :conversations, :foreign_key => :sender_id
+  has_many :conversations, :foreign_key => :recipient_id
+
   has_many :messages
 
   # belongs_to :captain, class_name: "User"

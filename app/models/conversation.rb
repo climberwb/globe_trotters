@@ -24,6 +24,10 @@ class Conversation < ActiveRecord::Base
   #   where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)
   # end
 
+  # chat relationship for user to user
+  belongs_to :sender, class_name: "User"
+  belongs_to :recipient, class_name: "User"
+
   def title
     if self.team_id.present?
       "Internal chat for the #{self.team.name}"

@@ -9,8 +9,12 @@ hello I am index
             <li><%= teammate.name %></li>
           <%end%>
       <% else %>
-           <% conversation.team.teammates.each do |teammate| %>
-            <li><%= teammate.name %></li>
+           <% @user_conversations.each do |user_conversation| %>
+               <% if user_conversation.recipient_id != current_user.id %>
+                   <li><%= link_to user_conversation.recipient.name, messages_path(:messages => { :conversation_id => user_conversation.id }) %></li>
+                <% elsif  user_conversation.sender_id != current_user.id %>
+                    <li><%= link_to user_conversation.sender.name, messages_path(:messages => { :conversation_id => user_conversation.id }) %></li>
+               <%end%>
           <%end%>
         <%end%>
     </ul>

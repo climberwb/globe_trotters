@@ -22,11 +22,30 @@ class TeammatesController < ApplicationController
   def add_teammate_to_team
     @team = Team.find(params[:id])
     @team.teammates << current_user
+    @team.teammates.each do |teammate|
+      if teammate.id != current_user.id
+         @new_convo =  Conversation.new
+         @create_convo = Conversation.create!(
+              :team_id => current_user.team.id,
+              :sender_id => current_user.id,
+              :recipient_id => teammate.id
+            )
+         @new_convo
+         @create_convo
+      end
+        if @conversation.present?
+         # put something to verify a conversation was made or not
+        end
+    end
    redirect_to @team
   end
-end
-private 
+
+private
 
 def teammate_params
    params.require(:teammate).permit(:avatar)
+end
+def conversation_params
+    params.require(:conversation).permit(:sender_id, :recipient_id)
+  end
 end
