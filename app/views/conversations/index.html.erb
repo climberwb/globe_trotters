@@ -5,9 +5,15 @@ hello I am index
   <li><%=link_to conversation.team.nil? ? @opposing_team.name : conversation.team.name, messages_path(:messages => { :conversation_id => conversation.id }) %>
     <ul>
       <% if conversation.team.nil? %>
-         <% @opposing_team.teammates.each do |teammate| %>
-            <li><%= teammate.name %></li>
-          <%end%>
+         <% @opposing_team_conversations.each do |conversation| %>
+           <% if conversation.recipient != nil && conversation.sender != nil %>
+               <% if conversation.recipient_id == current_user.id%>
+                    <li><%= link_to conversation.sender.name, messages_path(:messages => { :conversation_id => conversation.id })%></li>
+               <%elsif conversation.sender_id == current_user.id %>
+                    <li><%= link_to conversation.recipient.name, messages_path(:messages => { :conversation_id => conversation.id })%></li>
+               <%end%>
+            <%end%>
+         <%end%>
       <% else %>
            <% @user_conversations.each do |user_conversation| %>
                <% if user_conversation.recipient_id != current_user.id %>
