@@ -33,10 +33,39 @@ class TeammatesController < ApplicationController
          @new_convo
          @create_convo
       end
+    end
+          if Conversation.where(:home_team_id => @team.id).first.id != nil
+            puts "go fuck yourself!"
+              @visitor_team = Conversation.where(:home_team_id => @team.id).first.visiting_team
+              @visitor_team.teammates.each do |teammate| 
+                  @new_convo =  Conversation.new
+                  @create_convo = Conversation.create!(
+                                :visiting_team_id => Conversation.where(:home_team_id => @team.id).first.visiting_team.id,
+                                :home_team_id => current_user.team.id,
+                                :sender_id => current_user.id,
+                                :recipient_id => teammate.id
+                              )
+                  @new_convo
+                  @create_convo
+              end    
+
+          elsif Conversation.where(:visiting_team_id => @team.id).first.id != nil
+                  @home_team = Conversation.where(:visiting_team_id => @team.id).first.home_team
+                  @home_team.teammates.each do |teammate| 
+                    @new_convo =  Conversation.new
+                    @create_convo = Conversation.create!(
+                                  :visiting_team_id => current_user.team.id,
+                                  :home_team_id => Conversation.where(:visiting_team_id => @team.id).first.home_team.id,
+                                  :sender_id => current_user.id,
+                                  :recipient_id => teammate.id
+                                )
+                    @new_convo
+                    @create_convo
+                  end
+          end  
         if @conversation.present?
          # put something to verify a conversation was made or not
         end
-    end
    redirect_to @team
   end
 

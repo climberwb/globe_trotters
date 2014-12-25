@@ -46,7 +46,6 @@ class ConversationsController < ApplicationController
             @opposing_team = Conversation.where("home_team_id = ? OR visiting_team_id = ? ", current_user.team.id, current_user.team.id).first.home_team
       end
             @opposing_team_conversations = Conversation.where("home_team_id = ? OR visiting_team_id = ? ", current_user.team.id, current_user.team.id)
-
   end
 
   protected
