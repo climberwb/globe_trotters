@@ -48,6 +48,7 @@ gem 'faye'
 gem 'faker'
 gem 'thin'
 
+gem 'd3js-rails'
 # gem 'thin'
 
 # Use ActiveModel has_secure_password
