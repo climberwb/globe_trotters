@@ -29,19 +29,19 @@ $(function() {
 d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
-
-var width = 960,
-    height = 500;
-
+//scales the svg
+var width = 960*1.2,
+    height = 500*1.5;
+//takes care of the height and width of globe
 var proj = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(220);
-
+    .scale(220*1.5);
+//takes care of the height and width of globe
 var sky = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(300);
+    .scale(300*1.5);
 
 var path = d3.geo.path().projection(proj).pointRadius(2);
 
@@ -93,7 +93,7 @@ function ready(error, world, places) {
       globe_shading.append("stop")
         .attr("offset","100%").attr("stop-color", "#505962")
         .attr("stop-opacity","0.3")
-
+//gives it a shaodow
   var drop_shadow = svg.append("defs").append("radialGradient")
         .attr("id", "drop_shadow")
         .attr("cx", "50%")
@@ -104,11 +104,11 @@ function ready(error, world, places) {
       drop_shadow.append("stop")
         .attr("offset","100%").attr("stop-color", "#000")
         .attr("stop-opacity","0")
-
+//moves the shadow
   svg.append("ellipse")
-    .attr("cx", 440).attr("cy", 450)
-    .attr("rx", proj.scale()*.90)
-    .attr("ry", proj.scale()*.25)
+    .attr("cx", 440*1.5).attr("cy", 450*1.5)
+    .attr("rx", proj.scale()*.90*1.5)
+    .attr("ry", proj.scale()*.25*1.5)
     .attr("class", "noclicks")
     .style("fill", "url(#drop_shadow)");
 
@@ -268,8 +268,8 @@ function startAnimation() {
 
   d3.timer(function() {
     if(!mousemove() || !mouseup() || !mousedown()){
-    proj.rotate([y]);
-    sky.rotate([y]);
+    proj.rotate([y,-18]);
+    sky.rotate([y,-18]);
   //d3.event.preventDefault();
     y++;
     refresh();
