@@ -56,7 +56,7 @@ var links = [],
 
 var svg = d3.select("body").append("svg")
             .attr("width", width)
-            .attr("height", height)
+            .attr("height", height).attr("class",'img-responsive')
             .on("mousedown", mousedown);
 
 queue()
