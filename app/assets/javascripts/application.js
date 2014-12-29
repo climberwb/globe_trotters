@@ -19,12 +19,13 @@
 //alert('hello');
 
 $(function() {
+  //chat!
   var faye = new Faye.Client('http://localhost:9292/faye');
   faye.subscribe('/messages/new', function (data) {
      eval(data);
   });
 
-
+//spining globe
 d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
@@ -257,12 +258,26 @@ function mouseup() {
 }
 
 
-// try to animate
-  startAnimation();
+// try to animate this code makes it so you cannot move the globe, fix this!
+
+
+startAnimation();
 function startAnimation() {
- //  proj.rotate([35]);
-   //sky.rotate([35]);
-   //refresh();
+  var y = 1;
+  done=false;
+
+  d3.timer(function() {
+    if(!mousemove() || !mouseup() || !mousedown()){
+    proj.rotate([y]);
+    sky.rotate([y]);
+  //d3.event.preventDefault();
+    y++;
+    refresh();
+    return done;
+  }
+
+  });
+
 }
 
 });
