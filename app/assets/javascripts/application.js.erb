@@ -179,8 +179,13 @@ function ready(error, world, places) {
       .attr("d", path)
       .on("mouseover", function() {
           var div = document.getElementById('profile');
-
+          var test = <%= @test%>
+         // alert(test);
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX;
+
+          $(div).css("top",d3.event.pageY);
+          $(div).css("left",d3.event.pageX);
+          
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
       });
 
