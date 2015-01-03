@@ -30,18 +30,18 @@ d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
 //scales the svg
-var width = 960*1.2,
-    height = 500*1.5;
+var width = 960*1.2/2,
+    height = 500*1.5/2;
 //takes care of the height and width of globe
 var proj = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(220*1.5);
+    .scale(220*1.5/2);
 //takes care of the height and width of globe
 var sky = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(300*1.5);
+    .scale(300*1.5/2);
 
 var path = d3.geo.path().projection(proj).pointRadius(2);
 
@@ -171,6 +171,19 @@ function ready(error, world, places) {
     .attr("class","flyer")
     .attr("d", function(d) { return swoosh(flying_arc(d)) })
 
+    
+     svg.append("g").attr("class","points")
+      .selectAll("text").data(places.features)
+    .enter().append("path")
+      .attr("class", "point")
+      .attr("d", path)
+      .on("mouseover", function() {
+          var div = document.getElementById('profile');
+
+          div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX;
+        //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
+      });
+
   refresh();
 }
 
@@ -279,5 +292,4 @@ function startAnimation() {
   });
 
 }
-
 });
