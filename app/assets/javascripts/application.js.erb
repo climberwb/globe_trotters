@@ -30,18 +30,18 @@ d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
 //scales the svg
-var width = 960*1.2/2,
-    height = 500*1.5/2;
+var width = 960*1.5/2,
+    height = 500*2.3/2;
 //takes care of the height and width of globe
 var proj = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(220*1.5/2);
+    .scale(220*2.3/2);
 //takes care of the height and width of globe
 var sky = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(300*1.5/2);
+    .scale(300*2.3/2);
 
 var path = d3.geo.path().projection(proj).pointRadius(2);
 
