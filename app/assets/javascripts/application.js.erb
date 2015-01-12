@@ -20,10 +20,10 @@
 
 $(function() {
   //chat!
-  var faye = new Faye.Client('http://localhost:9292/faye');
-  faye.subscribe('/messages/new', function (data) {
-     eval(data);
-  });
+  // var faye = new Faye.Client('http://localhost:9292/faye');
+  // faye.subscribe('/messages/new', function (data) {
+  //    eval(data);
+  // });
 
 //spining globe
 d3.select(window)
@@ -183,10 +183,11 @@ function ready(error, world, places) {
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
 
-
+          
           $(div).css("top",d3.event.pageY);
           $(div).css("left",d3.event.pageX);
-          
+          alert($(this).attr('d'));
+          var j = places.features[0].properties.name
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
       });
 
