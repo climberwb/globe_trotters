@@ -171,7 +171,7 @@ function ready(error, world, places) {
     .attr("class","flyer")
     .attr("d", function(d) { return swoosh(flying_arc(d)) })
 
-// append information upon hover ////////////////////    
+// append information upon hover ////////////////////
      svg.append("g").attr("class","points")
       .selectAll("text").data(places.features)
     .enter().append("path")
@@ -183,7 +183,7 @@ function ready(error, world, places) {
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
 
-          
+
           $(div).css("top",d3.event.pageY);
           $(div).css("left",d3.event.pageX);
           alert($(this).attr('d'));
