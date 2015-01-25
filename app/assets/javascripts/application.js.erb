@@ -24,7 +24,7 @@ $(function() {
   // faye.subscribe('/messages/new', function (data) {
   //    eval(data);
   // });
-
+//1203-586-7283
 //spining globe
 d3.select(window)
     .on("mousemove", mousemove)
@@ -174,9 +174,8 @@ function ready(error, world, places) {
 // append information upon hover ////////////////////
      svg.append("g").attr("class","points")
       .selectAll("text").data(places.features)
-    .enter().append("path")
-      .attr("class", "point")
-      .attr("d", path)
+    .enter().append("path").attr("r", function(d){return 1234567})
+      .attr("class", "point").
       .on("mouseover", function() {
           var div = document.getElementById('profile');
           var test = $('#test').text();
