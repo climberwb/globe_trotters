@@ -175,7 +175,7 @@ function ready(error, world, places) {
      svg.append("g").attr("class","points")
       .selectAll("text").data(places.features)
     .enter().append("path").attr("r", function(d){return 1234567})
-      .attr("class", "point").
+      .attr("class", "point")
       .on("mouseover", function() {
           var div = document.getElementById('profile');
           var test = $('#test').text();
