@@ -26,10 +26,11 @@ $(function() {
   // });
 //adding tool-tip
 var tooltip = d3.select("body")
-    .append("div")
-    .style("position", "absolute")
+    .append("div").attr("id", "tool_tip");
+   tooltip.style("position", "absolute")
     .style("z-index", "10")
     .style("visibility", "hidden")
+    .style("background-color", "yellow").style("top","100px").style("left","20px")
     .text("a simple tooltip");
 
     tooltip.text("my tooltip text");
@@ -192,17 +193,17 @@ function ready(error, world, places) {
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
 
-          
-          $(div).css("top",d3.event.pageY);
-          $(div).css("left",d3.event.pageX);
+
+          $('#tool_tip').css("top",d3.event.pageY);
+          $('#tool_tip').css("left",d3.event.pageX);
           alert($(this).attr('d'));
 
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
-          tooltip.text(d.properties.name); 
-          return tooltip.style("visibility", "visible");
+          tooltip.style("top",d3.event.pageY).style("left",d3.event.pageX).text(d.properties.name);
+          return tooltip.style("visibility", "visible").style("top",d3.event.pageY).style("left",d3.event.pageX);
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
-        
+
       });
 
   refresh();
