@@ -26,12 +26,13 @@ $(function() {
   // });
 //adding tool-tip
 var tooltip = d3.select("body")
-    .append("div").attr("id", "tool_tip");
+    .append("div").attr("id", "tool_tip");//.append("img").attr("src","");
+var image = tooltip.append("img").attr("src","");
    tooltip.style("position", "absolute")
     .style("z-index", "10")
     .style("visibility", "hidden")
-    .style("background-color", "yellow").style("top","100px").style("left","20px")
-    .text("a simple tooltip");
+    .style("background-color", "yellow")//.style("top","100px").style("left","20px")
+    .text("a simple tooltip");//.image;
 
     tooltip.text("my tooltip text");
 //spining globe
@@ -196,12 +197,16 @@ function ready(error, world, places) {
 
           $('#tool_tip').css("top",d3.event.pageY);
           $('#tool_tip').css("left",d3.event.pageX);
-          alert($(this).attr('d'));
+          var tool_tip = $('#tool_tip');
+
+         // alert($(this).attr('d'));
 
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
-          tooltip.style("top",d3.event.pageY).style("left",d3.event.pageX).text(d.properties.name);
-          return tooltip.style("visibility", "visible").style("top",d3.event.pageY).style("left",d3.event.pageX);
+          tooltip.text(d.properties.name);
+          tool_tip.innerHTML = tool_tip.innerHTML+'<img src='+'https://coolstuffiknow.files.wordpress.com/2012/04/cool_003.jpg'+'>';
+
+          return tooltip.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
 
       });
