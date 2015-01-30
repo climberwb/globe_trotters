@@ -24,7 +24,15 @@ $(function() {
   // faye.subscribe('/messages/new', function (data) {
   //    eval(data);
   // });
-//1203-586-7283
+//adding tool-tip
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .text("a simple tooltip");
+
+    tooltip.text("my tooltip text");
 //spining globe
 d3.select(window)
     .on("mousemove", mousemove)
@@ -172,22 +180,29 @@ function ready(error, world, places) {
     .attr("d", function(d) { return swoosh(flying_arc(d)) })
 
 // append information upon hover ////////////////////
+
+
      svg.append("g").attr("class","points")
       .selectAll("text").data(places.features)
     .enter().append("path").attr("r", function(d){return 1234567})
       .attr("class", "point")
-      .on("mouseover", function() {
+      .on("mouseover", function(d) {
           var div = document.getElementById('profile');
           var test = $('#test').text();
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
 
-
+          
           $(div).css("top",d3.event.pageY);
           $(div).css("left",d3.event.pageX);
           alert($(this).attr('d'));
+
           var j = places.features[0].properties.name
+          //adding text to tool tip by different points
+          tooltip.text(d.properties.name); 
+          return tooltip.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
+        
       });
 
   refresh();
@@ -276,6 +291,19 @@ function mouseup() {
   }
 }
 
+// here is the .tsv code
+
+ // var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) {    return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";  })
+
+
+ // svg.call(tip);
+
+
+// d3.tsv("data.tsv", type, function(error, data){  x.domain(data.map(function(d) { return d.letter; }));  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+
+// svg.selectAll(".bar").data(data).enter().append("rect").attr("class", "bar").attr("x", function(d) { return x(d.letter); }).attr("width", x.rangeBand()).attr("y", function(d) { return y(d.frequency); }).attr("height", function(d) { return height - y(d.frequency); }).on('mouseover', tip.show).on('mouseout', tip.hide)
+// function type(d){  d.frequency =+ d.frequency;  return d;}
 
 // try to animate this code makes it so you cannot move the globe, fix this!
 
