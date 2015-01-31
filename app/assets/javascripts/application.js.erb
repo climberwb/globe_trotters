@@ -122,11 +122,11 @@ function ready(error, world, places) {
     .attr("class", "noclicks")
     .style("fill", "url(#drop_shadow)");
 
-  svg.append("circle")
-    .attr("cx", width / 2).attr("cy", height / 2)
-    .attr("r", proj.scale())
-    .attr("class", "noclicks")
-    .style("fill", "url(#ocean_fill)");
+  // svg.append("circle")
+  //   .attr("cx", width / 2).attr("cy", height / 2)
+  //   .attr("r", proj.scale())
+  //   .attr("class", "noclicks")
+  //   .style("fill", "url(#ocean_fill)");
 
   svg.append("path")
     .datum(topojson.object(world, world.objects.land))
