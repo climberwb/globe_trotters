@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223011736) do
+ActiveRecord::Schema.define(version: 20150201185558) do
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20141223011736) do
     t.integer "captain_id"
     t.string  "avatar"
     t.integer "home_team_id"
+    t.float   "latitude"
+    t.float   "longitude"
   end
 
   create_table "users", force: true do |t|

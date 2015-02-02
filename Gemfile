@@ -49,8 +49,9 @@ gem 'faker'
 gem 'thin'
 
 gem 'd3js-rails'
+gem 'geocoder'
+gem 'georuby'
 # gem 'thin'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

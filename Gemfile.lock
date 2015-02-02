@@ -103,6 +103,8 @@ GEM
     fog-json (1.0.0)
       multi_json (~> 1.0)
     formatador (0.2.5)
+    geocoder (1.2.7)
+    georuby (2.5.1)
     hike (1.2.3)
     http_parser.rb (0.6.0)
     i18n (0.6.11)
@@ -223,6 +225,8 @@ DEPENDENCIES
   faye
   figaro (= 1.0)
   fog
+  geocoder
+  georuby
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
