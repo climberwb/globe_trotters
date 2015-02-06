@@ -37,8 +37,10 @@ class Team < ActiveRecord::Base
     end 
     }.to_json 
   end
-  
-
+  def self.validate_address
+    #Geocoder.coordinates("25 Main St, Cooperstown, NY")
+    #Geocoder.address([42.700124, -74.922749])
+  end
 
   # making home_team the multiple team chat relation
  # belongs_to :group_conversation, class_name: "Conversation"

@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  respond_to :html, :js
   
   def new
    @team = Team.new
@@ -19,6 +20,10 @@ class TeamsController < ApplicationController
     end
 
   end
+
+  # def geo_json
+  #   redirect_to @team
+  # end
 
   def index
       @teams = Team.all

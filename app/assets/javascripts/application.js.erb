@@ -24,6 +24,13 @@ $(function() {
   // faye.subscribe('/messages/new', function (data) {
   //    eval(data);
   // });
+
+// location for teams
+$('#team_role_submit').click(function( event ) {
+  event.preventDefault();
+  alert('hello'); 
+});
+//
 //adding tool-tip
 var tooltip = d3.select("body")
     .append("div").attr("id", "tool_tip");//.append("img").attr("src","");
