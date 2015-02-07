@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
   # def geo_json
   #   redirect_to @team
   # end
-
+  
   def index
       @teams = Team.all
   end

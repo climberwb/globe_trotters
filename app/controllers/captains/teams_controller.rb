@@ -3,7 +3,8 @@ class Captains::TeamsController < ApplicationController
     @team = Team.new
     @captain = current_user
   end
-
+  def verify_address
+  end
   def create
     @captain = current_user.id
     @team = Team.create(

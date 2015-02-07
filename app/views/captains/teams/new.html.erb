@@ -31,9 +31,8 @@
       <%= f.label :location %>
       <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
     </div>
-    <div class = "form-group">
-      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
-    </div>
+        <%= render partial: "captains/teams/verify_address"%>
+
   <% end %>
   </div>
 
