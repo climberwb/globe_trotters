@@ -1,7 +1,11 @@
-<%= form_for [@team], remote:true  do |f|%>
+<%= form_for :team, url: verify_address_path(@captain), remote:true  do |f|%>
   
-
     <div class = "form-group">
-      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
     </div>
+   <div class = "form-group">
+      <%= f.submit "Verify address" ,class: 'btn btn-success' ,id: 'verify_address'  %>
+    </div>
+    <%= @validate_address%>
 <% end %>

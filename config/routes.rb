@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
 
 
-
   resources :users
 
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
@@ -24,6 +23,9 @@ Rails.application.routes.draw do
   resources :teams, :only => [:index, :show] do
     resources :users, :path => :teammates, :as => :teammates, :controller => "teammates"
   end
+
+  #post 'captains/:id/teams' => "teams#verify_address"#, as: 'verify_address'
+  get 'captains/:id/teams' => "teams#verify_address", as: 'verify_address'
 
   resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show, :add_teammate_to_team]
   #get "/users" => "users#update", as: 'update'

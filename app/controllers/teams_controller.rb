@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-  respond_to :html, :js
   
   def new
    @team = Team.new
