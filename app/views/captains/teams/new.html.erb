@@ -12,7 +12,7 @@
    </div>
  </div>
 <div class = "col-md-8">
-  <%= form_for  :team, url: captain_teams_path(@captain, @team), method: :post  do |f|
+  <%= form_for  :team, url: captain_teams_path(@captain, @team),:html => { :id => 'team_form'}, method: :post  do |f|
  %><%= current_user %>
       <div class="form-group">
         <%= f.label :avatar %>
@@ -21,15 +21,15 @@
       </div>
     <div class = "form-group">
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki title" %>
     </div>
     <div class = "form-group">
       <%= f.label :sport %>
-      <%= f.text_field :sport, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+      <%= f.text_field :sport, class: 'form-control', placeholder: "Enter wiki title" %>
     </div>
     <div class = "form-group">
       <%= f.label :location %>
-      <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+      <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title" %>
 
     </div>
     <div class = "form-group">
@@ -37,6 +37,8 @@
     </div>
   <% end %>
   </div>
-  
-<%= render partial: "/captains/teams/verify_address", locals: { address: @address, validate_address: @validate_address}%>
+
+  <div id="testing_modal">
+    "TESTING"</div>
 </div>
+

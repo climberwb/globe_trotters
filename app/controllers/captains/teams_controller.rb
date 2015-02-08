@@ -24,12 +24,15 @@ class Captains::TeamsController < ApplicationController
   end
  def verify_address
     @address = params[:team][:location]
-    @validate_address = Team.validate_address(@address)
+    @validate_address = Team.location_search(@address)
+    redirect_to  new_captain_team_path(current_user.id)
   end
-  def address_show
-    @address = params[:team][:location]
-    @validate_address = Team.validate_address(@address)
-  end
+  # def address_show
+  #   @address = params[:team][:location]
+  #   @validate_address = Team.validate_address(@address)
+  #   redirect_to  new_captain_team_path(current_user.id)
+  # end
+  
   def edit
   end
 

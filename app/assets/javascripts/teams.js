@@ -1,5 +1,22 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+var locationSearch = function (location, cb) {
+  $.post(
+    "/teams/location_search",
+    {"location": location},
+    cb,
+    "json");
+};
 
-alert('hello');
+
+$(function() {
+  $('#team_form').submit(function( event ) {
+
+    event.preventDefault();
+    var val = $("#team_location")[0].value;
+    locationSearch(val, function(locations) {
+      $("#testing_modal")[0].modal("show")
+    });
+
+
+   });
+
+  });

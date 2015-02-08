@@ -20,9 +20,9 @@ class TeamsController < ApplicationController
 
   end
 
-  # def geo_json
-  #   redirect_to @team
-  # end
+  def to_geo_json
+    Team.to_geojson
+  end
   
   def index
       @teams = Team.all
@@ -30,5 +30,11 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+  end
+
+  def location_search
+    p params
+    location = params[:location]
+    render :json => Team.location_search(location).to_json
   end
 end

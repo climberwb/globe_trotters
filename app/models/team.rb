@@ -31,6 +31,14 @@ class Team < ActiveRecord::Base
     @address || location
   end
 
+  def self.location_search(location)
+    Geocoder.search(location).map do |loc|
+      city = "#{loc.city}, " if loc.city
+      state = "#{loc.state}, " if loc.state
+      "#{city}#{state}#{loc.country}"
+    end
+  end
+
   def self.to_geojson 
     {"type" => "FeatureCollection", "features" => all.map do |team| 
       {"type" => "Feature", "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}} 

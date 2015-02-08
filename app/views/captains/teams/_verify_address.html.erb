@@ -1,4 +1,4 @@
-<%= form_for :team, url: verify_address_path(@captain), remote:true  do |f|%>
+<%= form_for :team, url: verify_address_path(@captain), :html => { :id => 'location'}, remote:true  do |f|%>
   
     <div class = "form-group">
       <%= f.label :location %>

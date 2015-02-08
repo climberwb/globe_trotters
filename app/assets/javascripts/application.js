@@ -16,7 +16,7 @@
 //= require_tree .
 //= require bootstrap
 //= require d3
-//alert('hello');
+
 
 $(function() {
   //chat!
@@ -26,10 +26,7 @@ $(function() {
   // });
 
 // location for teams
-$('#team_role_submit').click(function( event ) {
-  event.preventDefault();
-  alert('hello'); 
-});
+
 //
 //adding tool-tip
 var tooltip = d3.select("body")

@@ -25,8 +25,9 @@ Rails.application.routes.draw do
   end
 
   #post 'captains/:id/teams' => "teams#verify_address"#, as: 'verify_address'
-  get 'captains/:id/teams' => "teams#verify_address", as: 'verify_address'
-
+  # post 'captains/:id/teams' => "teams#verify_address", as: 'verify_address'
+  post "/teams/location_search" => "teams#location_search"
+  post "/teams" => "teams#to_geo_json", as: 'to_geo_json'
   resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show, :add_teammate_to_team]
   #get "/users" => "users#update", as: 'update'
 
