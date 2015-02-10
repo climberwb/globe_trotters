@@ -14,8 +14,8 @@ class Team < ActiveRecord::Base
 
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
-  
-  reverse_geocoded_by :latitude, :longitude 
+
+  reverse_geocoded_by :latitude, :longitude
 
   #do |obj, results|
     #p results
@@ -39,11 +39,11 @@ class Team < ActiveRecord::Base
     end
   end
 
-  def self.to_geojson 
-    {"type" => "FeatureCollection", "features" => all.map do |team| 
-      {"type" => "Feature", "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}} 
-    end 
-    }.to_json 
+  def self.to_geojson
+    {"type" => "FeatureCollection", "features" => Team.all.map do |team|
+        {"type" => "Feature", "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+    end
+    }.to_json
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)

@@ -28,7 +28,7 @@ $(function() {
 // location for teams
 $('#location-list li').click(function(event){
        alert($(this)[0].innerHTML);
-    });    
+    });
 
 //
 //adding tool-tip

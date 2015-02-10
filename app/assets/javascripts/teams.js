@@ -5,7 +5,13 @@ var locationSearch = function (location, cb) {
     cb,
     "json");
 };
-
+// var city_and_teams = function (location, cb) {
+//   $.post(
+//     "/teams/to_geo_json",
+//     {"location": location},
+//     cb,
+//     "json");
+// };
 var ready;
 ready = function() {
 
@@ -15,7 +21,7 @@ ready = function() {
        $(document).on('click','#save-address',function(event){
           $('#team_form').submit();
       });
-    });  
+    });
 };
 
 $(function() {
@@ -28,7 +34,7 @@ $(function() {
     $('#location-list').empty();
     locationSearch(val, function(locations) {
       //$("#testing_modal")[0].modal("show")
-      
+
       function possibleLocations(element, index, array) {
           $("<li>"+element+"</li>").appendTo('#location-list');
         }
@@ -39,7 +45,7 @@ $(function() {
 
    });
    ready();
-  
+
 
 
   });

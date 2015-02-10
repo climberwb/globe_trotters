@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
 
 
-
   resources :users
 
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
