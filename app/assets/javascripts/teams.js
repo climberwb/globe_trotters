@@ -6,8 +6,21 @@ var locationSearch = function (location, cb) {
     "json");
 };
 
+var ready;
+ready = function() {
+
+  $(document).on('click','#location-list li',function(event){
+       $('#team_location').val($(this)[0].innerHTML);
+
+       $(document).on('click','#save-address',function(event){
+          $('#team_form').submit();
+      });
+    });  
+};
 
 $(function() {
+
+
   $('#team_loc_create').click(function( event ) {
 
    // event.preventDefault();
@@ -20,11 +33,16 @@ $(function() {
           $("<li>"+element+"</li>").appendTo('#location-list');
         }
       locations.forEach(possibleLocations);
-      
 
     });
 
 
    });
+   ready();
+  
+
 
   });
+
+//$(document).on('page:load', ready);
+
