@@ -43,7 +43,7 @@ class Team < ActiveRecord::Base
     {"type" => "FeatureCollection", "features" => Team.all.map do |team|
         {"type" => "Feature", "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
     end
-    }.to_json
+    }
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)

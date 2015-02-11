@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
     resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
+   get "/teams/to_geo_json" => "teams#to_geo_json"
 
   resources :teams, :only => [:index, :show] do
     resources :users, :path => :teammates, :as => :teammates, :controller => "teammates"
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   #post 'captains/:id/teams' => "teams#verify_address"#, as: 'verify_address'
   # post 'captains/:id/teams' => "teams#verify_address", as: 'verify_address'
   post "/teams/location_search" => "teams#location_search"
-  post "/teams" => "teams#to_geo_json", as: 'to_geo_json'
   resources :users, :path => :teammates, :as => :teammates, :controller => "teammates", :only => [:new, :create, :show, :add_teammate_to_team]
   #get "/users" => "users#update", as: 'update'
 

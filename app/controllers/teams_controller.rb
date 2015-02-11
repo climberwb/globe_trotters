@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  
+
   def new
    @team = Team.new
    @conversation = Conversation.new
@@ -21,9 +21,9 @@ class TeamsController < ApplicationController
   end
 
   def to_geo_json
-    Team.to_geojson
+   render :json => Team.to_geojson.to_json
   end
-  
+
   def index
       @teams = Team.all
   end

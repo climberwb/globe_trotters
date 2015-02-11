@@ -26,11 +26,14 @@ $(function() {
   // });
 
 // location for teams
-$('#location-list li').click(function(event){
-       alert($(this)[0].innerHTML);
-    });
+// $('#location-list li').click(function(event){
+//        alert($(this)[0].innerHTML);
+//     });
 
 //
+
+
+
 //adding tool-tip
 var tooltip = d3.select("body")
     .append("div").attr("id", "tool_tip");//.append("img").attr("src","");
@@ -75,10 +78,9 @@ var svg = d3.select("body").append("svg")
             .attr("width", width)
             .attr("height", height).attr("class",'img-responsive')
             .on("mousedown", mousedown);
-
 queue()
     .defer(d3.json, "/assets/world-110m.json")
-    .defer(d3.json, "/assets/places.json")
+    .defer(d3.json, "/teams/to_geo_json")
     .await(ready);
 
 function ready(error, world, places) {

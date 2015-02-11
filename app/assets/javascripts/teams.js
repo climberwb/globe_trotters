@@ -5,13 +5,8 @@ var locationSearch = function (location, cb) {
     cb,
     "json");
 };
-// var city_and_teams = function (location, cb) {
-//   $.post(
-//     "/teams/to_geo_json",
-//     {"location": location},
-//     cb,
-//     "json");
-// };
+
+
 var ready;
 ready = function() {
 
@@ -26,9 +21,10 @@ ready = function() {
 
 $(function() {
 
-
+$.post( "/teams/to_geo_json", function( data ) {
+   alert( JSON.stringify(data) );
+});
   $('#team_loc_create').click(function( event ) {
-
    // event.preventDefault();
     var val = $("#team_location")[0].value;
     $('#location-list').empty();
