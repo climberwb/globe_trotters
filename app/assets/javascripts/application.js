@@ -30,9 +30,20 @@ $(function() {
 //        alert($(this)[0].innerHTML);
 //     });
 
-//
+//way to get the json string
 
-
+var jqxhr = $.get( "/teams/to_geo_json", function(data) {
+  alert( "success" );
+})
+  .done(function(d) {
+    alert( JSON.stringify(d.features[0].properties.TeamName) );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "finished" );
+  });
 
 //adding tool-tip
 var tooltip = d3.select("body")
@@ -212,7 +223,8 @@ function ready(error, world, places) {
 
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
-          tooltip.text(d.properties.name);
+         // alert(JSON.stringify(d.properties.TeamName));
+          tooltip.text(d.properties.TeamName);
           tool_tip.innerHTML = tool_tip.innerHTML+'<img src='+'https://coolstuffiknow.files.wordpress.com/2012/04/cool_003.jpg'+'>';
 
           return tooltip.style("visibility", "visible");

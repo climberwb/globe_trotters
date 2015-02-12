@@ -41,7 +41,7 @@ class Team < ActiveRecord::Base
 
   def self.to_geojson
     {"type" => "FeatureCollection", "features" => Team.all.map do |team|
-        {"type" => "Feature", "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+        {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
     end
     }
   end
