@@ -40,10 +40,44 @@ class Team < ActiveRecord::Base
   end
 
   def self.to_geojson
-    {"type" => "FeatureCollection", "features" => Team.all.map do |team|
-        {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+    json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
+    binding.pry
+    team_hash = Hash.new
+
+    location = []
+    Team.all.each do |team|
+      location << "#{team.latitude}#{team.longitude}"
+      if location.include? team.location == false
+        team_hash["#{team.latitude}#{team.longitude}"] = []
+         team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
+       else
+         team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
+      end
     end
-    }
+
+
+    coordinates_exist = false
+    Team.all.each do |team|
+      json_string_start['features'].each do |feature|
+        #Team.all.map do |team|
+          if  (feature['geometry']['coordinates'] == [team.longitude, team.latitude])
+                 feature['properties'] << {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location}
+                 coordinates_exist = true
+               break
+          end
+        #end
+      end
+         if coordinates_exist == false
+            json_string_start['features'] << {"type" => "Feature","properties" => [{"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }], "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+            coordinates_exist = false
+        end
+    end
+    json_string_start
+
+    # {"type" => "FeatureCollection", "features" => Team.all.map do |team|
+    #     {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+    # end
+    # }
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)

@@ -224,6 +224,7 @@ function ready(error, world, places) {
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
          // alert(JSON.stringify(d.properties.TeamName));
+         alert(JSON.stringify(d));
           tooltip.text(d.properties.TeamName);
           tool_tip.innerHTML = tool_tip.innerHTML+'<img src='+'https://coolstuffiknow.files.wordpress.com/2012/04/cool_003.jpg'+'>';
 
