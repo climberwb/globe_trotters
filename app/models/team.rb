@@ -47,13 +47,16 @@ class Team < ActiveRecord::Base
     location = []
     Team.all.each do |team|
       location << "#{team.latitude}#{team.longitude}"
-      if location.include? team.location == false
+      if location.include? team.location == false #array.has_key?
         team_hash["#{team.latitude}#{team.longitude}"] = []
          team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
        else
-         team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
+           team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
       end
     end
+    
+    # {"type" => "FeatureCollection", "features" => team_hash.map do |coords,string|
+    #    {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
 
 
     coordinates_exist = false
