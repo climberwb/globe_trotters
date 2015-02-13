@@ -226,7 +226,6 @@ function ready(error, world, places) {
          // alert(JSON.stringify(d.properties.TeamName));
          alert(JSON.stringify(d));
           tooltip.text(d.properties[0].TeamName);
-          tool_tip.innerHTML = tool_tip.innerHTML+'<img src='+'https://coolstuffiknow.files.wordpress.com/2012/04/cool_003.jpg'+'>';
 
           return tooltip.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
