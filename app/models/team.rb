@@ -40,42 +40,50 @@ class Team < ActiveRecord::Base
   end
 
   def self.to_geojson
-    json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
-    binding.pry
+   # json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
+   # binding.pry
     team_hash = Hash.new
 
     location = []
     Team.all.each do |team|
-      location << "#{team.latitude}#{team.longitude}"
-      if location.include? team.location == false #array.has_key?
-        team_hash["#{team.latitude}#{team.longitude}"] = []
-         team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
+
+      if location.include?("#{team.longitude} #{team.latitude}") == false #array.has_key?
+        location << "#{team.longitude} #{team.latitude}"
+        team_hash["#{team.longitude} #{team.latitude}"] = []
+         team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
        else
-           team_hash["#{team.latitude}#{team.longitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
+           team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address }
       end
     end
-    
-    # {"type" => "FeatureCollection", "features" => team_hash.map do |coords,string|
-    #    {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
 
-
-    coordinates_exist = false
-    Team.all.each do |team|
-      json_string_start['features'].each do |feature|
-        #Team.all.map do |team|
-          if  (feature['geometry']['coordinates'] == [team.longitude, team.latitude])
-                 feature['properties'] << {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location}
-                 coordinates_exist = true
-               break
-          end
-        #end
-      end
-         if coordinates_exist == false
-            json_string_start['features'] << {"type" => "Feature","properties" => [{"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }], "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
-            coordinates_exist = false
-        end
+   geo_string =  {"type" => "FeatureCollection", "features" => team_hash.map do |coords,string|
+    coords1 = coords.split(' ')[0].to_f
+    coords2 = coords.split(' ')[1].to_f
+    if coords.split(" ") != []
+      {"type" => "Feature","properties" => string, "geometry" => {"type" => "Point" , "coordinates" => [coords1,coords2]}}
+      else
+         {"type" => "Feature","properties" => string, "geometry" => {"type" => "Point" , "coordinates" => [1,1]}}
+     end
     end
-    json_string_start
+    }
+   geo_string
+    # coordinates_exist = false
+    # Team.all.each do |team|
+    #   json_string_start['features'].each do |feature|
+    #     #Team.all.map do |team|
+    #       if  (feature['geometry']['coordinates'] == [team.longitude, team.latitude])
+    #              feature['properties'] << {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location}
+    #              coordinates_exist = true
+    #            break
+    #       end
+    #     #end
+    #   end
+    #      if coordinates_exist == false
+    #         json_string_start['features'] << {"type" => "Feature","properties" => [{"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }], "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
+    #         coordinates_exist = false
+    #     end
+    # end
+   # json_string_start
 
     # {"type" => "FeatureCollection", "features" => Team.all.map do |team|
     #     {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}

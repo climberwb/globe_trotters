@@ -36,7 +36,8 @@ var jqxhr = $.get( "/teams/to_geo_json", function(data) {
   alert( "success" );
 })
   .done(function(d) {
-    alert( JSON.stringify(d.features[0].properties.TeamName) );
+    alert( JSON.stringify(d.features) );
+    //alert( JSON.stringify(d.features[0].properties.TeamName) );
   })
   .fail(function() {
     alert( "error" );
@@ -170,7 +171,6 @@ function ready(error, world, places) {
     .enter().append("path")
       .attr("class", "point")
       .attr("d", path);
-
   // spawn links between cities as source/target coord pairs
   places.features.forEach(function(a) {
     places.features.forEach(function(b) {
@@ -225,7 +225,7 @@ function ready(error, world, places) {
           //adding text to tool tip by different points
          // alert(JSON.stringify(d.properties.TeamName));
          alert(JSON.stringify(d));
-          tooltip.text(d.properties.TeamName);
+          tooltip.text(d.properties[0].TeamName);
           tool_tip.innerHTML = tool_tip.innerHTML+'<img src='+'https://coolstuffiknow.files.wordpress.com/2012/04/cool_003.jpg'+'>';
 
           return tooltip.style("visibility", "visible");
