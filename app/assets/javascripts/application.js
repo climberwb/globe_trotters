@@ -48,13 +48,18 @@ var jqxhr = $.get( "/teams/to_geo_json", function(data) {
 
 //adding tool-tip
 var tooltip = d3.select("body")
-    .append("div").attr("id", "tool_tip");//.append("img").attr("src","");
-var image = tooltip.append("img").attr("src","");
-   tooltip.style("position", "absolute")
+    .append("div").attr("id", "tool_tip").style("position", "absolute")
     .style("z-index", "10")
     .style("visibility", "hidden")
     .style("background-color", "yellow")//.style("top","100px").style("left","20px")
-    .text("a simple tooltip");//.image;
+    .text("a simple tooltip").append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+
+var image = tooltip.append("img").attr("src","");
+   // tooltip.style("position", "absolute")
+   //  .style("z-index", "10")
+   //  .style("visibility", "hidden")
+   //  .style("background-color", "yellow")//.style("top","100px").style("left","20px")
+   //  .text("a simple tooltip");//.image;
 
     tooltip.text("my tooltip text");
 //spining globe
@@ -217,6 +222,10 @@ function ready(error, world, places) {
 
           $('#tool_tip').css("top",d3.event.pageY);
           $('#tool_tip').css("left",d3.event.pageX);
+
+          
+          $('#tool_tip').css("visibility", "visible");
+          $('#tool_tip img').css("visibility", "visible");
           var tool_tip = $('#tool_tip');
 
          // alert($(this).attr('d'));
@@ -224,10 +233,10 @@ function ready(error, world, places) {
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
          // alert(JSON.stringify(d.properties.TeamName));
-         alert(JSON.stringify(d));
-          tooltip.text(d.properties[0].TeamName);
+        // alert(JSON.stringify(d));
+          $('#tool_tip').text(d.properties[0].TeamName);
 
-          return tooltip.style("visibility", "visible");
+         // return tooltip;//.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
 
       });
