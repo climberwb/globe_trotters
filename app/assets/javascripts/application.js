@@ -52,7 +52,7 @@ var tooltip = d3.select("body")
     .style("z-index", "10")
     .style("visibility", "hidden")
     .style("background-color", "yellow")//.style("top","100px").style("left","20px")
-    .text("a simple tooltip").append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+    .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
 
 var image = tooltip.append("img").attr("src","");
    // tooltip.style("position", "absolute")
@@ -219,23 +219,23 @@ function ready(error, world, places) {
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
 
-
           $('#tool_tip').css("top",d3.event.pageY);
           $('#tool_tip').css("left",d3.event.pageX);
 
-          
+
           $('#tool_tip').css("visibility", "visible");
           $('#tool_tip img').css("visibility", "visible");
+          $('#tool_tip img').css("top",d3.event.pageY);
           var tool_tip = $('#tool_tip');
-
+            
          // alert($(this).attr('d'));
 
           var j = places.features[0].properties.name
           //adding text to tool tip by different points
          // alert(JSON.stringify(d.properties.TeamName));
         // alert(JSON.stringify(d));
-          $('#tool_tip').text(d.properties[0].TeamName);
-
+          //$('#tool_tip').text(d.properties[0].TeamName);
+          return tooltip.html(d.properties[0].TeamName+"<img src = 'http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg'>")//text(d.properties[0].TeamName);//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
          // return tooltip;//.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
 
