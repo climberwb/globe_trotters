@@ -32,19 +32,19 @@ $(function() {
 
 //way to get the json string
 
-var jqxhr = $.get( "/teams/to_geo_json", function(data) {
-  alert( "success" );
-})
-  .done(function(d) {
-    alert( JSON.stringify(d.features) );
-    //alert( JSON.stringify(d.features[0].properties.TeamName) );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "finished" );
-  });
+// var jqxhr = $.get( "/teams/to_geo_json", function(data) {
+//   alert( "success" );
+// })
+//   .done(function(d) {
+//     alert( JSON.stringify(d.features) );
+//     //alert( JSON.stringify(d.features[0].properties.TeamName) );
+//   })
+//   .fail(function() {
+//     alert( "error" );
+//   })
+//   .always(function() {
+//     alert( "finished" );
+//   });
 
 //adding tool-tip
 var tooltip = d3.select("body")
@@ -235,7 +235,7 @@ function ready(error, world, places) {
          // alert(JSON.stringify(d.properties.TeamName));
         // alert(JSON.stringify(d));
           //$('#tool_tip').text(d.properties[0].TeamName);
-          return tooltip.html(d.properties[0].TeamName+"<img src = 'http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg'>")//text(d.properties[0].TeamName);//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+          return tooltip.html("<a href="+d.properties[0].TeamProfileUrl+">"+d.properties[0].TeamName+"</a>"+"<img src = "+d.properties[0].TeamPicUrl+">");
          // return tooltip;//.style("visibility", "visible");
         //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
 
