@@ -245,17 +245,28 @@ function ready(error, world, places) {
               $('#tool_tip').css("visibility", "visible");
               $('#tool_tip img').css("visibility", "visible");
 
+              $('#tool_tip2').css("visibility", "hidden");
+              $('#tool_tip2 img').css("visibility", "hidden");
+
+              $('#tool_tip3').css("visibility", "hidden");
+              $('#tool_tip3 img').css("visibility", "hidden");
+
+
               tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
               if(d.properties.length == 1){
                 break;
               }
             case d.properties[1]:
+
               $('#tool_tip2').css("top",d3.event.pageY-40);
               $('#tool_tip2').css("left",d3.event.pageX-40);
 
-
               $('#tool_tip2').css("visibility", "visible");
               $('#tool_tip2 img').css("visibility", "visible");
+
+              $('#tool_tip3').css("visibility", "hidden");
+              $('#tool_tip3 img').css("visibility", "hidden");
+
 
               tooltip2.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
               if(d.properties.length == 2){
@@ -264,7 +275,6 @@ function ready(error, world, places) {
             case d.properties[2]:
               $('#tool_tip3').css("top",d3.event.pageY-40);
               $('#tool_tip3').css("left",d3.event.pageX+40);
-
 
               $('#tool_tip3').css("visibility", "visible");
               $('#tool_tip3 img').css("visibility", "visible");

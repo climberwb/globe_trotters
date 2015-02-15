@@ -53,9 +53,10 @@ class Team < ActiveRecord::Base
          team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address, "TeamPicUrl"=> team.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.team_path(team.id) }
        else
            team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address, "TeamPicUrl"=> team.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.team_path(team.id) }
+           team_hash["#{team.longitude} #{team.latitude}"].shuffle!
       end
     end
-
+    
    geo_string =  {"type" => "FeatureCollection", "features" => team_hash.map do |coords,string|
     coords1 = coords.split(' ')[0].to_f
     coords2 = coords.split(' ')[1].to_f
