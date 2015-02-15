@@ -54,6 +54,20 @@ var tooltip = d3.select("body")
     .style("background-color", "yellow")//.style("top","100px").style("left","20px")
     .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
 
+var tooltip2 = d3.select("body")
+    .append("div").attr("id", "tool_tip2").style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("background-color", "yellow")//.style("top","100px").style("left","20px")
+    .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+
+var tooltip3 = d3.select("body")
+    .append("div").attr("id", "tool_tip3").style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("background-color", "yellow")//.style("top","100px").style("left","20px")
+    .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+
 var image = tooltip.append("img").attr("src","");
    // tooltip.style("position", "absolute")
    //  .style("z-index", "10")
@@ -208,7 +222,7 @@ function ready(error, world, places) {
 
 // append information upon hover ////////////////////
 
-
+     var i = 0;
      svg.append("g").attr("class","points")
       .selectAll("text").data(places.features)
     .enter().append("path").attr("r", function(d){return 1234567})
@@ -218,27 +232,47 @@ function ready(error, world, places) {
           var test = $('#test').text();
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
+          
+        d.properties.forEach(function(a) {
+          //alert(d.properties.length);
+          switch(a){
+            case d.properties[0]:
+            //  alert('hello');
+              $('#tool_tip').css("top",d3.event.pageY);
+              $('#tool_tip').css("left",d3.event.pageX);
 
-          $('#tool_tip').css("top",d3.event.pageY);
-          $('#tool_tip').css("left",d3.event.pageX);
+
+              $('#tool_tip').css("visibility", "visible");
+              $('#tool_tip img').css("visibility", "visible");
+
+              tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+              if(d.properties.length == 1){
+                break;
+              }
+            case d.properties[1]:
+              $('#tool_tip2').css("top",d3.event.pageY-40);
+              $('#tool_tip2').css("left",d3.event.pageX-40);
 
 
-          $('#tool_tip').css("visibility", "visible");
-          $('#tool_tip img').css("visibility", "visible");
-          $('#tool_tip img').css("top",d3.event.pageY);
-          var tool_tip = $('#tool_tip');
-            
-         // alert($(this).attr('d'));
+              $('#tool_tip2').css("visibility", "visible");
+              $('#tool_tip2 img').css("visibility", "visible");
 
-          var j = places.features[0].properties.name
-          //adding text to tool tip by different points
-         // alert(JSON.stringify(d.properties.TeamName));
-        // alert(JSON.stringify(d));
-          //$('#tool_tip').text(d.properties[0].TeamName);
-          return tooltip.html("<a href="+d.properties[0].TeamProfileUrl+">"+d.properties[0].TeamName+"</a>"+"<img src = "+d.properties[0].TeamPicUrl+">");
-         // return tooltip;//.style("visibility", "visible");
-        //Warren you need to build out the pop up here.  Ideally you can pull the data from the json object "places.json."
+              tooltip2.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+              if(d.properties.length == 2){
+                break;
+              }
+            case d.properties[2]:
+              $('#tool_tip3').css("top",d3.event.pageY-40);
+              $('#tool_tip3').css("left",d3.event.pageX+40);
 
+
+              $('#tool_tip3').css("visibility", "visible");
+              $('#tool_tip3 img').css("visibility", "visible");
+
+              tooltip3.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+              break;
+            }
+          });
       });
 
   refresh();
