@@ -237,8 +237,8 @@ function ready(error, world, places) {
               }
             case d.properties[1]:
 
-              $('#tool_tip2').css("top",d3.event.pageY-45);
-              $('#tool_tip2').css("left",d3.event.pageX-45);
+              $('#tool_tip2').css("top",d3.event.pageY-46);
+              $('#tool_tip2').css("left",d3.event.pageX-46);
 
               $('#tool_tip2').css("visibility", "visible");
               $('#tool_tip2 img').css("visibility", "visible");
@@ -252,8 +252,8 @@ function ready(error, world, places) {
                 break;
               }
             case d.properties[2]:
-              $('#tool_tip3').css("top",d3.event.pageY-45);
-              $('#tool_tip3').css("left",d3.event.pageX+45);
+              $('#tool_tip3').css("top",d3.event.pageY-47);
+              $('#tool_tip3').css("left",d3.event.pageX+47);
 
               $('#tool_tip3').css("visibility", "visible");
               $('#tool_tip3 img').css("visibility", "visible");
