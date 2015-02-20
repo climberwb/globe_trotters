@@ -50,39 +50,6 @@ class Team < ActiveRecord::Base
       geo["features"] << {"type" => "Feature", "properties" => teams, "geometry" => {"type" => "Point", "coordinates" => [coords.longitude, coords.latitude]}}
     end
     geo
-
-   #  team_hash = {}
-
-   #  location = []
-   #  Team.all.each do |team|
-
-   #    if location.include?("#{team.longitude} #{team.latitude}") == false #array.has_key?
-   #      location << "#{team.longitude} #{team.latitude}"
-   #      team_hash["#{team.longitude} #{team.latitude}"] = []
-   #       team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address, "TeamPicUrl"=> team.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.team_path(team.id) }
-   #     else
-   #         team_hash["#{team.longitude} #{team.latitude}"] << {"TeamName" => team.name, "TeamSport" => team.sport, "TeamAddress"=> team.address, "TeamPicUrl"=> team.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.team_path(team.id) }
-   #         team_hash["#{team.longitude} #{team.latitude}"].shuffle!
-   #    end
-   #  end
-    
-   # geo_string =  {"type" => "FeatureCollection", "features" => team_hash.map do |coords,string|
-   #  coords1 = coords.split(' ')[0].to_f
-   #  coords2 = coords.split(' ')[1].to_f
-   #  if coords.split(" ") != []
-   #    {"type" => "Feature","properties" => string, "geometry" => {"type" => "Point" , "coordinates" => [coords1,coords2]}}
-   #    else
-   #       {"type" => "Feature","properties" => string, "geometry" => {"type" => "Point" , "coordinates" => [1,1]}}
-   #   end
-   #  end
-   #  }
-   # geo_string
-   
-
-    # {"type" => "FeatureCollection", "features" => Team.all.map do |team|
-    #     {"type" => "Feature","properties" => {"TeamName" => team.name,"TeamSport" => team.sport, "TeamAddress" => team.location  }, "geometry" => {"type" => "Point" , "coordinates" => [team.longitude, team.latitude]}}
-    # end
-    # }
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)

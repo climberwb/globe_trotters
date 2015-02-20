@@ -25,27 +25,6 @@ $(function() {
   //    eval(data);
   // });
 
-// location for teams
-// $('#location-list li').click(function(event){
-//        alert($(this)[0].innerHTML);
-//     });
-
-//way to get the json string
-
-// var jqxhr = $.get( "/teams/to_geo_json", function(data) {
-//   alert( "success" );
-// })
-//   .done(function(d) {
-//     alert( JSON.stringify(d.features) );
-//     //alert( JSON.stringify(d.features[0].properties.TeamName) );
-//   })
-//   .fail(function() {
-//     alert( "error" );
-//   })
-//   .always(function() {
-//     alert( "finished" );
-//   });
-
 //adding tool-tip
 var tooltip = d3.select("body")
     .append("div").attr("id", "tool_tip").style("position", "absolute")
@@ -258,8 +237,8 @@ function ready(error, world, places) {
               }
             case d.properties[1]:
 
-              $('#tool_tip2').css("top",d3.event.pageY-40);
-              $('#tool_tip2').css("left",d3.event.pageX-40);
+              $('#tool_tip2').css("top",d3.event.pageY-45);
+              $('#tool_tip2').css("left",d3.event.pageX-45);
 
               $('#tool_tip2').css("visibility", "visible");
               $('#tool_tip2 img').css("visibility", "visible");
@@ -273,8 +252,8 @@ function ready(error, world, places) {
                 break;
               }
             case d.properties[2]:
-              $('#tool_tip3').css("top",d3.event.pageY-40);
-              $('#tool_tip3').css("left",d3.event.pageX+40);
+              $('#tool_tip3').css("top",d3.event.pageY-45);
+              $('#tool_tip3').css("left",d3.event.pageX+45);
 
               $('#tool_tip3').css("visibility", "visible");
               $('#tool_tip3 img').css("visibility", "visible");
@@ -284,6 +263,7 @@ function ready(error, world, places) {
             }
           });
       });
+// append information upon hover above ////////////////////
 
   refresh();
 }

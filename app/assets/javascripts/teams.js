@@ -21,9 +21,7 @@ ready = function() {
 
 $(function() {
 
-$.post( "/teams/to_geo_json", function( data ) {
-   alert( JSON.stringify(data) );
-});
+
   $('#team_loc_create').click(function( event ) {
    // event.preventDefault();
     var val = $("#team_location")[0].value;
