@@ -51,6 +51,9 @@ gem 'thin'
 gem 'd3js-rails'
 gem 'geocoder'
 gem 'georuby'
+gem "google-instant-hangouts"    
+gem "opentok", "~> 2.2"
+
 # gem 'thin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
