@@ -51,7 +51,6 @@ gem 'thin'
 gem 'd3js-rails'
 gem 'geocoder'
 gem 'georuby'
-gem "google-instant-hangouts"    
 gem "opentok", "~> 2.2"
 
 # gem 'thin'

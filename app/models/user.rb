@@ -21,6 +21,16 @@ class User < ActiveRecord::Base
   # belongs_to :captain, class_name: "User"
 
   # has_many :teammates, class_name: "User", foreign_key: "captain_id"
+  belongs_to :vidconference
+
+  validate :user_count_within_limit, :on => :update
+
+  def user_count_within_limit
+    if vidconference.users.count > 1
+      errors.add(:base, "Exceeded thing limit")
+    end
+  end
+
 
   def teammate?
    role == 'teammate'
