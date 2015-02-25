@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
  # get '/school_sort' => "students#school_sort", :as => :sort_school
 
-
+  resources :vidconference
 
 
   get 'welcome/index'

@@ -1,0 +1,12 @@
+<%= form_for :vidconference, url: @team do |f|
+ %><%= current_user %>
+    <div class = "form-group">
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id, class: 'form-control', placeholder: "Enter wiki title", id:'user_id' %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>
+    </div>
+  <% end %>
+  </div>
+</div>
