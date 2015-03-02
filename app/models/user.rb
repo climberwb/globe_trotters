@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   validate :user_count_within_limit, :on => :update
 
+  scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
+
   def user_count_within_limit
     if vidconference.users.count > 1
       errors.add(:base, "Exceeded thing limit")
