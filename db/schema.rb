@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224161950) do
+ActiveRecord::Schema.define(version: 20150302232115) do
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20150224161950) do
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "team_relationships", force: true do |t|
+    t.datetime "accepted_at"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+  end
+
+  add_index "team_relationships", ["receiver_id"], name: "index_team_relationships_on_receiver_id"
+  add_index "team_relationships", ["sender_id"], name: "index_team_relationships_on_sender_id"
 
   create_table "teams", force: true do |t|
     t.string  "name"
