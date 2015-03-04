@@ -1,5 +1,5 @@
-class TeamRelationship < ActiveRecord::Base
+class TeammateRelationship < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
-  has_many :teammate_relationships
+  belongs_to :team_relationship
 end

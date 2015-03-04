@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   has_one :team_relationship, foreign_key: "receiver_id"
   has_one :team_relationship, foreign_key: "sender_id"
 
+  has_one :teammate_relationship, foreign_key: "receiver_id"
+  has_one :teammate_relationship, foreign_key: "sender_id"
+
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
 
   def user_count_within_limit
