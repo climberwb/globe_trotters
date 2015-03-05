@@ -39,12 +39,14 @@ ActiveRecord::Schema.define(version: 20150304181113) do
 
   create_table "team_relationships", force: true do |t|
     t.datetime "accepted_at"
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
+    t.integer  "sender_team_id"
+    t.integer  "receiver_team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "team_relationships", ["receiver_id"], name: "index_team_relationships_on_receiver_id"
-  add_index "team_relationships", ["sender_id"], name: "index_team_relationships_on_sender_id"
+  add_index "team_relationships", ["receiver_team_id"], name: "index_team_relationships_on_receiver_team_id"
+  add_index "team_relationships", ["sender_team_id"], name: "index_team_relationships_on_sender_team_id"
 
   create_table "teammate_relationships", force: true do |t|
     t.datetime "accepted_at"

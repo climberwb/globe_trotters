@@ -16,3 +16,22 @@
 <% @team.teammates.each do |teammate| %>
    <p><%= link_to teammate.name, teammate_path(teammate.id) %></p>
 <% end %>
+
+
+<%= form_for :team_relationship, url: @team_relationship, method: :post,:html => { :id => 'new_team_relationship'} do |f|
+ %>
+    <div class = "form-group">
+      <%= f.label :sender_team_id %>
+      <%= f.text_field :sender_team_id, class: 'form-control', placeholder: "Enter wiki title", id:'sender_team_relationship',value: "#{current_user.team.id}" %>
+    </div>
+    <div class = "form-group">
+      <%= f.label :receiver_team_id %>
+      <%= f.text_field :receiver_team_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_team_relationship',value: "#{@team.id}" %>
+    </div>
+    <div class = "form-group">
+     <button type="button" id ="#AddFriendTeam" class="btn btn-primary btn-lg" >
+      Add Friend
+     </button>
+    </div>
+<%end%>
+

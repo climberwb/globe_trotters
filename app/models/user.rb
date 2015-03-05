@@ -25,9 +25,6 @@ class User < ActiveRecord::Base
 
   validate :user_count_within_limit, :on => :update
 
-  has_one :team_relationship, foreign_key: "receiver_id"
-  has_one :team_relationship, foreign_key: "sender_id"
-
   has_one :teammate_relationship, foreign_key: "receiver_id"
   has_one :teammate_relationship, foreign_key: "sender_id"
 

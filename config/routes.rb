@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :users
 
 
@@ -38,8 +37,9 @@ Rails.application.routes.draw do
   get '/add_teammate_to_team/:id' => "teammates#add_teammate_to_team", :as => :add_teammate_to_team
  # get '/school_sort' => "students#school_sort", :as => :sort_school
 
+  resources :team_relationships
+  post "/team_relationships/create" => "team_relationships#create"
   resources :vidconferences
-
 
   get 'welcome/index'
   get 'welcome/about'

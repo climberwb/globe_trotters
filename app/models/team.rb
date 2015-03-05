@@ -22,7 +22,9 @@ class Team < ActiveRecord::Base
 
 
   #end
-
+  has_one :team_relationship, foreign_key: "receiver_id"
+  has_one :team_relationship, foreign_key: "sender_id"
+  
   mount_uploader :avatar, AvatarUploader
 
   attr_writer :address
