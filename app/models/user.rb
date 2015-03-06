@@ -35,8 +35,15 @@ class User < ActiveRecord::Base
       errors.add(:base, "Exceeded thing limit")
     end
   end
+## self.current allows to set the current user also relates to code in application controller
+   def self.current
+    Thread.current[:user]
+  end
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
 
-
+## rolse for user
   def teammate?
    role == 'teammate'
   end

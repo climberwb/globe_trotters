@@ -31,6 +31,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @team_relationship = TeamRelationship.new
+    @current_user = current_user
   end
 
   def location_search
