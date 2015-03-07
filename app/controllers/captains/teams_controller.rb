@@ -18,6 +18,7 @@ class Captains::TeamsController < ApplicationController
               :avatar => params[:team][:avatar]
 
             )
+     User.find(@captain).update_attributes(:team_id =>@team.id)
     if @team.present?
       redirect_to @team # show view for team 
     end
