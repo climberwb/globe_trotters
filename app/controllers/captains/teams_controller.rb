@@ -8,19 +8,19 @@ class Captains::TeamsController < ApplicationController
  
   def create
    
-    @captain = current_user.id
+    @captain = current_user
 
     @team = Team.create(
               :name => params[:team][:name],
               :location  => params[:team][:location],
               :sport  => params[:team][:sport],
-              :captain_id => @captain,
+              :captain => @captain,
               :avatar => params[:team][:avatar]
-
             )
-     User.find(@captain).update_attributes(:team_id =>@team.id)
+   @captain.team = @team
+   @captain.save!
     if @team.present?
-      redirect_to @team # show view for team 
+      redirect_to team_path(@team.id) # show view for team 
     end
   end
  def verify_address

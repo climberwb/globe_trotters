@@ -13,10 +13,11 @@
 <p><span>location: </span><%= @team.location %></p>
 </br>
 <strong> list of teammates</strong>
-<% @team.teammates.each do |teammate| %>
-   <p><%= link_to teammate.name, teammate_path(teammate.id) %></p>
-<% end %>
-
+<%if @team.teammates%>
+  <% @team.teammates.each do |teammate| %>
+     <p><%= link_to teammate.name, teammate_path(teammate.id) %></p>
+  <% end %>
+<%end%>
 
 <%= form_for :team_relationship, url: @team_relationship, method: :post,:html => { :id => 'new_team_relationship'} do |f|
  %>

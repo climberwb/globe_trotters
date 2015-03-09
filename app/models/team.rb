@@ -56,8 +56,6 @@ class Team < ActiveRecord::Base
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)
     address = Geocoder.address(coordinates)
-    # Geocoder.coordinates("25 Main St, Cooperstown, NY")
-    # Geocoder.address([42.700124, -74.922749])
   end
 
   # making home_team the multiple team chat relation

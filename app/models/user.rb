@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
   # has_many :teammates, class_name: "User", foreign_key: "captain_id"
   belongs_to :vidconference
-
   validate :user_count_within_limit, :on => :update
 
   has_one :teammate_relationship, foreign_key: "receiver_id"
@@ -31,17 +30,11 @@ class User < ActiveRecord::Base
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
 
   def user_count_within_limit
-    if vidconference.users.count > 1
+    if vidconference && vidconference.users.count > 1
       errors.add(:base, "Exceeded thing limit")
     end
   end
-## self.current allows to set the current user also relates to code in application controller
-   def self.current
-    Thread.current[:user]
-  end
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
+
 
 ## rolse for user
   def teammate?

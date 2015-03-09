@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150304181113) do
 
   create_table "team_relationships", force: true do |t|
     t.datetime "accepted_at"
+    t.datetime "rejected_at"
     t.integer  "sender_team_id"
     t.integer  "receiver_team_id"
     t.datetime "created_at"
