@@ -31,7 +31,11 @@
     </div>
     <div class = "form-group">
      <button type="button" id ="#AddFriendTeam" class="btn btn-primary btn-lg" >
-      Add Friend
+      <%if TeamRelationship.where(sender_team_id: current_user.team.id).first == nil%>
+        Add Friend
+      <%else%>
+        Request Sent
+      <%end%>
      </button>
     </div>
 <%end%>
