@@ -32,6 +32,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @team_relationship = TeamRelationship.new
     @current_user = current_user
+    @current_team_relationship = TeamRelationship.where(sender_team_id: current_user.team.id).first
   end
 
   def location_search
