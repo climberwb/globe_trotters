@@ -17,11 +17,14 @@
        <ul class="nav nav-tabs">
         <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
-
+         <%if current_user.role =="captain"%>
+               <li><%= link_to "CAPTAIN!" %></li>
+             <%end%>
         <div class="pull-right user-info">
            <% if current_user %>
               <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
              Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+            
            <% else %>
              <%= link_to "Sign In", new_user_session_path %> or
              <%= link_to "Sign Up", new_user_registration_path %>
