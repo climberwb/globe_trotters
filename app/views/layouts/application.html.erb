@@ -17,11 +17,9 @@
        <ul class="nav nav-tabs">
         <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
-      <%if current_user%>
-         <%if current_user.role =="captain" && TeamRelationship.where(receiver_team_id: current_user.team_id ).first%>
+         <%if current_user && current_user.role =="captain" && TeamRelationship.where(receiver_team_id: current_user.team_id ).first%>
                <li><%= link_to "Friend Requested!",team_relationships_path %></li>
          <%end%>
-     <%end%>
         <div class="pull-right user-info">
            <% if current_user %>
               <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
