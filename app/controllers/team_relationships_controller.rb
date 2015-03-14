@@ -1,6 +1,9 @@
 class TeamRelationshipsController < ApplicationController
   def new
   end
+  def index
+    @team_relationships = TeamRelationship.where(receiver_team: current_user.team)   
+  end
 
   def show
 
@@ -9,6 +12,7 @@ class TeamRelationshipsController < ApplicationController
   def create
     #binding.pry
     @team_relationship = TeamRelationship.create!(message_params)
+    @team_relationship.save
     render :json => {:status => "Request Sent" }.to_json
 
   end
@@ -20,6 +24,18 @@ class TeamRelationshipsController < ApplicationController
   end
 
   def update
+  end
+  def team_accept
+    @team_relationship = TeamRelationship.where(params[:team_relationships][:sender_team_id]).where(params[:team_relationships][:receiver_team_id]).first
+    @team_relationship_accept = @team_relationship.update_attributes(:accepted_at=> Time.new)
+    @team_relationship.save
+    render :json => {:status => "Accept" }.to_json
+   #
+  end
+
+  def team_decline
+    @team_relationship_accept = TeamRelationship.where(params[:team_relationships][:sender_team_id]).where(params[:team_relationships][:receiver_team_id]).first.update_attributes(:rejected_at=> Time.new)
+    render :json => {:status => "Decline" }.to_json
   end
 
   protected

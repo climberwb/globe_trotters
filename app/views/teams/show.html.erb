@@ -33,7 +33,7 @@
      <button type="button" id ="#AddFriendTeam" class="btn btn-primary btn-lg" >
       <%if @current_team_relationship == nil %>
         Add Friend
-      <%elsif @current_team_relationship.receiver_team == @team%>
+      <%elsif @current_team_relationship.receiver_team == @team %>
         Request Sent
       <%else%>
         Request Pending...

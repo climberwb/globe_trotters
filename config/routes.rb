@@ -43,6 +43,9 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/about'
+  
+  post "/team_relationships/team_accept" => "team_relationships#team_accept"
+  post "/team_relationships/team_decline" => "team_relationships#team_decline"
 
   root to: 'welcome#index'
 end
