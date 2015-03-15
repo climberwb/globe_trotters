@@ -1,6 +1,6 @@
 <h1>TeamRelationships#index</h1>
 <p>Find me in app/views/team_relationships/index.html.erb</p>
-<ul style="list-style:none">
+<ul id='team-relationship-list'style="list-style:none">
 <% @team_relationships.each do |relationship| %>
   <li id=<%="relationship-sender-#{relationship.sender_team_id}"%> class=<%="relationship-receiver-#{relationship.receiver_team_id}" %> ><%=link_to relationship.sender_team.name, team_path(relationship.sender_team.id) %>: <%= link_to "Accept",'dfd',class:"team-relationship-accept" %> | <%= link_to "Decline",'dfd',class:"team-relationship-decline" %></li>
 <%end%>

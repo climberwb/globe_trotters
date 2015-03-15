@@ -28,12 +28,13 @@ class TeamRelationshipsController < ApplicationController
   def team_accept
     sender_id = params[:team_relationships][:sender_team_id].to_i
     receiver_id = params[:team_relationships][:receiver_team_id].to_i
+    sender_team_name = Team.find(sender_id).name
     # @team_relationship = TeamRelationship.where(params[:team_relationships][:sender_team_id]).where(params[:team_relationships][:receiver_team_id]).first
 
     @team_relationship = TeamRelationship.where(sender_team_id: sender_id, receiver_team_id: receiver_id).first
     @team_relationship_accept = @team_relationship.update_attributes(:accepted_at=> Time.new)
     @team_relationship.save!
-    render :json => {:status => "Accept" }.to_json
+    render :json => {:status => "Accept",:team =>{:link =>"teams/#{sender_id}", :name => sender_team_name} }.to_json
    #
   end
 
