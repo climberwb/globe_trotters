@@ -15,14 +15,15 @@
     t.string  "location"
     t.integer "captain_id"
 <div class = "col-md-8">
-  <%= form_for :user, url: binary_selection_update_path(@user), html: { method: :put } do |f|
+  <%= form_for :user, url: binary_selection_update_path(@user), html: { method: :post } do |f|
  %><%= current_user %>
     <div class = "form-group">
       <%= f.label :role %>
       <%= f.text_field :role, class: 'form-control', placeholder: "Enter wiki title", id:'user_role_attribute' %>
         <button type="button" class="btn btn-warning" id='role_button_captain'>captain</button>
          <button type="button" class="btn btn-primary" id='role_button_teammate'>teammate</button>
-
+         <button type="button" class="btn btn-primary" id='role_button_independent'>independent</button>
+         
     </div>
     <div class = "form-group">
       <%= f.submit class: 'btn btn-success' ,id: 'team_role_submit'  %>

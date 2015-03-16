@@ -22,8 +22,6 @@ def admin_show
 
 
 
-
-
    def update
     if current_user.update_attributes(user_params)
       flash[:notice] = "User information updated"
@@ -36,20 +34,27 @@ def admin_show
 
   def binary_selection
     @user = User.find(params[:id])
+
   end
   def binary_selection_update
-    @user = User.find(params[:id])
-    url = @user.id
-    if @user.update_attribute(:role, params[:user][:role])
-      if @user.role == "captain"
-       # '/captains/'"#{url}"'/teams/new'
-      redirect_to new_captain_team_path(current_user.id), notice: "#{@user.id} was updated."
-      elsif @user.role == "teammate"
-        redirect_to new_teammate_path
-      end
-    else
-     # format.html { render action: "edit" }
+      @user = User.find(params[:id])
+      url = @user.id
+      if @user.update_attribute(:role, params[:user][:role])
+        if @user.role == "captain"
+         # '/captains/'"#{url}"'/teams/new'
+        redirect_to new_captain_team_path(current_user.id), notice: "#{@user.id} was updated."
+        elsif @user.role == "teammate"
+          redirect_to new_teammate_path
+        elsif @user.role == "independent"
+          redirect_to independent_form_path
+        end
     end
+   end
+
+  def independent_form
+  end
+
+  def independent_form_post
   end
 
   def new

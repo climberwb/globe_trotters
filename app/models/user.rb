@@ -44,7 +44,9 @@ class User < ActiveRecord::Base
   def team_captain?
     role == 'captain'
   end
-
+   def independent?
+    role == 'independent'
+  end
   def admin?
     role == 'admin'
   end
