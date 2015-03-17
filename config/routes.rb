@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get "/users/:id/admin_show" => "users#admin_show", as: 'admin_show'
   put "/users/:id/admin_info_create" => "users#admin_info_create", as: 'admin_info_create'
 
-  get '/users/:id/independent_form' => "users#independent_form", as: "independent_form"
-  post '/users/:id/independent_form_post' => "users#independent_form", as: "independent_form_post"
+  get '/users/:id/individual_form' => "users#individual_form", as: "individual_form"
+  post '/users/:id/individual_form_post' => "users#individual_form", as: "individual_form_post"
 
   resources :users
   

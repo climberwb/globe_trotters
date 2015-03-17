@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304181113) do
+ActiveRecord::Schema.define(version: 20150317011203) do
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150304181113) do
     t.text     "bio"
     t.string   "avatar"
     t.integer  "vidconference_id"
+    t.string   "location"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('#role_button_teammate').click(function() {
         $('#user_role_attribute').val('teammate');
     });
-    $('#role_button_independent').click(function() {
-        $('#user_role_attribute').val('independent');
+    $('#role_button_individual').click(function() {
+        $('#user_role_attribute').val('individual');
     });
 });

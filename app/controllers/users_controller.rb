@@ -45,16 +45,16 @@ def admin_show
         redirect_to new_captain_team_path(current_user.id), notice: "#{@user.id} was updated."
         elsif @user.role == "teammate"
           redirect_to new_teammate_path
-        elsif @user.role == "independent"
-          redirect_to independent_form_path
+        elsif @user.role == "individual"
+          redirect_to individual_form_path
         end
     end
    end
 
-  def independent_form
+  def individual_form
   end
 
-  def independent_form_post
+  def individual_form_post
   end
 
   def new

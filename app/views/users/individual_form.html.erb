@@ -1,0 +1,70 @@
+<h1>individual form </h1>
+
+ <div class= "row">
+   <div class = "col-md-4">
+     <p>Blah Blah</p>
+     <ul>
+       <li>Blah Blah blah ...</li>
+       <li>Kdod dodo d d</li>
+       <li>adf djdj djdj </li>
+     </ul>
+   </div>
+ </div>
+<div class = "col-md-8">
+  <%= form_for :user, url: individual_form_post_path(current_user),:html => { :id => 'individual_form'}, method: :post  do |f|
+ %>
+      <div class = "form-group">
+      <%= f.label :bio %>
+      <%= f.text_area :bio, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
+    </div>
+    <% if current_user.avatar? %>
+        <div class="form-group">
+          <p>Current avatar</p>
+          <%= image_tag( current_user.avatar.profile.url ) %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+      </div>
+    <div class = "form-group">
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title" %>
+
+    </div>
+    <div class = "form-group">
+     <%= f.submit class: 'btn btn-success' ,id: 'individual_submit'  %>
+    </div>
+     <!-- <button type="button" id ="individual_create"class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myIndividualModal">
+      Create Team
+     </button>
+    </div>
+  <% end %>
+  </div>
+
+    
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="myIndividualModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Pick Your Address</h4>
+      </div>
+      <div class="modal-body">
+        <ul id="location-list">
+
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id='save-address'>Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+ --> -->
