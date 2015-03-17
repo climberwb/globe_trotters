@@ -55,6 +55,7 @@ def admin_show
   end
 
   def individual_form_post
+    #TODO: update user for individual account add pundit
   end
 
   def new
