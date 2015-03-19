@@ -89,7 +89,7 @@ var svg = d3.select("body").append("svg")
             .on("mousedown", mousedown);
 queue()
     .defer(d3.json, "/assets/world-110m.json")
-    .defer(d3.json, "/teams/to_geo_json")
+    .defer(d3.json, "/to_geo_json")//TODO make if else for /teams/to_geo_json
     .await(ready);
 
 function ready(error, world, places) {

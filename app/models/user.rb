@@ -60,7 +60,7 @@ attr_writer :address
     geo = {"type" => "FeatureCollection", "features" => []}
     User.select([:latitude, :longitude]).distinct.each do |coords|
       users = User.where(latitude: coords.latitude, longitude: coords.longitude).order("RANDOM()").map do |user|
-        {"TeamName" => user.name, "TeamSport" => user.sport, "TeamAddress"=> user.location, "TeamPicUrl"=> user.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.individual_show_path(user.id) }
+        {"TeamName" => user.name,  "TeamAddress"=> user.location, "TeamPicUrl"=> user.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.individual_show_path(user.id) }
       end
       geo["features"] << {"type" => "Feature", "properties" => users, "geometry" => {"type" => "Point", "coordinates" => [coords.longitude, coords.latitude]}}
     end

@@ -65,7 +65,7 @@ def admin_show
   end
 
   def individual_show
-    @user = current_user
+    @user = User.find(params[:id])
   end
   def to_geo_json
    render :json => User.to_geojson.to_json
