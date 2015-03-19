@@ -13,7 +13,11 @@
 <div class = "col-md-8">
   <%= form_for :user, url: individual_form_post_path(current_user),:html => { :id => 'individual_form'}, method: :post  do |f|
  %>
-      <div class = "form-group">
+    <div class = "form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki title", id:'indvidual_name' %>
+    </div>
+    <div class = "form-group">
       <%= f.label :bio %>
       <%= f.text_area :bio, class: 'form-control', placeholder: "Enter wiki title", id:'team_title' %>
     </div>
@@ -31,7 +35,6 @@
     <div class = "form-group">
       <%= f.label :location %>
       <%= f.text_field :location, class: 'form-control', placeholder: "Enter wiki title" %>
-
     </div>
     <div class = "form-group">
      <%= f.submit class: 'btn btn-success' ,id: 'individual_submit'  %>

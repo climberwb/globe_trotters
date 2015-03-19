@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get '/users/:id/individual_form' => "users#individual_form", as: "individual_form"
   post '/users/:id/individual_form_post' => "users#individual_form_post", as: "individual_form_post"
+  get '/users/:id/individual_show' => "users#individual_show", as: "individual_show"
+
 
   resources :users
   

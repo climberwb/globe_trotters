@@ -35,6 +35,12 @@ class User < ActiveRecord::Base
     end
   end
 
+geocoded_by :location   # can also be an IP address
+after_validation :geocode          # auto-fetch coordinates
+
+reverse_geocoded_by :latitude, :longitude
+
+
 
 ## rolse for user
   def teammate?

@@ -57,14 +57,15 @@ def admin_show
   def individual_form_post
     #TODO: update user for individual account add pundit
     puts 'dfasfadf'
-     @user = current_user.update_attributes(
-              :name => params[:user][:name],
-              :bio=> params[:user][:location],
-              :avatar => params[:user][:avatar]
-            )
-     current_user.save
-    redirect_to user_path(current_user)
+     @user = current_user.update_attributes(user_params)
+     if current_user.save
+        redirect_to individual_show_path(current_user)
+     end
 
+  end
+
+  def individual_show
+    @user = current_user
   end
 
   def new
@@ -80,6 +81,6 @@ def admin_show
  private
 
   def user_params
-    params.require(:user).permit(:name,:avatar)
+    params.require(:user).permit(:name,:avatar,:bio,:location)
   end
 end
