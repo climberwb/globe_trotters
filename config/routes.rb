@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   get "/users/:id/admin_show" => "users#admin_show", as: 'admin_show'
   put "/users/:id/admin_info_create" => "users#admin_info_create", as: 'admin_info_create'
 
-  get '/users/:id/individual_form' => "users#individual_form", as: "individual_form"
+  get  '/users/:id/individual_form' => "users#individual_form", as: "individual_form"
   post '/users/:id/individual_form_post' => "users#individual_form_post", as: "individual_form_post"
-  get '/users/:id/individual_show' => "users#individual_show", as: "individual_show"
+  get  '/users/:id/individual_show' => "users#individual_show", as: "individual_show"
 
+  get  "/to_geo_json" => "users#to_geo_json"#, as:"individual_to_geo_json"
+  post "/location_search" => "users#location_search"#, as: "individual_location_search"
 
   resources :users
 
@@ -21,8 +23,7 @@ Rails.application.routes.draw do
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
     resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
-  get "/users/to_geo_json" => "users#to_geo_json"
-  post "/users/location_search" => "users#location_search"
+
 
 
    get "/teams/to_geo_json" => "teams#to_geo_json"

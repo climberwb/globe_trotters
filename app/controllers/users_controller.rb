@@ -34,7 +34,6 @@ def admin_show
 
   def binary_selection
     @user = User.find(params[:id])
-
   end
   def binary_selection_update
       @user = User.find(params[:id])
@@ -52,6 +51,7 @@ def admin_show
    end
 
   def individual_form
+    @user = current_user
   end
 
   def individual_form_post
@@ -74,6 +74,7 @@ def admin_show
    def location_search
     p params
     location = params[:location]
+
     render :json => User.location_search(location).to_json
   end
 

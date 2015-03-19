@@ -1,6 +1,6 @@
 var locationSearch = function (location, cb) {
   $.post(
-    "/users/location_search",
+    "/location_search",
     {"location": location},
     cb,
     "json");
@@ -12,13 +12,29 @@ ready = function() {
   $(document).on('click','#individual-location-list li',function(event){
        $('#individual_location').val($(this)[0].innerHTML);
 
-       $(document).on('click','#save-address',function(event){
-          $('#team_form').submit();
+       $(document).on('click','#save-individual-address',function(event){
+          $('#individual_form').submit();
       });
     });
 };
 
 $(document).ready(function() {
+
+    $('#individual_loc_create').click(function( event ) {
+    event.preventDefault();
+    var val = $('#individual_location').attr('value');
+    $('#individual-location-list').empty();
+    locationSearch(val, function(locations) {
+      //$("#testing_modal")[0].modal("show")
+
+      function possibleLocations(element, index, array) {
+          $("<li>"+element+"</li>").appendTo('#individual-location-list');
+        }
+      locations.forEach(possibleLocations);
+
+    });
+    ready();
+});
     // put all your jQuery goodness in here.
     $('#role_button_captain').click(function() {
        $('#user_role_attribute').val('captain');
