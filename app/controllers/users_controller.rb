@@ -67,9 +67,19 @@ def admin_show
   def individual_show
     @user = current_user
   end
+  def to_geo_json
+   render :json => User.to_geojson.to_json
+  end
+
+   def location_search
+    p params
+    location = params[:location]
+    render :json => User.location_search(location).to_json
+  end
 
   def new
   end
+
   def show
   end
 

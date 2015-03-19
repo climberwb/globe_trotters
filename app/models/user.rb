@@ -40,7 +40,36 @@ after_validation :geocode          # auto-fetch coordinates
 
 reverse_geocoded_by :latitude, :longitude
 
+attr_writer :address
 
+  def address
+    @address || location
+  end
+
+  def self.location_search(location)
+    Geocoder.search(location).map do |loc|
+      city = "#{loc.city}, " if loc.city
+      state = "#{loc.state}, " if loc.state
+      "#{city}#{state}#{loc.country}"
+    end
+  end
+
+  def self.to_geojson
+   # json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
+   # binding.pry
+    geo = {"type" => "FeatureCollection", "features" => []}
+    User.select([:latitude, :longitude]).distinct.each do |coords|
+      users = User.where(latitude: coords.latitude, longitude: coords.longitude).order("RANDOM()").map do |user|
+        {"TeamName" => user.name, "TeamSport" => user.sport, "TeamAddress"=> user.location, "TeamPicUrl"=> user.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.individual_show_path(user.id) }
+      end
+      geo["features"] << {"type" => "Feature", "properties" => users, "geometry" => {"type" => "Point", "coordinates" => [coords.longitude, coords.latitude]}}
+    end
+    geo
+  end
+  def self.validate_address(location)
+    coordinates = Geocoder.coordinates(location)
+    address = Geocoder.address(coordinates)
+  end
 
 ## rolse for user
   def teammate?

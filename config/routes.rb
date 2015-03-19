@@ -16,11 +16,13 @@ Rails.application.routes.draw do
 
 
   resources :users
-  
+
 
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
     resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
+  get "/users/to_geo_json" => "users#to_geo_json"
+  post "/users/location_search" => "users#location_search"
 
 
    get "/teams/to_geo_json" => "teams#to_geo_json"
@@ -49,10 +51,10 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/about'
-  
+
   post "/team_relationships/team_accept" => "team_relationships#team_accept"
   post "/team_relationships/team_decline" => "team_relationships#team_decline"
-   
+
 
   root to: 'welcome#index'
 end

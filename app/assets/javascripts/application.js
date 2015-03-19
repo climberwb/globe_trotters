@@ -210,7 +210,7 @@ function ready(error, world, places) {
           var test = $('#test').text();
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
-          
+
         d.properties.forEach(function(a) {
           //alert(d.properties.length);
           switch(a){
@@ -218,7 +218,6 @@ function ready(error, world, places) {
             //  alert('hello');
               $('#tool_tip').css("top",d3.event.pageY);
               $('#tool_tip').css("left",d3.event.pageX);
-
 
               $('#tool_tip').css("visibility", "visible");
               $('#tool_tip img').css("visibility", "visible");
