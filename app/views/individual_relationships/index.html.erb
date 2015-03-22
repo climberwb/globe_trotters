@@ -1,0 +1,10 @@
+ <h1>IndividualRelationships#index</h1>
+<p>Find me in app/views/team_relationships/index.html.erb</p>
+<ul id='individual-relationship-list'style="list-style:none">
+<% @relationship_display.each do |relationship| %>
+  <li id=<%="relationship-sender-#{relationship.sender_id}"%> class=<%="relationship-receiver-#{relationship.receiver_id}" %> ><%=link_to relationship.sender.name, individual_show_path(relationship.sender.id) %>: <%= link_to "Accept",'dfd',class:"individual-relationship-accept" %> | <%= link_to "Decline",'dfd',class:"individual-relationship-decline" %></li>
+<%end%>
+<%if @friend%>
+ <div>You are friends with:  <%= link_to @friend.sender.name,individual_show_path(@friend.sender) %></div>
+<%end%>
+</ul>

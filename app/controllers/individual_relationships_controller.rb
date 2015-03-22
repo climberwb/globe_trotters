@@ -2,7 +2,13 @@ class IndividualRelationshipsController < ApplicationController
 
 
   def index
-    @relationships = IndividualRelationship.where(receiver: current_user.individual_relationship)
+    individual_relationships = IndividualRelationship.where(receiver: current_user)
+    @relationship_display = []
+    if individual_relationships.where.not(accepted_at: nil).length == 0
+        @relationship_display = individual_relationships.where(rejected_at: nil)
+    else
+      @friend = individual_relationships.where(rejected_at: nil).first
+    end
   end
 
   def show
@@ -27,21 +33,21 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def accept
-    sender_id = params[individual_relationships][:sender_id].to_i
-    receiver_id = params[individual_relationships][:receiver_id].to_i
-    sender_name = Individual.find(sender_id).name
+    sender_id = params[:individual_relationships][:sender_id].to_i
+    receiver_id = params[:individual_relationships][:receiver_id].to_i
+   # sender_name = IndividualRelationship.find(sender_id).name
     # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
 
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     @relationship_accept = @relationship.update_attributes(:accepted_at=> Time.new)
     @relationship.save!
-    render :json => {:status => "Accept",:Individual =>{:link =>"Individuals/#{sender_id}", :name => sender_name} }.to_json
+    render :json => {:status => "Accept",:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #
   end
 
   def decline
-    sender_id = params[individual_relationships][:sender_id].to_i
-    receiver_id = params[individual_relationships][:receiver_id].to_i
+    sender_id = params[:individual_relationships][:sender_id].to_i
+    receiver_id = params[:individual_relationships][:receiver_id].to_i
 
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     @relationship_accept = @relationship.update_attributes(:rejected_at=> Time.new)

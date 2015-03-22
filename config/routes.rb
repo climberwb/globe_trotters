@@ -53,8 +53,8 @@ Rails.application.routes.draw do
  
   resources :individual_relationships
   post "/individual_relationships/create" => "individual_relationships#create"
-  post "/individual_relationships/team_accept" => "individual_relationships#team_accept"
-  post "/individual_relationships/team_decline" => "individual_relationships#team_decline"
+  post "/individual_relationships/accept" => "individual_relationships#accept"
+  post "/individual_relationships/decline" => "individual_relationships#decline"
 
   resources :vidconferences
 
