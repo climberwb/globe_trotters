@@ -7,8 +7,8 @@ def admin_show
 
  def admin_info_create
  @admin = current_user.update_attributes(
- :bio => params[:user][:bio],
- :avatar => params[:user][:avatar]
+  :bio => params[:user][:bio],
+  :avatar => params[:user][:avatar]
  )
  #if @admin.present?
  #team1.teammates << @teammates
@@ -16,9 +16,9 @@ def admin_show
  # end
  end
 
-   def admin_form
-      @user = current_user
-    end
+  def admin_form
+    @user = current_user
+  end
 
 
 

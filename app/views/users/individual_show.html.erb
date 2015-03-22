@@ -9,3 +9,27 @@ Name:<%= @user.name%>
         </div>
 <% end %>
 <%= @user.bio%>
+
+<%= form_for :individual_relationship, url: @relationship, method: :post,:html => { :id => 'new_individual_relationship'} do |f|
+ %>
+    <div class = "form-group">
+      <%= f.label :sender_team_id %>
+      <%= f.text_field :sender_team_id, class: 'form-control', placeholder: "Enter wiki title", id:'sender_individual_relationship',value: "#{current_user.id}" %>
+    </div>
+    <div class = "form-group">
+      <%= f.label :receiver_id %>
+      <%= f.text_field :receiver_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_individual_relationship',value: "#{@user.id}" %>
+    </div>
+    <div class = "form-group">
+     <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
+      <%if @current_relationship == nil %>
+        Add Friend
+      <%elsif @current_relationship.receiver == @user %>
+        Request Sent
+      <%else%>
+        Request Pending...
+      <%end%>
+     </button>
+    </div>
+<%end%>
+

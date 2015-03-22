@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
   has_one :teammate_relationship, foreign_key: "receiver_id"
   has_one :teammate_relationship, foreign_key: "sender_id"
 
+  has_one :individual_relationship, foreign_key: "receiver_id"
+  has_one :individual_relationship, foreign_key: "sender_id"
+
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
 
   def user_count_within_limit
@@ -47,13 +50,14 @@ attr_writer :address
   end
 
   def self.location_search(location)
+    Geocoder.configure(:timeout => 6000)
+    
     Geocoder.search(location).map do |loc|
       city = "#{loc.city}, " if loc.city
       state = "#{loc.state}, " if loc.state
       "#{city}#{state}#{loc.country}"
     end
   end
-
   def self.to_geojson
    # json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
    # binding.pry

@@ -46,4 +46,13 @@ $(document).ready(function() {
     $('#role_button_individual').click(function() {
         $('#user_role_attribute').val('individual');
     });
+
+
+    // type of travelor for individual form
+    $('#travel_status_button_host').click(function() {
+        $('#travel_status_input').val('host');
+    });
+    $('#travel_status_button_traveler').click(function() {
+        $('#travel_status_input').val('traveler');
+    });
 });

@@ -48,6 +48,14 @@ Rails.application.routes.draw do
 
   resources :team_relationships
   post "/team_relationships/create" => "team_relationships#create"
+  post "/team_relationships/team_accept" => "team_relationships#team_accept"
+  post "/team_relationships/team_decline" => "team_relationships#team_decline"
+ 
+  resources :individual_relationships
+  post "/individual_relationships/create" => "individual_relationships#create"
+  post "/individual_relationships/team_accept" => "individual_relationships#team_accept"
+  post "/individual_relationships/team_decline" => "individual_relationships#team_decline"
+
   resources :vidconferences
 
   get 'welcome/index'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319040548) do
+ActiveRecord::Schema.define(version: 20150321230553) do
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20150319040548) do
 
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
   add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
+
+  create_table "individual_relationships", force: true do |t|
+    t.datetime "accepted_at"
+    t.datetime "rejected_at"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "individual_relationships", ["receiver_id"], name: "index_individual_relationships_on_receiver_id"
+  add_index "individual_relationships", ["sender_id"], name: "index_individual_relationships_on_sender_id"
 
   create_table "messages", force: true do |t|
     t.text     "body"
@@ -100,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150319040548) do
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "travel_status"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
