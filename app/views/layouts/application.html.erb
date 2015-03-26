@@ -4,10 +4,10 @@
   <title>GlobeTrotters</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <!-- 
+  <!--
   <%= javascript_include_tag :defaults, "http://localhost:9292/faye.js" %>
    -->
-  
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,6 +17,7 @@
        <ul class="nav nav-tabs">
         <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
+        <li id="friend request" ><span class= "glyphicon glyphicon-user" style="margin-top:14px"> </span></li>
          <%if current_user && current_user.role =="captain" && TeamRelationship.where(receiver_team_id: current_user.team_id ).first%>
                <li><%= link_to "Friend Requested!",team_relationships_path %></li>
          <%end%>
@@ -24,7 +25,7 @@
            <% if current_user %>
               <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
              Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-            
+
            <% else %>
              <%= link_to "Sign In", new_user_session_path %> or
              <%= link_to "Sign Up", new_user_registration_path %>
