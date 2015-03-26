@@ -53,6 +53,9 @@ gem 'geocoder'
 gem 'georuby'
 gem "opentok", "~> 2.2"
 
+gem 'react-rails', github: 'reactjs/react-rails'
+
+
 # gem 'thin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

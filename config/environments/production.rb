@@ -82,4 +82,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'fierce-brook-6463.herokuapp.com' }
+
+  # config/environments/production.rb
+GlobeTrotters::Application.configure do
+  config.react.variant = :production
+end
+
 end
