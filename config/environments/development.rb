@@ -38,6 +38,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
 
+  config.react.jsx_transform_options = {
+    harmony: true,
+    strip_types: true # for removing Flow type annotations
+}
+
   # config/environments/development.rb
 GlobeTrotters::Application.configure do
   config.react.variant = :development
