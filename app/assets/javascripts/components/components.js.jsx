@@ -2,13 +2,29 @@
 // tutorial2.js
 var FriendInfo = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {
+      url: '',
+      name: ''
+    };
   },
+
+  componentDidMount: function() {
+    $.get(this.props.source, function(user) {
+      var users= user["users"][0];
+      if (this.isMounted()) {
+        this.setState({
+          url: users.url,
+          name: users.name
+        });
+      }
+    }.bind(this));
+  },
+
   render: function() {
     return (
       <div className="friendInfo">
               <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/92/SRC-TV.svg/140px-SRC-TV.svg.png"></img>
-              <a href={JSON.stringify(this.props.url.users)}>link to profile</a>
+              <a href={this.state.url}>{this.state.name}</a>
       </div>
     );
   }
@@ -29,7 +45,7 @@ var FriendBox = React.createClass({
   render: function() {
     return (
       <div className="friendBox">
-        <FriendInfo url="/individual_relationships/show"/>
+        <FriendInfo source="/individual_relationships/show"/>
         <RequestLinks />
       </div>
     );
