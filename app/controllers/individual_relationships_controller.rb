@@ -12,8 +12,22 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def show
-
+    #TODO Finish json sting then use index controller instead of show
+    individual_relationships = IndividualRelationship.where(receiver: 1)
+    relationship_display = []
+    relationships = {"users" => []}
+    if individual_relationships.where.not(accepted_at: nil).length == 0
+        relationship_display = individual_relationships.each do |relationship|
+          relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender)}
+        end
+        render :json => relationships.to_json
+    else
+      friend = individual_relationships.where(rejected_at: nil).first
+      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender)}
+      render :json => relationships.to_json
+    end     
   end
+
   def new
     @relationship=IndividualRelationship.new
   end
