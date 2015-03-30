@@ -1,31 +1,51 @@
 // TODO convert test to real friend request
-// tutorial2.js
+
+
 var FriendInfo = React.createClass({
+  render: function () {
+    return (
+      <li>
+          <a href={this.props.url}>{this.props.name}</a>
+      </li>
+      )
+  }
+
+})
+
+var FriendsInfo = React.createClass({
   getInitialState: function() {
     return {
-      url: '',
-      name: ''
+      users: []
     };
   },
 
   componentDidMount: function() {
-    $.get(this.props.source, function(user) {
-      var users= user["users"][0];
-      if (this.isMounted()) {
-        this.setState({
-          url: users.url,
-          name: users.name
-        });
-      }
+    $.get(this.props.source, function(data) {
+      this.setState({users: data.users});
     }.bind(this));
+    // $.get(this.props.source, function(user) {
+    //   var users= user["users"][0];
+    //   if (this.isMounted()) {
+    //     this.setState({
+    //       url: users.url,
+    //       name: users.name
+    //     });
+    //   }
+    // }.bind(this));
   },
 
   render: function() {
     return (
-      <div className="friendInfo">
-              <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/92/SRC-TV.svg/140px-SRC-TV.svg.png"></img>
-              <a href={this.state.url}>{this.state.name}</a>
-      </div>
+      <ul>
+        {this.state.users.map(function (user) {
+          console.log(user)
+          return <FriendInfo {...user} />
+        })}
+      </ul>
+      // <div className="friendInfo">
+      //         <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/92/SRC-TV.svg/140px-SRC-TV.svg.png"></img>
+      //         <a href={this.state.url}>{this.state.name}</a>
+      // </div>
     );
   }
 });
@@ -45,7 +65,7 @@ var FriendBox = React.createClass({
   render: function() {
     return (
       <div className="friendBox">
-        <FriendInfo source="/individual_relationships/show"/>
+        <FriendsInfo source="/individual_relationships/show"/>
         <RequestLinks />
       </div>
     );
