@@ -29,8 +29,8 @@ var FriendInfo = React.createClass({
       type: 'POST',
       data: sender_id,
       success: function(data) {
-        alert("hello");
-        this.setState({data: data});
+        alert('dhdh');
+        this.setState({data: data['individual_relationship']});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('/individual_relationships/accept', status, err.toString());
@@ -65,7 +65,7 @@ var FriendsInfo = React.createClass({
     return (
       <ul>
         {this.state.users.map(function (user) {
-          return <FriendInfo {...user} />
+          return <FriendInfo {...user}  />
         })}
       </ul>
     );

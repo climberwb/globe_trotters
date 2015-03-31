@@ -23,7 +23,7 @@ class IndividualRelationshipsController < ApplicationController
         render :json => relationships.to_json
     else
       friend = individual_relationships.where(rejected_at: nil).first
-      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s}
+      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s}
       render :json => relationships.to_json
     end
   end
