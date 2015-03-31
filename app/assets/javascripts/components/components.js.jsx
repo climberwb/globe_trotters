@@ -5,7 +5,7 @@ var Decide = React.createClass({
   handleSubmitAccept: function(e) {
     alert(this.props.data);
     e.preventDefault();
-    //TODO this.props.onSubmitAccept({sender_id: this.props.data});
+    this.props.onSubmitAccept({sender_id: this.props.data});//new////////////////
   },
   render: function () {
     return (
@@ -18,10 +18,30 @@ var Decide = React.createClass({
 })
 
 var FriendInfo = React.createClass({
+  handleSubmitAccept:  function(user) {//new////////
+   // alert(user.sender_id);
+        var sender_id = user;
+       // var newComments = comments.concat([comment]);
+        this.setState({data: sender_id});
+        $.ajax({
+      url: '/individual_relationships/accept',
+      dataType: 'json',
+      type: 'POST',
+      data: sender_id,
+      success: function(data) {
+        alert("hello");
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/individual_relationships/accept', status, err.toString());
+      }.bind(this)
+    });
+  },///new////////
+ //
   render: function () {
     return (
       <li>
-          <img src={this.props.avatar}></img><a href={this.props.url}>{this.props.name}</a> <Decide data={this.props.id} /> 
+          <img src={this.props.avatar}></img><a href={this.props.url}>{this.props.name}</a> <Decide onSubmitAccept={this.handleSubmitAccept} data={this.props.id} />
       </li>
       )
   }
@@ -74,37 +94,3 @@ var FriendBox = React.createClass({
   }
 });
 React.render(<FriendBox />,  document.getElementById('test'));
-// var Timer = React.createClass({
-//   getInitialState: function() {
-//     return {secondsElapsed: 0};
-//   },
-//   tick: function() {
-//   //  $(function() {
-//       // $( this ).click(function() {
-//        // console.log(this.toSource());
-//     this.setState({secondsElapsed: this.state.secondsElapsed + 1});
-//   // });
-//   //  });
-//   },
-//   componentDidMount: function() {
-//     this.interval = setInterval(this.tick, 1000);
-//   },
-//   componentWillUnmount: function() {
-//     clearInterval(this.interval);
-//   },
-//   render: function() {
-//     return (
-//       <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
-//     );
-//   }
-// });
-
-// // $(function() {
-// //   $( "#test" ).click(function() {
-// React.render(<Timer name="Timer" />,  document.getElementById('test'));
-// });
-
-// });
-
-
-

@@ -25,7 +25,7 @@ class IndividualRelationshipsController < ApplicationController
       friend = individual_relationships.where(rejected_at: nil).first
       relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s}
       render :json => relationships.to_json
-    end     
+    end
   end
 
   def new
@@ -47,7 +47,7 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def accept
-    sender_id = params[:individual_relationships][:sender_id].to_i
+    sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
    # sender_name = IndividualRelationship.find(sender_id).name
     # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
