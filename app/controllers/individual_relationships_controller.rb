@@ -13,17 +13,17 @@ class IndividualRelationshipsController < ApplicationController
 
   def show
     #TODO Finish json sting then use index controller instead of show
-    individual_relationships = IndividualRelationship.where(receiver: 1)
+    individual_relationships = IndividualRelationship.where(receiver: current_user)
     relationship_display = []
     relationships = {"users" => []}
     if individual_relationships.where.not(accepted_at: nil).length == 0
         relationship_display = individual_relationships.each do |relationship|
-          relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender)}
+          relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s}
         end
         render :json => relationships.to_json
     else
       friend = individual_relationships.where(rejected_at: nil).first
-      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender)}
+      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s}
       render :json => relationships.to_json
     end     
   end
@@ -48,7 +48,7 @@ class IndividualRelationshipsController < ApplicationController
 
   def accept
     sender_id = params[:individual_relationships][:sender_id].to_i
-    receiver_id = params[:individual_relationships][:receiver_id].to_i
+    receiver_id = current_user.id
    # sender_name = IndividualRelationship.find(sender_id).name
     # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
 

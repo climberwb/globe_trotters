@@ -66,7 +66,9 @@ def admin_show
 
   def individual_show
     @user = User.find(params[:id])
-    @current_relationship = IndividualRelationship.where(sender_id: current_user.id).first
+    if current_user
+      @current_relationship = IndividualRelationship.where(sender_id: current_user.id).first
+    end
   end
   def to_geo_json
    render :json => User.to_geojson.to_json
