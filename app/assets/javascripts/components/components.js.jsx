@@ -1,10 +1,16 @@
 // TODO convert test to real friend request
 var Decide = React.createClass({
   //TODO ajax post calles for accept and decline links
+
+  handleSubmitAccept: function(e) {
+    alert(this.props.data);
+    e.preventDefault();
+    //TODO this.props.onSubmitAccept({sender_id: this.props.data});
+  },
   render: function () {
     return (
         <span className="relationship"  data={this.props.data}>
-          <a name="accept">accept</a> | <a name="decline">decline</a>
+          <a name="accept" onClick={this.handleSubmitAccept}>accept</a> | <a name="decline">decline</a>
         </span>
       )
   }
