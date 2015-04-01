@@ -3,45 +3,45 @@ var Decide = React.createClass({
   //TODO ajax post calles for accept and decline links
 
   handleSubmitAccept: function(e) {
-    alert(this.props.data);
     e.preventDefault();
-    this.props.onSubmitAccept({sender_id: this.props.data});//new////////////////
+    this.props.onSubmitAccept();//new////////////////
+  },
+  handleSubmitDecline: function(e) {
+    e.preventDefault();
+    this.props.onSubmitDecline();//new////////////////
   },
   render: function () {
     return (
-        <span className="relationship"  data={this.props.data}>
-          <a name="accept" onClick={this.handleSubmitAccept}>accept</a> | <a name="decline">decline</a>
+        <span className="relationship">
+          <a name="accept" onClick={this.handleSubmitAccept}>accept</a> |
+          <a name="decline" onClick={this.handleSubmitDecline}>decline</a>
         </span>
       )
   }
 
 })
 
+
 var FriendInfo = React.createClass({
-  handleSubmitAccept:  function(user) {//new////////
-   // alert(user.sender_id);
-        var sender_id = user;
-       // var newComments = comments.concat([comment]);
-        this.setState({data: sender_id});
-        $.ajax({
-      url: '/individual_relationships/accept',
-      dataType: 'json',
-      type: 'POST',
-      data: sender_id,
-      success: function(data) {
-        alert('dhdh');
-        this.setState({data: data['individual_relationship']});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('/individual_relationships/accept', status, err.toString());
-      }.bind(this)
-    });
+  handleSubmitAccept: function() {
+    console.log(this.props)
+    this.props.onAccept(this.props.user);
   },///new////////
  //
+  handleSubmitDecline: function() {
+    this.props.onDecline(this.props.user);
+  },
   render: function () {
+    var decision;
+    if (this.props.user.friendStatus) {
+      decision = <div>my friend</div>;
+    } else {
+      decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
+    }
     return (
       <li>
-          <img src={this.props.avatar}></img><a href={this.props.url}>{this.props.name}</a> <Decide onSubmitAccept={this.handleSubmitAccept} data={this.props.id} />
+          <img src={this.props.avatar}></img><a href={this.props.url}>{this.props.name}</a>
+          {decision}
       </li>
       )
   }
@@ -51,21 +51,59 @@ var FriendInfo = React.createClass({
 var FriendsInfo = React.createClass({
   getInitialState: function() {
     return {
-      users: []
+      users: [
+        {id:1, url:"", name:"test user", friendStatus: false},
+        {id:2, url:"", name:"test user 2", friendStatus: true}
+      ]
     };
   },
-
+  onAccept: function(user) {
+    user.friendStatus = true;
+    this.setState({ users:[user]});
+    // $.ajax({  //uncomment when done
+    //   url: '/individual_relationships/accept',
+    //   dataType: 'json',
+    //   type: 'POST',
+    //   data: user.id,
+    //   success: function(data) {
+    //     alert('dhdh');
+    //     user.friendStatus = true;
+    //     this.setState({ users:[user]});
+    //   }.bind(this),
+    //   error: function(xhr, status, err) {
+    //     console.error('/individual_relationships/accept', status, err.toString());
+    // }.bind(this)})
+  },
+  onDecline: function(user) {
+    var index = this.state.users.indexOf(user);
+        this.setState(this.state.splice(index, 1));
+    // $.ajax({ //uncoment when done
+    //   url: '/individual_relationships/decline',
+    //   dataType: 'json',
+    //   type: 'POST',
+    //   data: user.id,
+    //   success: function(data) {
+    //     alert('dhdh');
+    //     var index = this.state.users.indexOf(users);
+    //     this.setState(this.state.splice(index, 1));
+    //   }.bind(this),
+    //   error: function(xhr, status, err) {
+    //     console.error('/individual_relationships/accept', status, err.toString());
+    // }.bind(this)})
+  },
   componentDidMount: function() {
-    $.get(this.props.source, function(data) {
-      this.setState({users: data.users});
-    }.bind(this));
+    //$.get(this.props.source, function(data) { //uncomment when done
+      //this.setState({users: data.users});
+    //}.bind(this));
+
   },
 
   render: function() {
+    var self = this;
     return (
       <ul>
         {this.state.users.map(function (user) {
-          return <FriendInfo {...user}  />
+          return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline}  />
         })}
       </ul>
     );
