@@ -33,6 +33,7 @@ var FriendInfo = React.createClass({
   },
   render: function () {
     var decision;
+    alert(this.props.user.friendStatus)
     if (this.props.user.friendStatus) {
       decision = <div>my friend</div>;
     } else {
@@ -40,7 +41,7 @@ var FriendInfo = React.createClass({
     }
     return (
       <li>
-          <img src={this.props.avatar}></img><a href={this.props.url}>{this.props.name}</a>
+          <img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a>
           {decision}
       </li>
       )
@@ -52,27 +53,29 @@ var FriendsInfo = React.createClass({
   getInitialState: function() {
     return {
       users: [
-        {id:1, url:"", name:"test user", friendStatus: false},
-        {id:2, url:"", name:"test user 2", friendStatus: true}
+        // {id:1, url:"", name:"test user", friendStatus: false},
+        // {id:2, url:"", name:"test user 2", friendStatus: true}
       ]
     };
   },
   onAccept: function(user) {
-    user.friendStatus = true;
+    alert(user.id);
     this.setState({ users:[user]});
-    // $.ajax({  //uncomment when done
-    //   url: '/individual_relationships/accept',
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: user.id,
-    //   success: function(data) {
-    //     alert('dhdh');
-    //     user.friendStatus = true;
-    //     this.setState({ users:[user]});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error('/individual_relationships/accept', status, err.toString());
-    // }.bind(this)})
+    $.ajax({  //uncomment when done
+      url: '/individual_relationships/accept',
+      dataType: 'json',
+      type: 'POST',
+      data: {sender_id: user.id},
+      success: function(data) {
+        alert('dhdh');
+        user.friendStatus = true;
+        this.setState({ users:[user]});
+      }.bind(this),
+      error: function(xhr, status, err) {
+           // user.friendStatus = true;
+
+        console.error('/individual_relationships/accept', status, err.toString());
+    }.bind(this)})
   },
   onDecline: function(user) {
     var index = this.state.users.indexOf(user);
@@ -92,9 +95,9 @@ var FriendsInfo = React.createClass({
     // }.bind(this)})
   },
   componentDidMount: function() {
-    //$.get(this.props.source, function(data) { //uncomment when done
-      //this.setState({users: data.users});
-    //}.bind(this));
+    $.get(this.props.source, function(data) { //uncomment when done
+      this.setState({users: data.users});
+    }.bind(this));
 
   },
 
