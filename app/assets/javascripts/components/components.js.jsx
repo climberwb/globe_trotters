@@ -72,23 +72,22 @@ var FriendsInfo = React.createClass({
   }
 });
 
-var RequestLinks= React.createClass({
-  render: function() {
-    return (
-      <div className="requestLinks" style={{float:"right"}}>
-        <a href="accept.com">accept</a>
-        <a href="deny.com">deny</a>
-      </div>
-    );
-  }
-});
+// var RequestLinks= React.createClass({
+//   render: function() {
+//     return (
+//       <div className="requestLinks" style={{float:"right"}}>
+//         <a href="accept.com">accept</a>
+//         <a href="deny.com">deny</a>
+//       </div>
+//     );
+//   }
+// });
 
 var FriendBox = React.createClass({
   render: function() {
     return (
       <div className="friendBox">
         <FriendsInfo source="/individual_relationships/show"/>
-        <RequestLinks />
       </div>
     );
   }

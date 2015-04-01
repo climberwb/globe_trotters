@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     $('#individual_loc_create').click(function( event ) {
     event.preventDefault();
-    var val = $('#individual_location').attr('value');
+    var val = $('#individual_location')[0].value;
     $('#individual-location-list').empty();
     locationSearch(val, function(locations) {
       //$("#testing_modal")[0].modal("show")
