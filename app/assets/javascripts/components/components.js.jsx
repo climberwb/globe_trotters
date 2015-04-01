@@ -34,7 +34,7 @@ var FriendInfo = React.createClass({
   render: function () {
     var decision;
     alert(this.props.user.friendStatus)
-    if (this.props.user.friendStatus) {
+    if (this.props.user.friendStatus == true) {
       decision = <div>my friend</div>;
     } else {
       decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
