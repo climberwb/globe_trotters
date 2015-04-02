@@ -13,6 +13,7 @@ class IndividualRelationshipsController < ApplicationController
 
   def show
     #TODO Finish json sting then use index controller instead of show
+    #TODO make sure if there is an  accepted at it does not make it to the view
     #binding.pry
     individual_relationships = IndividualRelationship.where(receiver: current_user)
     relationship_display = []
