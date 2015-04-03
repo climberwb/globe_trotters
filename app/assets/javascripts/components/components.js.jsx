@@ -33,16 +33,23 @@ var FriendInfo = React.createClass({
   },
   render: function () {
     var decision;
-
+    var friend;
     if(this.props.user.friendStatus == 'true') {
       decision = <div>my friend</div>;
+      friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
+
+      alert('true');
     }
-    else{
+    else if(this.props.user.friendStatus == 'false') {
+      alert('false');
+      alert(this.props.user.friendStatus);
       decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
+      friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
+
     }
     return (
       <li>
-          <img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a>
+           {friend}
           {decision}
       </li>
       )
@@ -60,7 +67,7 @@ var FriendsInfo = React.createClass({
     };
   },
   onAccept: function(user) {
-    alert(user.id);
+   // alert(user.id);
     this.setState({ users:[user]});
     $.ajax({  //uncomment when done
       url: '/individual_relationships/accept',
@@ -68,8 +75,8 @@ var FriendsInfo = React.createClass({
       type: 'POST',
       data: {sender_id: user.id},
       success: function(data) {
-        alert('dhdh');
-        user.friendStatus = true;
+       // alert('dhdh');
+        user.friendStatus = 'true';
         this.setState({ users:[user]});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -79,21 +86,36 @@ var FriendsInfo = React.createClass({
     }.bind(this)})
   },
   onDecline: function(user) {
+   // this.setState({ users:[user]});
     var index = this.state.users.indexOf(user);
-        this.setState(this.state.splice(index, 1));
-    // $.ajax({ //uncoment when done
-    //   url: '/individual_relationships/decline',
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: user.id,
-    //   success: function(data) {
-    //     alert('dhdh');
-    //     var index = this.state.users.indexOf(users);
-    //     this.setState(this.state.splice(index, 1));
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error('/individual_relationships/accept', status, err.toString());
-    // }.bind(this)})
+   // var oldUsers=this.state.users;
+   // alert(oldUsers[index]);
+   //this.setState(this.state.splice(index, 1));
+   alert(this.props.users[0].name);
+   alert(this.state.users[1].name);
+   alert(index);
+    alert(user.name);
+    $.ajax({ //uncoment when done
+      url: '/individual_relationships/decline',
+      dataType: 'json',
+      type: 'POST',
+      data: {sender_id: user.id},
+      success: function(data) {
+        alert(user.name);
+
+        user.friendStatus = 'nil';
+        var index = this.state.users.indexOf(user);
+        var oldUsers=this.state.users;
+         oldUsers.splice(index-1,index);
+         alert("oldUsers");
+        // alert(this.state.users[1].name);
+        //alert(this.state.users[1].name);
+
+        this.setState({ users:[this.state.users]});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/individual_relationships/decline', status, err.toString());
+    }.bind(this)})
   },
   componentDidMount: function() {
     $.get(this.props.source, function(data) { //uncomment when done
@@ -104,6 +126,7 @@ var FriendsInfo = React.createClass({
 
   render: function() {
     var self = this;
+
     return (
       <ul>
         {this.state.users.map(function (user) {

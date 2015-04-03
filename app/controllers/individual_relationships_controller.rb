@@ -18,18 +18,24 @@ class IndividualRelationshipsController < ApplicationController
     individual_relationships = IndividualRelationship.where(receiver: current_user)
     relationship_display = []
     relationships = {"users" => []}
-    if individual_relationships.where.not(accepted_at: nil).length == 0
-        relationship_display = individual_relationships.each do |relationship|
-          relationship.accepted_at ? friendStatus = true : friendStatus = false
-
-          relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>friendStatus.to_s}
-        end
-        render :json => relationships.to_json
-    else
-      friend = individual_relationships.where(rejected_at: nil).first
-      friend.accepted_at ? friendStatus = true : friendStatus = false
+   # binding.pry
+    if individual_relationships.where.not(accepted_at: nil).length > 0
+      #bindig.pry
+      friend = individual_relationships.where.not(accepted_at: nil).first
+      friendStatus = true
       relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s,"friendStatus"=>friendStatus.to_s}
       render :json => relationships.to_json
+
+    else
+        #binding.pry
+        relationship_display = individual_relationships.each do |relationship|
+          #friend.accepted_at ? friendStatus = true : friendStatus = false
+          if relationship.rejected_at == nil
+            relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false"}
+          end
+       # friendStatus ?
+        end
+        render :json => relationships.to_json
     end
   end
 
@@ -64,9 +70,9 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def decline
-    sender_id = params[:individual_relationships][:sender_id].to_i
-    receiver_id = params[:individual_relationships][:receiver_id].to_i
-
+    sender_id = params[:sender_id].to_i
+    receiver_id = current_user.id
+    #binding.pry
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     @relationship_accept = @relationship.update_attributes(:rejected_at=> Time.new)
     render :json => {:status => "Decline" }.to_json
