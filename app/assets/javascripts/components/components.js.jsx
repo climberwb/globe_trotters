@@ -124,14 +124,15 @@ var FriendsInfo = React.createClass({
   }
 });
 
+React.render(<FriendsInfo source="/individual_relationships/show" />,  document.getElementById('FriendBox'));
 
-var FriendBox = React.createClass({
-  render: function() {
-    return (
-      <div className="friendBox">
-        <FriendsInfo source="/individual_relationships/show"/>
-      </div>
-    );
-  }
-});
-React.render(<FriendBox />,  document.getElementById('test'));
+// var FriendBox = React.createClass({
+//   render: function() {
+//     return (
+//       <div className="friendBox">
+//         <FriendsInfo source="/individual_relationships/show"/>
+//       </div>
+//     );
+//   }
+// });
+//React.render(<FriendBox />,  document.getElementById('test'));
