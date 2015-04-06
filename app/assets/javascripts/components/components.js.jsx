@@ -20,7 +20,7 @@ var navbarInstance = (
   </Navbar>
 );
 
-//React.render(navbarInstance, document.getElementById('FriendBox'));
+React.render(navbarInstance, document.getElementById('FriendBox'));
 
 
 
@@ -181,8 +181,18 @@ var FriendBox = React.createClass({
 });
 
 React.render(<FriendBox />,  document.getElementById('FriendBox'));
+//document.getElementById('FriendBox').id = 'newFriendBox'
+// var i = 1;
+// $('#friend_request').on('mouseover',function(){
+//    //if(i == 2){
+//     var cnt = $("#FriendBox").contents();
+//    // alert(cnt);
+//     $('#friend_request').replaceWith(cnt);
 
-// var Menu = React.createClass({
+//   // }
+// });
+
+//var Menu = React.createClass({
 //   render: function() {
 //     return (
 //       <ul className="nav nav-tabs">
