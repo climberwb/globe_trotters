@@ -1,6 +1,10 @@
 
-
-const navbarInstance = (
+var Navbar = ReactBootstrap.Navbar;
+var Nav = ReactBootstrap.Nav;
+var NavItem = ReactBootstrap.NavItem;
+var MenuItem = ReactBootstrap.MenuItem;
+var DropdownButton = ReactBootstrap.DropdownButton;
+var navbarInstance = (
   <Navbar brand='React-Bootstrap'>
     <Nav>
       <NavItem eventKey={1} href='#'>Link</NavItem>
@@ -16,7 +20,7 @@ const navbarInstance = (
   </Navbar>
 );
 
-React.render(navbarInstance, document.getElementById('FriendBox'));
+//React.render(navbarInstance, document.getElementById('FriendBox'));
 
 
 
@@ -143,7 +147,7 @@ var FriendsInfo = React.createClass({
     var self = this;
 
     return (
-      <ul className="hello">
+      <ul className="dropdown-menu">
         {this.state.users.map(function (user) {
           return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline}  />
         })}
@@ -154,13 +158,38 @@ var FriendsInfo = React.createClass({
 
 //React.render(<FriendsInfo source="/individual_relationships/show" />,  document.getElementById('FriendBox'));
 
-// var FriendBox = React.createClass({
+
+var DropDown = React.createClass({
+  render: function() {
+
+    return (
+      <a className="dropdown-toggle" href="#" data-toggle="dropdown">
+        <span className="glyphicon glyphicon-user"></span>
+      </a>
+    );
+  }
+});
+var FriendBox = React.createClass({
+  render: function() {
+    return (
+      <li className="dropdown">
+        <DropDown/>
+        <FriendsInfo source="/individual_relationships/show"/>
+      </li>
+    );
+  }
+});
+
+React.render(<FriendBox />,  document.getElementById('FriendBox'));
+
+// var Menu = React.createClass({
 //   render: function() {
 //     return (
-//       <div className="friendBox">
-//         <FriendsInfo source="/individual_relationships/show"/>
-//       </div>
+//       <ul className="nav nav-tabs">
+//         <FriendBox />
+//         <li><li/>
+//       </ul>
 //     );
 //   }
 // });
-//React.render(<FriendBox />,  document.getElementById('test'));
+// React.render(<FriendBox />,  document.getElementById('FriendBox'));

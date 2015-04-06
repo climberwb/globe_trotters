@@ -16,17 +16,15 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require bootstrap
 //= require d3
-//= require_tree .
-
 //= require react
 //= require react_ujs
 //= require components
+//= require bootstrap
 //= require react_bootstrap
 //= require react_bootstrap_style
+//= require_tree .
 
-//var Alert = require('react-bootstrap').Alert;
 
 $(function() {
   //chat!
