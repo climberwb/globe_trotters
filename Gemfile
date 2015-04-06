@@ -54,6 +54,8 @@ gem 'georuby'
 gem "opentok", "~> 2.2"
 
 gem 'react-rails', github: 'reactjs/react-rails'
+gem 'react-bootstrap-rails', '~> 0.13.0'
+gem 'sprockets-commonjs'
 
 
 # gem 'thin'

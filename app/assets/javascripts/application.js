@@ -23,6 +23,10 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require react_bootstrap
+//= require react_bootstrap_style
+
+//var Alert = require('react-bootstrap').Alert;
 
 $(function() {
   //chat!

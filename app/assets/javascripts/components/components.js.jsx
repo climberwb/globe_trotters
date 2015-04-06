@@ -1,3 +1,31 @@
+
+
+const navbarInstance = (
+  <Navbar brand='React-Bootstrap'>
+    <Nav>
+      <NavItem eventKey={1} href='#'>Link</NavItem>
+      <NavItem eventKey={2} href='#'>Link</NavItem>
+      <DropdownButton eventKey={3} title='Dropdown'>
+        <MenuItem eventKey='1'>Action</MenuItem>
+        <MenuItem eventKey='2'>Another action</MenuItem>
+        <MenuItem eventKey='3'>Something else here</MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey='4'>Separated link</MenuItem>
+      </DropdownButton>
+    </Nav>
+  </Navbar>
+);
+
+React.render(navbarInstance, document.getElementById('FriendBox'));
+
+
+
+
+
+
+
+
+
 // TODO Refactor & Style
 var Decide = React.createClass({
 
@@ -115,7 +143,7 @@ var FriendsInfo = React.createClass({
     var self = this;
 
     return (
-      <ul>
+      <ul className="hello">
         {this.state.users.map(function (user) {
           return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline}  />
         })}
@@ -124,7 +152,7 @@ var FriendsInfo = React.createClass({
   }
 });
 
-React.render(<FriendsInfo source="/individual_relationships/show" />,  document.getElementById('FriendBox'));
+//React.render(<FriendsInfo source="/individual_relationships/show" />,  document.getElementById('FriendBox'));
 
 // var FriendBox = React.createClass({
 //   render: function() {

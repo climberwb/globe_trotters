@@ -14,9 +14,20 @@
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script src="http://d3js.org/topojson.v0.min.js"></script>
    <div class="container">
-   <div id="FriendBox"></div>
-
+   <div ></div>
+   <div  id="FriendBox"></div>
        <ul class="nav nav-tabs">
+        <!-- component -->
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">TIPS <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="/WebPages/tips/E-MailAdvice.aspx" >E-MAIL ADVICE</a></li>
+          <li><a href="/WebPages/tips/envelopeSizes.aspx" >ENVELOPE SIZES</a></li>
+          <li><a href="/WebPages/tips/tabs.aspx" >TABS AND WAFER SEALS</a></li>
+          <li><a href="/WebPages/tips/permit.aspx" >PERMIT IMPRINTS</a></li>
+        </ul>
+      </li>
+
         <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
         <%if current_user%>
@@ -45,6 +56,7 @@
       <%= yield %>
      </div>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <script src="/assets/components/components.js"></script>
 </body>
 </html>
