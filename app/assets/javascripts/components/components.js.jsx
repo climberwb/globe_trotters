@@ -44,8 +44,7 @@ var Decide = React.createClass({
   render: function () {
     return (
         <span className="relationship">
-          <a name="accept" onClick={this.handleSubmitAccept}>accept</a> |
-          <a name="decline" onClick={this.handleSubmitDecline}>decline</a>
+           <a name="accept" onClick={this.handleSubmitAccept}>accept</a> | <a name="decline" onClick={this.handleSubmitDecline}>decline</a>   
         </span>
       )
   }
@@ -73,7 +72,7 @@ var FriendInfo = React.createClass({
     else if(this.props.user.friendStatus == 'false') {
 
       decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
-      friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
+      friend = <span><img src={this.props.user.avatar}></img> <a href={this.props.user.url}>{this.props.user.name}</a> </span>;
 
     }
     return (
@@ -147,7 +146,7 @@ var FriendsInfo = React.createClass({
     var self = this;
 
     return (
-      <ul className="dropdown-menu">
+      <ul className="dropdown-menu" id="friend-menu">
         {this.state.users.map(function (user) {
           return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline}  />
         })}
@@ -184,13 +183,11 @@ var FriendBox = React.createClass({
 });
 
 React.render(<FriendBox />,  document.getElementById('FriendBox'));
-document.getElementById('FriendBox').id = 'newFriendBox'
-document.getElementById('newFriendBox').id = 'FriendBox'
 $('#glyphicon').on('click', function(){
 
    $("#friend_drop").toggleClass("dropdown open");
 });
-document.getElementById('FriendBox').id = 'newFriendBox'
+
 // var i = 1;
 // $('#friend_request').on('mouseover',function(){
 //    //if(i == 2){
