@@ -43,8 +43,8 @@ var Decide = React.createClass({
   },
   render: function () {
     return (
-        <span className="relationship">
-           <a name="accept" onClick={this.handleSubmitAccept}>accept</a> | <a name="decline" onClick={this.handleSubmitDecline}>decline</a>   
+        <span className="relationship" >
+           <a name="accept" onClick={this.handleSubmitAccept}>accept</a> | <a name="decline" onClick={this.handleSubmitDecline}>decline</a>
         </span>
       )
   }
@@ -65,7 +65,7 @@ var FriendInfo = React.createClass({
     var decision;
     var friend;
     if(this.props.user.friendStatus == 'true') {
-      decision = <div>my friend</div>;
+      decision = <span> my friend!</span>;
       friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
 
     }
@@ -159,7 +159,7 @@ var FriendsInfo = React.createClass({
 
 
 var DropDown = React.createClass({
-  
+
 
   render: function() {
 
@@ -171,7 +171,7 @@ var DropDown = React.createClass({
   }
 });
 var FriendBox = React.createClass({
-  
+
   render: function() {
     return (
       <li className="dropdown" id="friend_drop" >

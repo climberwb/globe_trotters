@@ -57,6 +57,11 @@
   .flyer { }
   .flyer:hover { }
 
+/******** friend request component**********/
 #friend-menu{
   width:250px;
+}
+#friend-menu .relationship{
+  float:right;
+  margin-right:20px
 }
