@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411184525) do
+ActiveRecord::Schema.define(version: 20150411232047) do
+
+  create_table "answers", force: true do |t|
+    t.string   "answer"
+    t.integer  "user_id"
+    t.integer  "icebreaker_session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["icebreaker_session_id"], name: "index_answers_on_icebreaker_session_id"
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -25,6 +36,16 @@ ActiveRecord::Schema.define(version: 20150411184525) do
 
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
   add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
+
+  create_table "icebreaker_sessions", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "notebook_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "icebreaker_sessions", ["notebook_id"], name: "index_icebreaker_sessions_on_notebook_id"
+  add_index "icebreaker_sessions", ["question_id"], name: "index_icebreaker_sessions_on_question_id"
 
   create_table "individual_relationships", force: true do |t|
     t.datetime "accepted_at"
@@ -56,6 +77,12 @@ ActiveRecord::Schema.define(version: 20150411184525) do
   end
 
   add_index "notebooks", ["individual_relationship_id"], name: "index_notebooks_on_individual_relationship_id"
+
+  create_table "questions", force: true do |t|
+    t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "team_relationships", force: true do |t|
     t.datetime "accepted_at"

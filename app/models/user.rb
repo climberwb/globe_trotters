@@ -31,7 +31,9 @@ class User < ActiveRecord::Base
   has_one :individual_relationship, foreign_key: "sender_id"
 
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
-
+  
+  has_many :answers #for notebook
+  
   def user_count_within_limit
     if vidconference && vidconference.users.count > 1
       errors.add(:base, "Exceeded thing limit")
