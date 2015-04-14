@@ -53,6 +53,10 @@ var Decide = React.createClass({
 
 
 var FriendInfo = React.createClass({
+  deleteFriend: function() {
+    console.log(this.props)
+    this.props.onDelete(this.props.user);
+  },
   handleSubmitAccept: function() {
     console.log(this.props)
     this.props.onAccept(this.props.user);
@@ -65,7 +69,7 @@ var FriendInfo = React.createClass({
     var decision;
     var friend;
     if(this.props.user.friendStatus == 'true') {
-      decision = <span> my friend!</span>;
+      decision = <span> my friend! <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
       friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
 
     }
@@ -86,6 +90,8 @@ var FriendInfo = React.createClass({
 })
 
 var FriendsInfo = React.createClass({
+
+
   getInitialState: function() {
     return {
       users: [
@@ -93,6 +99,21 @@ var FriendsInfo = React.createClass({
         // {id:2, url:"", name:"test user 2", friendStatus: true}
       ]
     };
+  },
+  onDelete: function(user) {
+   // alert(user.id);
+    $.ajax({
+      url: '/individual_relationships/delete',
+      dataType: 'json',
+      type: 'POST',
+      data: {sender_id: user.id},
+      success: function(data) {
+          this.setState({users: data.users});
+      }.bind(this),
+      error: function(xhr, status, err) {
+
+        console.error('/individual_relationships/delete', status, err.toString());
+    }.bind(this)})
   },
   onAccept: function(user) {
    // alert(user.id);
@@ -148,7 +169,7 @@ var FriendsInfo = React.createClass({
     return (
       <ul className="dropdown-menu" id="friend-menu">
         {this.state.users.map(function (user) {
-          return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline}  />
+          return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
         })}
       </ul>
     );

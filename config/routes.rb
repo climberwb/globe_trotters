@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   post "/individual_relationships/create" => "individual_relationships#create"
   post "/individual_relationships/accept" => "individual_relationships#accept"
   post "/individual_relationships/decline" => "individual_relationships#decline"
-
+  post "/individual_relationships/delete" => "individual_relationships#delete"
   resources :vidconferences
 
   get 'welcome/index'

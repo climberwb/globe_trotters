@@ -50,8 +50,25 @@ class IndividualRelationshipsController < ApplicationController
     render :json => {:status => "Request Sent" }.to_json
 
   end
+  def delete
+    sender_id = params[:sender_id].to_i
+    receiver_id = current_user.id
+    @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
+    individual_relationships = IndividualRelationship.where(receiver: current_user)
+    relationship_display = []
+    relationships = {"users" => []}
+    relationship_display = individual_relationships.each do |relationship|
+          #friend.accepted_at ? friendStatus = true : friendStatus = false
+          if relationship.rejected_at == nil
+            relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false"}
+          end
+       # friendStatus ?
+        end
+        render :json => relationships.to_json
 
+  end
   def destroy
+    
   end
 
   def update
