@@ -16,6 +16,8 @@ class IndividualRelationshipsController < ApplicationController
     #TODO make sure if there is an  accepted at it does not make it to the view
     #binding.pry
     individual_relationships = IndividualRelationship.where(receiver: current_user)
+    authorize individual_relationships
+    
     relationship_display = []
     relationships = {"users" => []}
    # binding.pry

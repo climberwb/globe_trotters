@@ -36,7 +36,7 @@ class ApplicationPolicy
 
   def scope
     #Pundit.policy_scope!(user, record.class) deleted from bloc tutorial
-    Pundit.policy_scope!(record.class)
+    record.class
   end
 end
 
