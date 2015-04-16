@@ -17,5 +17,7 @@ class IndividualRelationshipPolicy < ApplicationPolicy
    def delete?
    end
    def create?
+      relationship = IndividualRelationship.where(sender: user).first
+      user.present? && relationship == nil 
    end
 end

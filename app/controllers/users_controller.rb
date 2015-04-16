@@ -69,6 +69,7 @@ def admin_show
     if current_user
       @current_relationship = IndividualRelationship.where(sender_id: current_user.id).first
     end
+      @new_relationship = IndividualRelationship.new
   end
   def to_geo_json
    render :json => User.to_geojson.to_json

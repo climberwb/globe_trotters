@@ -9,6 +9,7 @@ Name:<%= @user.name%>
         </div>
 <% end %>
 <%= @user.bio%>
+<% if policy(IndividualRelationship.new).create?%>
 
 <%= form_for :individual_relationship, url: @relationship, method: :post,:html => { :id => 'new_individual_relationship'} do |f|
  %>
@@ -21,15 +22,18 @@ Name:<%= @user.name%>
       <%= f.text_field :receiver_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_individual_relationship',value: "#{@user.id}" %>
     </div>
     <div class = "form-group">
-     <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
-      <%if @current_relationship == nil %>
-        Add Friend
-      <%elsif @current_relationship.receiver == @user %>
-        Request Sent
-      <%else%>
-        Request Pending...
-      <%end%>
-     </button>
+       <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
+        <%if @current_relationship == nil %>
+          Add Friend
+        <%end%>
+       </button>
     </div>
+  <%end%>
+  <%else%>
+    <% if @current_relationship && @current_relationship.receiver == @user%>
+      Request Pending...
+    <%elsif @current_relationship%>
+      You have a friend request with <%= link_to @current_relationship.receiver.name, individual_show_path(@current_relationship.receiver) %> pending...
+    <%end%>
 <%end%>
 
