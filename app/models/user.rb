@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
   has_one :individual_relationship, foreign_key: "sender_id"
 
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
-  
+
   has_many :answers #for notebook
-  
+
   def user_count_within_limit
     if vidconference && vidconference.users.count > 1
       errors.add(:base, "Exceeded thing limit")
@@ -53,7 +53,7 @@ attr_writer :address
 
   def self.location_search(location)
     Geocoder.configure(:timeout => 6000)
-    
+
     Geocoder.search(location).map do |loc|
       city = "#{loc.city}, " if loc.city
       state = "#{loc.state}, " if loc.state
@@ -77,7 +77,7 @@ attr_writer :address
     address = Geocoder.address(coordinates)
   end
 
-## rolse for user
+## role for user
   def teammate?
    role == 'teammate'
   end
@@ -91,5 +91,15 @@ attr_writer :address
   def admin?
     role == 'admin'
   end
+
+# travel status
+  def traveler?
+    travel_status == 'traveler'
+  end
+
+  def host?
+    travel_status == 'host'
+  end
+
 end
 
