@@ -72,7 +72,17 @@ def admin_show
       @new_relationship = IndividualRelationship.new
   end
   def to_geo_json
-   render :json => User.to_geojson.to_json
+    individual_hash = User.to_geojson
+    # you can loop through users with this  individual_hash["features"][1]["properties"][0]
+    # where first array is coords and second is users within coords
+    individual_hash["features"].each do |properties|
+      if current_user && current_user.travel_status == "host"
+        properties["properties"].delete_if { |user| user["TravelStatus"] == "host" }
+      elsif current_user && current_user.travel_status == "traveler"
+        properties["properties"].delete_if { |user| user["TravelStatus"] == "traveler" }
+      end
+    end
+   render :json =>individual_hash.to_json
   end
 
    def location_search
