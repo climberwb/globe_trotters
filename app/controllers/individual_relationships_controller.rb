@@ -82,8 +82,6 @@ class IndividualRelationshipsController < ApplicationController
    # sender_name = IndividualRelationship.find(sender_id).name
     # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
-    new_notebook = Notebook.new
-    @relationship_accept = @relationship.update_attributes(:accepted_at=> Time.new,:notebook=>new_notebook)
     @relationship.save!
     render :json => {:status => "Accept",:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #

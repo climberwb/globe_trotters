@@ -1,7 +1,7 @@
 class CreateNotebooks < ActiveRecord::Migration
   def change
     create_table :notebooks do |t|
-      t.references :individual_relationship, index: true
+      t.references :user, index: true
       t.timestamps
     end
   end

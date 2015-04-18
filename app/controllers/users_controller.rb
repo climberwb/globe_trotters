@@ -56,9 +56,12 @@ def admin_show
 
   def individual_form_post
     #TODO: update user for individual account add pundit
-    puts 'dfasfadf'
-     @user = current_user.update_attributes(user_params)
+    new_notebook = Notebook.new
+    
      if current_user.save
+      new_notebook = Notebook.new
+      @relationship_accept = current_user.update_attributes(:notebook=>new_notebook)
+     @user = current_user.update_attributes(user_params)
         redirect_to individual_show_path(current_user)
      end
 

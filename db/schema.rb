@@ -15,14 +15,12 @@ ActiveRecord::Schema.define(version: 20150411232047) do
 
   create_table "answers", force: true do |t|
     t.string   "answer"
-    t.integer  "user_id"
     t.integer  "icebreaker_session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "answers", ["icebreaker_session_id"], name: "index_answers_on_icebreaker_session_id"
-  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -71,12 +69,12 @@ ActiveRecord::Schema.define(version: 20150411232047) do
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "notebooks", force: true do |t|
-    t.integer  "individual_relationship_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "notebooks", ["individual_relationship_id"], name: "index_notebooks_on_individual_relationship_id"
+  add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id"
 
   create_table "questions", force: true do |t|
     t.string   "question"
