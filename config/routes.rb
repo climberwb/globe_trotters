@@ -66,4 +66,16 @@ Rails.application.routes.draw do
 
 
   root to: 'welcome#index'
+
+  get 'icebreaker_session/edit'
+
+  get 'icebreaker_session/new'
+
+  get 'icebreaker_session/create'
+
+  get 'icebreaker_session/show'
+
+  get 'notebook/edit'
+
+  get 'notebook/show'
 end
