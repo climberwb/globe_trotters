@@ -85,7 +85,8 @@ def admin_show
         properties["properties"].delete_if { |user| user["TravelStatus"] == "traveler" }
       end
     end
-   render :json =>individual_hash.to_json
+     individual_hash["features"].delete_if{|feature| feature["properties"].length ==0}
+     render :json =>individual_hash.to_json
   end
 
    def location_search
