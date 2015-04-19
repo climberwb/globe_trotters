@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-
   get "/users/:id" => "users#binary_selection", as: 'binary_selection'
   post "/users/:id" => "users#binary_selection_update", as: 'binary_selection_update'
 
@@ -24,8 +23,6 @@ Rails.application.routes.draw do
   resources :users, :path => :captains, :as => :captains, :controller => "captains" do
     resources :teams, :only => [:new, :create, :edit, :update, :destroy], controller: 'captains/teams'
   end
-
-
 
    get "/teams/to_geo_json" => "teams#to_geo_json"
 
@@ -57,8 +54,7 @@ Rails.application.routes.draw do
   post "/individual_relationships/accept" => "individual_relationships#accept"
   post "/individual_relationships/decline" => "individual_relationships#decline"
   post "/individual_relationships/delete" => "individual_relationships#delete"
-  
-  resources :answers
+
   resources :vidconferences
 
   get 'welcome/index'
@@ -66,6 +62,9 @@ Rails.application.routes.draw do
 
   post "/team_relationships/team_accept" => "team_relationships#team_accept"
   post "/team_relationships/team_decline" => "team_relationships#team_decline"
+  resources :users do
+    resources :answers
+  end
 
   root to: 'welcome#index'
 

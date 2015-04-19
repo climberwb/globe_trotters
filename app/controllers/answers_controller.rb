@@ -1,5 +1,10 @@
 class AnswersController < ApplicationController
   def edit
+      new_answer = Answer.new
+      current_user << new_answer
+  end
+
+  def update
   end
 
   def show
@@ -16,4 +21,5 @@ class AnswersController < ApplicationController
 
   def destroy
   end
+
 end
