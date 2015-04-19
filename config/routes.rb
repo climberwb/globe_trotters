@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   post "/individual_relationships/accept" => "individual_relationships#accept"
   post "/individual_relationships/decline" => "individual_relationships#decline"
   post "/individual_relationships/delete" => "individual_relationships#delete"
+  
+  resources :answers
   resources :vidconferences
 
   get 'welcome/index'
@@ -65,7 +67,6 @@ Rails.application.routes.draw do
   post "/team_relationships/team_accept" => "team_relationships#team_accept"
   post "/team_relationships/team_decline" => "team_relationships#team_decline"
 
-  resources :answers
   root to: 'welcome#index'
 
   
