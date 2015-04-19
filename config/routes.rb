@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
 
 
@@ -64,18 +65,8 @@ Rails.application.routes.draw do
   post "/team_relationships/team_accept" => "team_relationships#team_accept"
   post "/team_relationships/team_decline" => "team_relationships#team_decline"
 
-
+  resources :answers
   root to: 'welcome#index'
 
-  get 'icebreaker_session/edit'
-
-  get 'icebreaker_session/new'
-
-  get 'icebreaker_session/create'
-
-  get 'icebreaker_session/show'
-
-  get 'notebook/edit'
-
-  get 'notebook/show'
+  
 end

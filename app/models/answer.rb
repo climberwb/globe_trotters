@@ -1,3 +1,4 @@
 class Answer < ActiveRecord::Base
-belongs_to :icebreaker_session
+belongs_to :user
+belongs_to :question
 end

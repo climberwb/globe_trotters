@@ -14,13 +14,15 @@
 ActiveRecord::Schema.define(version: 20150411232047) do
 
   create_table "answers", force: true do |t|
-    t.string   "answer"
-    t.integer  "icebreaker_session_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id",                    null: false
+    t.integer  "question_id",                null: false
+    t.boolean  "pending",     default: true, null: false
+    t.text     "content"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "answers", ["icebreaker_session_id"], name: "index_answers_on_icebreaker_session_id"
+  add_index "answers", ["user_id", "question_id"], name: "index_answers_on_user_id_and_question_id", unique: true
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -77,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150411232047) do
   add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id"
 
   create_table "questions", force: true do |t|
-    t.string   "question"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -33,8 +33,7 @@ class User < ActiveRecord::Base
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
   
 
-  has_one :notebook, dependent: :destroy
-
+  has_many :answers
   def user_count_within_limit
     if vidconference && vidconference.users.count > 1
       errors.add(:base, "Exceeded thing limit")
