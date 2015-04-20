@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def show
+    @answers = current_user.answers
   end
 
   def index
