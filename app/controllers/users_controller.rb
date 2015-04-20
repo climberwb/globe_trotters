@@ -56,17 +56,15 @@ def admin_show
 
   def individual_form_post
     #TODO: update user for individual account add pundit
-      
+
       @questions = Question.all.shuffle
       @questions.each_with_index do |question,index|
-        new_answer = Answer.create(:question_id=>question.id,:user_id=>current_user.id) 
-        #current_user.answers << new_answer
-         break if index ==3
+        new_answer = Answer.create(:question_id=>question.id,:user_id=>current_user.id)
+        break if index == 3
       end
      if current_user.save
-      
+
       #current_user.answers
-      @relationship_accept = current_user.update_attributes(:notebook=>new_notebook)
      @user = current_user.update_attributes(user_params)
         redirect_to individual_show_path(current_user)
      end
