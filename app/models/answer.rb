@@ -9,12 +9,18 @@ belongs_to :question
                                   "answers"=>[]
                                 }
                             }
+      pendingCount = 0
       answers = user.answers.map do |answer|
+           pendingCount=pendingCount+1 if answer.pending == true
+           if pendingCount < 2
              {
-              "answerContent"=> answer.content,
-              "questionContent"=> answer.question.content
+              "answerContent"=> answer.content ? answer.content : "",
+              "questionContent"=> answer.question.content,
+              "pendingStatus"=>answer.pending
               }
+            end
        end
+       answers.delete_if{|answer| answer==nil}
        @answer_string["currentUser"]["answers"] = answers
        @answer_string
   end
