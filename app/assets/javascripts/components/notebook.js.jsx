@@ -13,7 +13,7 @@ var Session = React.createClass({
   render: function () {
     return (
         <li>
-          <a>{this.props.answer.questionContent}</a>
+          <span>{this.props.answer.questionContent}</span> : <span>{this.props.answer.answerContent}</span>
         </li>
       )
   }
@@ -100,7 +100,7 @@ var Sessions = React.createClass({
     var self = this;
 
     return(
-      <ul className="dropdown-menu" id="friend-menu">
+      <ul >
         {this.state.answers.map(function (answer) {
           return <Session answer={answer} />
         })}
