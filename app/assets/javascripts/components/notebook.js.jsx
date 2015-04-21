@@ -1,4 +1,30 @@
 
+var Answer = React.createClass({
+
+  render: function () {
+    return (
+        <div>
+          <p>{this.props.answerContent} </p>
+        </div>
+      )
+  }
+
+ });
+
+var Question = React.createClass({
+
+  render: function () {
+    return (
+        <div>
+          <h1>{this.props.questionContent} </h1>
+        </div>
+      )
+  }
+
+ });
+
+
+
 
 var Session = React.createClass({
 
@@ -13,7 +39,8 @@ var Session = React.createClass({
   render: function () {
     return (
         <li>
-          <span>{this.props.answer.questionContent}</span> : <span>{this.props.answer.answerContent}</span>
+          <Question questionContent={this.props.answer.questionContent} />
+           <Answer answerContent={this.props.answer.answerContent} />
         </li>
       )
   }
