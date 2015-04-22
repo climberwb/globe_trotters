@@ -5,7 +5,7 @@ var EditLink  = React.createClass({
     return (
 
         <div>
-          <a href="hello.com">{JSON.stringify(this.props.answerData)}</a>
+          <a href="hello.com">{JSON.stringify(this.props.answer)}</a>
         </div>
       )
   }
@@ -18,7 +18,7 @@ var AnswerLinks = React.createClass({
 
     return (
         <div>
-          <EditLink answerData={this.props.answerData}/>
+          <EditLink answer={this.props.answer}/>
         </div>
       )
   }
@@ -27,13 +27,30 @@ var AnswerLinks = React.createClass({
 
 var Answer = React.createClass({
 
-  render: function () {
+  updateLink: function(){
+    alert(JSON.stringify(this.props.answer));
+  ///this.props.answer['edit'] = true;
+    this.props.answer.edit = true
+    this.setState({answer: this.props});
+    //alert(JSON.stringify(this.state));
 
+    },
+
+
+  render: function () {
+    //if(updateLink)
+    var display;
+           if(this.props.answer.answer.edit === false){
+             display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
+             alert(this.props.answer.answer.edit);
+           }
+           else{
+            display = "hello";
+           }
     return (
 
         <div>
-          <p>{this.props.answerContent} </p>
-          <AnswerLinks answerData={this.props.answerData} />
+          {display}
         </div>
       )
   }
@@ -41,7 +58,7 @@ var Answer = React.createClass({
  });
 ////////////////////////////////////////////////
 var Question = React.createClass({
-  
+
   render: function () {
     return (
         <div>
@@ -70,7 +87,7 @@ var Session = React.createClass({
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
-           <Answer answerContent={this.props.answer.answerContent} answerData={this.props} />
+           <Answer answerContent={this.props.answer.answerContent} answer={this.props} />
         </li>
       )
   }
@@ -148,6 +165,9 @@ var Sessions = React.createClass({
   // },
   componentDidMount: function() {
     $.get(this.props.source, function(data) {
+      data.currentUser.answers.map(function(answer){
+        answer["edit"] = false;
+      })
       this.setState({answers: data.currentUser.answers});
     }.bind(this));
 
