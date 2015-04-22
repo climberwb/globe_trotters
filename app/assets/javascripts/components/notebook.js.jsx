@@ -30,8 +30,16 @@ var Answer = React.createClass({
   updateLink: function(){
     alert(JSON.stringify(this.props.answer));
   ///this.props.answer['edit'] = true;
-    this.props.answer.edit = true
-    this.setState({answer: this.props});
+    if(this.props.answer.answer.edit === false){
+     this.props.answer.answer["edit"] = true
+
+    this.setState(this.props.answer);
+  }
+    else{
+      this.props.answer.answer["edit"] = false
+
+    this.setState(this.props.answer);
+    }
     //alert(JSON.stringify(this.state));
 
     },
@@ -40,12 +48,14 @@ var Answer = React.createClass({
   render: function () {
     //if(updateLink)
     var display;
+    alert(JSON.stringify(this.props.answer.answer.edit));
            if(this.props.answer.answer.edit === false){
              display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
              alert(this.props.answer.answer.edit);
            }
            else{
-            display = "hello";
+            display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
+             alert(this.props.answer.answer.edit);
            }
     return (
 
