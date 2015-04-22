@@ -1,18 +1,47 @@
-
-var Answer = React.createClass({
+var EditLink  = React.createClass({
 
   render: function () {
+
     return (
+
         <div>
-          <p>{this.props.answerContent} </p>
+          <a href="hello.com">{JSON.stringify(this.props)}</a>
         </div>
       )
   }
 
  });
 
-var Question = React.createClass({
+var AnswerLinks = React.createClass({
 
+  render: function () {
+
+    return (
+        <div>
+          <EditLink answerData={this.props.answerData}/>
+        </div>
+      )
+  }
+
+ });
+
+var Answer = React.createClass({
+
+  render: function () {
+
+    return (
+
+        <div>
+          <p>{this.props.answerContent} </p>
+          <AnswerLinks answerData={this.props.answerData} />
+        </div>
+      )
+  }
+
+ });
+////////////////////////////////////////////////
+var Question = React.createClass({
+  
   render: function () {
     return (
         <div>
@@ -37,10 +66,11 @@ var Session = React.createClass({
   //   this.props.onSubmitDecline();
   // },
   render: function () {
+
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
-           <Answer answerContent={this.props.answer.answerContent} />
+           <Answer answerContent={this.props.answer.answerContent} answerData={this.props} />
         </li>
       )
   }
