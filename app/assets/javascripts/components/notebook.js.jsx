@@ -5,7 +5,7 @@ var EditLink  = React.createClass({
     return (
 
         <div>
-          <a href="hello.com">{JSON.stringify(this.props)}</a>
+          <a href="hello.com">{JSON.stringify(this.props.answerData)}</a>
         </div>
       )
   }
