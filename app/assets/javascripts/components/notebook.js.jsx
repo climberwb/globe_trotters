@@ -28,19 +28,17 @@ var AnswerLinks = React.createClass({
 var Answer = React.createClass({
 
   updateLink: function(){
-    alert(JSON.stringify(this.props.answer));
+   // alert(JSON.stringify(this.props.answer));
   ///this.props.answer['edit'] = true;
-    if(this.props.answer.answer.edit === false){
-     this.props.answer.answer["edit"] = true
+    if(this.props.answer.edit === false){
+     this.props.answer["edit"] = true
 
-    this.setState(this.props.answer);
   }
-    else{
-      this.props.answer.answer["edit"] = false
-
-    this.setState(this.props.answer);
+  else{
+      this.props.answer["edit"] = false
     }
-    //alert(JSON.stringify(this.state));
+    this.setState({answer: this.props.answer}).bind(this);
+
 
     },
 
@@ -48,19 +46,23 @@ var Answer = React.createClass({
   render: function () {
     //if(updateLink)
     var display;
-    alert(JSON.stringify(this.props.answer.answer.edit));
-           if(this.props.answer.answer.edit === false){
+    var content;
+    this.props.answerContent ? hellp = this.props.answerContent : content = 'write here!';
+    alert(JSON.stringify(this.props.answer));
+           if(this.props.answer.edit === false){
              display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
-             alert(this.props.answer.answer.edit);
+             alert(this.props.answer.edit);
            }
            else{
-            display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
-             alert(this.props.answer.answer.edit);
+            display = <div onDoubleClick={this.updateLink}> <textarea name="description">{content}</textarea> <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
+             alert(this.props.answer.edit);
            }
     return (
 
         <div>
           {display}
+            
+
         </div>
       )
   }
@@ -93,11 +95,11 @@ var Session = React.createClass({
   //   this.props.onSubmitDecline();
   // },
   render: function () {
-
+     alert(JSON.stringify(this.props.answer));
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
-           <Answer answerContent={this.props.answer.answerContent} answer={this.props} />
+           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} />
         </li>
       )
   }
