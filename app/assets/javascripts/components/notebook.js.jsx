@@ -47,7 +47,7 @@ var Answer = React.createClass({
     //if(updateLink)
     var display;
     var content;
-    this.props.answerContent ? hellp = this.props.answerContent : content = 'write here!';
+    this.props.answerContent ? content = this.props.answerContent : content = 'write here!';
     alert(JSON.stringify(this.props.answer));
            if(this.props.answer.edit === false){
              display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
