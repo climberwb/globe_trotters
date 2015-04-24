@@ -1,3 +1,16 @@
+var CreateLink  = React.createClass({
+
+  render: function () {
+    return (
+        <div>
+          <a href="hello.com">Create</a>
+        </div>
+      )
+  }
+
+ });
+
+
 var EditLink  = React.createClass({
 
   render: function () {
@@ -14,11 +27,15 @@ var EditLink  = React.createClass({
 
 var AnswerLinks = React.createClass({
 
-  render: function () {
 
+  
+  render: function () {
+    var create;
+    this.props.answer.pendingStatus ? create = <CreateLink answer={this.props.answer} /> : create = 'dfd'
     return (
         <div>
           <EditLink answer={this.props.answer}/>
+          <CreateLink answer={this.props.answer} />
         </div>
       )
   }
@@ -31,8 +48,7 @@ var Answer = React.createClass({
    // alert(JSON.stringify(this.props.answer));
   ///this.props.answer['edit'] = true;
     if(this.props.answer.edit === false){
-     this.props.answer["edit"] = true
-
+       this.props.answer["edit"] = true
   }
   else{
       this.props.answer["edit"] = false
@@ -48,19 +64,16 @@ var Answer = React.createClass({
     this.props.answerContent ? content = this.props.answerContent : content = 'write here!';
    // alert(JSON.stringify(this.props.answer));
            if(this.props.answer.edit === false){
-             display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
+             display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a>   </div>
             // alert(this.props.answer.edit);
            }
            else{
-            display = <div onDoubleClick={this.updateLink}> <textarea name="description">{content}</textarea> <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
+            display = <div onDoubleClick={this.updateLink}> <textarea name="description" value={content}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
             // alert(this.props.answer.edit);
            }
     return (
-
         <div>
           {display}
-            
-
         </div>
       )
   }

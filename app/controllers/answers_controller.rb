@@ -3,6 +3,11 @@ class AnswersController < ApplicationController
   end
 
   def update
+    #TODO go back to update
+    @answer=Answer.find(params[:id])
+    content=params[:answer][:content]
+    @answer.update_attributes(:content=> content)
+    render :json => { "answerContent"=> @answer.content}.to_json
   end
 
   def show
@@ -19,11 +24,15 @@ class AnswersController < ApplicationController
   end
 
   def create
-        render :json => User.location_search(location).to_json
-
+    @answer=Answer.find(params[:id])
+    content=params[:answer][:content]
+    @answer.update_attributes(:content=> content,:pending=>false)
+    render :json => { "updateStatus"=> true}.to_json
   end
 
   def destroy
+    @answer=Answer.find(params[:id])
+    @answer.update_attributes(:content=>"",:pending=>true)
   end
 
 end

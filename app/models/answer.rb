@@ -21,7 +21,7 @@ belongs_to :question
               "questionContent"=> answer.question.content,
               "pendingStatus"=>answer.pending,
               "answerId"=>answer.id,
-              "ownerId"=>current_user.id
+              "ownerId"=>user.id
               }
             end
        end
