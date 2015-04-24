@@ -12,7 +12,7 @@ belongs_to :question
                           }
       pendingCount = 0
 
-      answers = user.answers.map do |answer|
+      answers = user.answers.order(:id).map do |answer|
            pendingCount=pendingCount+1 if answer.pending == true
 
            if pendingCount < 2 || answer.pending == false
