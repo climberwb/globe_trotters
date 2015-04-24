@@ -19,7 +19,8 @@ belongs_to :question
              {
               "answerContent"=> answer.content ? answer.content : "",
               "questionContent"=> answer.question.content,
-              "pendingStatus"=>answer.pending
+              "pendingStatus"=>answer.pending,
+              "answerId"=>answer.id
               }
             end
        end
