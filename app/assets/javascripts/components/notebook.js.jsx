@@ -37,25 +37,23 @@ var Answer = React.createClass({
   else{
       this.props.answer["edit"] = false
     }
-    this.setState({answer: this.props.answer}).bind(this);
-
-
+      this.setState({answer: this.props.answer})
     },
 
 
   render: function () {
-    //if(updateLink)
+
     var display;
     var content;
     this.props.answerContent ? content = this.props.answerContent : content = 'write here!';
-    alert(JSON.stringify(this.props.answer));
+   // alert(JSON.stringify(this.props.answer));
            if(this.props.answer.edit === false){
              display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a> <AnswerLinks answer={this.props.answer} />  </div>
-             alert(this.props.answer.edit);
+            // alert(this.props.answer.edit);
            }
            else{
             display = <div onDoubleClick={this.updateLink}> <textarea name="description">{content}</textarea> <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
-             alert(this.props.answer.edit);
+            // alert(this.props.answer.edit);
            }
     return (
 
@@ -95,7 +93,7 @@ var Session = React.createClass({
   //   this.props.onSubmitDecline();
   // },
   render: function () {
-     alert(JSON.stringify(this.props.answer));
+     //alert(JSON.stringify(this.props.answer));
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
@@ -186,7 +184,7 @@ var Sessions = React.createClass({
   },
 
   render: function() {
-    var self = this;
+    //var self = this;
 
     return(
       <ul >

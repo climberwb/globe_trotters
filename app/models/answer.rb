@@ -3,16 +3,19 @@ belongs_to :user
 belongs_to :question
 
   def self.answer_string(user)
+    # sorted_list = user.answers.sort { |a, b|  a.id <=> b.id }
      @answer_string  =   {
                                 "currentUser"=> {
                                   "name"=> user.name,
                                   "answers"=>[]
-                                }
-                            }
+                                                 }
+                          }
       pendingCount = 0
+
       answers = user.answers.map do |answer|
            pendingCount=pendingCount+1 if answer.pending == true
-           if pendingCount < 2
+
+           if pendingCount < 2 || answer.pending == false
              {
               "answerContent"=> answer.content ? answer.content : "",
               "questionContent"=> answer.question.content,
@@ -21,7 +24,7 @@ belongs_to :question
             end
        end
        answers.delete_if{|answer| answer==nil}
-       @answer_string["currentUser"]["answers"] = answers
+       @answer_string["currentUser"]["answers"] = answers.sort{|a,b| (a["pendingStatus"] == b["pendingStatus"]) ? ((a["pendingStatus"] < b["pendingStatus"]) ? -1 : 1) : (a["pendingStatus"] ? -1 : 1)}
        @answer_string
   end
 end
