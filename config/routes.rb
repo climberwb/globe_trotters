@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   post "/team_relationships/create" => "team_relationships#create"
   post "/team_relationships/team_accept" => "team_relationships#team_accept"
   post "/team_relationships/team_decline" => "team_relationships#team_decline"
- 
+
   resources :individual_relationships
   post "/individual_relationships/create" => "individual_relationships#create"
   post "/individual_relationships/accept" => "individual_relationships#accept"
@@ -68,5 +68,5 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
-  
+
 end
