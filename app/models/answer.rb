@@ -4,13 +4,13 @@ belongs_to :question
 
   def self.answer_string(user)
     # sorted_list = user.answers.sort { |a, b|  a.id <=> b.id }
-     @answer_string  =   {
-                                "currentUser"=> {
-                                  "name"=> user.name,
-                                  "answers"=>[]
-                                                 }
-                          }
-      pendingCount = 0
+     @answer_string = {
+                        "currentUser"=> {
+                        "name"=> user.name,
+                        "answers"=>[]
+                                        }
+                      } 
+      pendingCount = 0 #initialize the count of pending object 
 
       answers = user.answers.order(:id).map do |answer|
            pendingCount=pendingCount+1 if answer.pending == true

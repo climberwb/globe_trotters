@@ -1,5 +1,5 @@
 //TODO incorporate https://facebook.github.io/react/docs/forms.html
-
+var Button = ReactBootstrap.Button;
 var UpdateLink  = React.createClass({
 
   UpdateAnswer: function(e){
@@ -7,9 +7,12 @@ var UpdateLink  = React.createClass({
     this.props.UpdateAnswer(e.target.name);
   },
   render: function () {
+    var submit;
+   
+    this.props.answer.pendingStatus ? submit=<Button className="btn btn-success" href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</Button> : submit = null
     return (
         <div>
-          <a href="hello.com" name="edit" onClick={this.UpdateAnswer}>Edit</a> | <a href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</a>
+          <Button className="btn" href="hello.com" name="edit" onClick={this.UpdateAnswer}>Edit</Button> {submit}
         </div>
       )
   }
@@ -38,11 +41,13 @@ var AnswerLinks = React.createClass({
   },
   render: function () {
     var Update;
-    this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
+    var editNonPending;
+    //this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
+    
     return (
         <div>
           <EditLink answer={this.props.answer} />
-          {Update}
+          <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
         </div>
       )
   }
@@ -143,13 +148,10 @@ var Sessions = React.createClass({
           dataType:"json",        
           data:{"answer":{"content":answer.answerContent}},        
           success: function(data) {
-           //this.setState({users: data.users});
-           //alert('success! Update Answer');
-           //alert(JSON.stringify(data));
+           
            this.componentDidMount();
           }.bind(this),
           error: function(xhr, status, err) {
-            //alert('fail :(')
             console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
       }});//.bind(this)})
     }else if(name=="submit"){
@@ -187,62 +189,7 @@ var Sessions = React.createClass({
           console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
     }.bind(this)})
   },
-  // onDelete: function(user) {
-  //  // //alert(user.id);
-  //   $.ajax({
-  //     url: '/individual_relationships/delete',
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: {sender_id: user.id},
-  //     success: function(data) {
-  //         this.setState({users: data.users});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-
-  //       console.error('/individual_relationships/delete', status, err.toString());
-  //   }.bind(this)})
-  // },
-  // onAccept: function(user) {
-  //  // //alert(user.id);
-  //   this.setState({ users:[user]});
-  //   $.ajax({
-  //     url: '/individual_relationships/accept',
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: {sender_id: user.id},
-  //     success: function(data) {
-  //       user.friendStatus = 'true';
-  //       this.setState({ users:[user]});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-
-  //       console.error('/individual_relationships/accept', status, err.toString());
-  //   }.bind(this)})
-  // },
-  // onDecline: function(user) {
-
-  //  ////alert(JSON.stringify(this.state,undefined,0)); USE TO DEBUG!!!!!!!!!
-  //       var oldUsers=this.state.users;
-  //  ////alert(JSON.stringify(oldUsers,undefined,0));USE TO DEBUG!!!!!!!!!
-
-  //   $.ajax({
-  //     url: '/individual_relationships/decline',
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: {sender_id: user.id},
-  //     success: function(data) {
-
-  //       user.friendStatus = 'nil';
-  //       var index = this.state.users.indexOf(user);
-  //       var oldUsers=this.state.users;
-  //        oldUsers.splice(index,index+1);
-
-  //       this.setState({ users:oldUsers});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error('/individual_relationships/decline', status, err.toString());
-  //   }.bind(this)})
-  // },
+  
   componentDidMount: function() {
     $.get(this.props.source, function(data) {
       data.currentUser.answers.map(function(answer){
@@ -255,11 +202,10 @@ var Sessions = React.createClass({
 
   render: function() {
     var self = this;
-
     return(
       <ul >
         {this.state.answers.map(function (answer) {
-          return <Session answer={answer} UpdateAnswer={self.UpdateAnswer} />
+          return <Session key={answer.answerId} answer={answer} UpdateAnswer={self.UpdateAnswer} />
         })}
       </ul>
     );

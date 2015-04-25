@@ -169,7 +169,7 @@ var FriendsInfo = React.createClass({
     return (
       <ul className="dropdown-menu" id="friend-menu">
         {this.state.users.map(function (user) {
-          return <FriendInfo user={user} onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
+          return <FriendInfo key={user.id} user={user} onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
         })}
       </ul>
     );
