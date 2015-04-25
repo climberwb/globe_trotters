@@ -1,9 +1,41 @@
 var CreateLink  = React.createClass({
 
+  CreateAnswer: function(e){
+    e.preventDefault();
+    alert(this.props.parentNode);
+
+    //  $.ajax({type:"POST",
+    //       url: '/users/'+this.props.answer.ownerId+'/answers'+this.props.answer.answerId,
+    //       dataType:"json", 
+    //       data:{"answer":"delete"},
+    //       complete: function(){ $("#SlotAllocationForm").dialog("close");
+    //       alert("Deleted successfully");
+    //     }
+    //   });
+
+    //   $.ajax({
+    //   url: '/users/'+this.props.answer.ownerId+'/answers'+this.props.answer.answerId,
+    //   dataType: 'json',
+    //   type: 'POST',
+    //   data: {sender_id: user.id},
+    //   success: function(data) {
+
+    //     user.friendStatus = 'nil';
+    //     var index = this.state.users.indexOf(user);
+    //     var oldUsers=this.state.users;
+    //      oldUsers.splice(index,index+1);
+
+    //     this.setState({ users:oldUsers});
+    //   }.bind(this),
+    //   error: function(xhr, status, err) {
+    //     console.error('/individual_relationships/decline', status, err.toString());
+    // }
+    this.props.CreateAnswer();
+  },
   render: function () {
     return (
         <div>
-          <a href="hello.com">Create</a>
+          <a href="hello.com" onClick={this.CreateAnswer}>Create</a>
         </div>
       )
   }
@@ -26,16 +58,17 @@ var EditLink  = React.createClass({
  });
 
 var AnswerLinks = React.createClass({
-
-
   
+  CreateAnswer: function(){
+      this.props.CreateAnswer();
+  },
   render: function () {
     var create;
-    this.props.answer.pendingStatus ? create = <CreateLink answer={this.props.answer} /> : create = 'dfd'
+    this.props.answer.pendingStatus ? create = <CreateLink answer={this.props.answer} CreateAnswer={this.CreateAnswer} /> : create = null
     return (
         <div>
-          <EditLink answer={this.props.answer}/>
-          <CreateLink answer={this.props.answer} />
+          <EditLink answer={this.props.answer} />
+          {create}
         </div>
       )
   }
@@ -43,7 +76,9 @@ var AnswerLinks = React.createClass({
  });
 
 var Answer = React.createClass({
-
+  CreateAnswer: function(){
+          this.props.CreateAnswer(this.props.answer);
+  },
   updateLink: function(){
    // alert(JSON.stringify(this.props.answer));
   ///this.props.answer['edit'] = true;
@@ -68,7 +103,7 @@ var Answer = React.createClass({
             // alert(this.props.answer.edit);
            }
            else{
-            display = <div onDoubleClick={this.updateLink}> <textarea name="description" value={content}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} />  </div>
+            display = <div onDoubleClick={this.updateLink}> <textarea name="description" value={content}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} CreateAnswer={this.CreateAnswer}/>  </div>
             // alert(this.props.answer.edit);
            }
     return (
@@ -97,20 +132,16 @@ var Question = React.createClass({
 
 var Session = React.createClass({
 
-  // handleSubmitAccept: function(e) {
-  //   e.preventDefault();
-  //   this.props.onSubmitAccept();
-  // },
-  // handleSubmitDecline: function(e) {
-  //   e.preventDefault();
-  //   this.props.onSubmitDecline();
-  // },
+  CreateAnswer: function(answer) {
+    //e.preventDefault();
+    this.props.CreateAnswer(answer);
+  },
   render: function () {
      //alert(JSON.stringify(this.props.answer));
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
-           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} />
+           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} CreateAnswer={this.CreateAnswer} />
         </li>
       )
   }
@@ -121,7 +152,7 @@ var Session = React.createClass({
 
 var Sessions = React.createClass({
 
-
+  
   getInitialState: function() {
     return {
       answers: [
@@ -129,6 +160,11 @@ var Sessions = React.createClass({
         // {id:2, url:"", name:"test user 2", friendStatus: true}
       ]
     };
+  },
+   CreateAnswer: function(answer) {
+    //e.preventDefault();
+    alert(JSON.stringify(answer));
+    return 'd';
   },
   // onDelete: function(user) {
   //  // alert(user.id);
@@ -197,12 +233,12 @@ var Sessions = React.createClass({
   },
 
   render: function() {
-    //var self = this;
+    var self = this;
 
     return(
       <ul >
         {this.state.answers.map(function (answer) {
-          return <Session answer={answer} />
+          return <Session answer={answer} CreateAnswer={self.CreateAnswer} />
         })}
       </ul>
     );
