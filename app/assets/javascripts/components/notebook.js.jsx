@@ -76,11 +76,15 @@ var AnswerLinks = React.createClass({
  });
 
 var Answer = React.createClass({
+  handleChange: function(event) {
+    this.props.answer.answerContent=event.target.value;
+    this.setState({answerContent:this.props.answer.answerContent});
+
+  },
   CreateAnswer: function(){
           this.props.CreateAnswer(this.props.answer);
   },
   updateLink: function(){
-   // alert(JSON.stringify(this.props.answer));
   ///this.props.answer['edit'] = true;
     if(this.props.answer.edit === false){
        this.props.answer["edit"] = true
@@ -90,21 +94,15 @@ var Answer = React.createClass({
     }
       this.setState({answer: this.props.answer})
     },
-
-
   render: function () {
-
     var display;
     var content;
     this.props.answerContent ? content = this.props.answerContent : content = 'write here!';
-   // alert(JSON.stringify(this.props.answer));
            if(this.props.answer.edit === false){
              display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a>   </div>
-            // alert(this.props.answer.edit);
            }
            else{
-            display = <div onDoubleClick={this.updateLink}> <textarea name="description" value={content}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} CreateAnswer={this.CreateAnswer}/>  </div>
-            // alert(this.props.answer.edit);
+            display = <div onDoubleClick={this.updateLink}> <textarea name="description" defaultValue={content} onChange={this.handleChange}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} CreateAnswer={this.CreateAnswer}  />  </div>
            }
     return (
         <div>
@@ -163,8 +161,39 @@ var Sessions = React.createClass({
   },
    CreateAnswer: function(answer) {
     //e.preventDefault();
-    alert(JSON.stringify(answer));
-    return 'd';
+    //alert(JSON.stringify(answer));
+     $.ajax({ type:"PATCH", 
+        url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,       
+        dataType:"json",        
+        data:{"answer":{"content":answer.answerContent}},        
+        success: function(data) {
+         //this.setState({users: data.users});
+         alert('success! Create Answer');
+         alert(JSON.stringify(data));
+         this.NewAnswers(answer);
+        }.bind(this),
+        error: function(xhr, status, err) {
+          alert('fail :(')
+          console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
+    }});//.bind(this)})
+  },
+  NewAnswers: function(answer) {
+    //e.preventDefault();
+    //alert(JSON.stringify(answer));
+     $.ajax({ type:"GET", 
+        url:"/users/"+ answer.ownerId+"/answers/",       
+        dataType:"json",        
+        data:{"_method":"delete"},        
+        success: function(data) {
+         //this.setState({users: data.users});
+         alert('success! New Answer');
+         alert(JSON.stringify(data));
+         this.setState({users: data.users});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          alert('fail :(')
+          console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
+    }.bind(this)})
   },
   // onDelete: function(user) {
   //  // alert(user.id);
