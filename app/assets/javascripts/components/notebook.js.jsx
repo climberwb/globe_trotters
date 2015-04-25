@@ -1,9 +1,9 @@
+//TODO incorporate https://facebook.github.io/react/docs/forms.html
+
 var CreateLink  = React.createClass({
 
   CreateAnswer: function(e){
     e.preventDefault();
-    alert(this.props.parentNode);
-
     //  $.ajax({type:"POST",
     //       url: '/users/'+this.props.answer.ownerId+'/answers'+this.props.answer.answerId,
     //       dataType:"json", 
