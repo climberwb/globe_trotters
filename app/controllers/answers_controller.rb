@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer=Answer.find(params[:id])
+    @answer=Answer.find(params[:answer][:id])
     content=params[:answer][:content]
     @answer.update_attributes(:content=> content,:pending=>false)
     render :json => { "updateStatus"=> true}.to_json

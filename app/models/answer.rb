@@ -26,7 +26,7 @@ belongs_to :question
             end
        end
        answers.delete_if{|answer| answer==nil}
-       @answer_string["currentUser"]["answers"] = answers.sort{|a,b| (a["pendingStatus"] == b["pendingStatus"]) ? ((a["pendingStatus"] < b["pendingStatus"]) ? -1 : 1) : (a["pendingStatus"] ? -1 : 1)}
+       @answer_string["currentUser"]["answers"] = answers.sort_by { |row| [row['pendingStatus'] ? 0 : 1] }
        @answer_string
   end
 end

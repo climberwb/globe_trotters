@@ -1,41 +1,15 @@
 //TODO incorporate https://facebook.github.io/react/docs/forms.html
 
-var CreateLink  = React.createClass({
+var UpdateLink  = React.createClass({
 
-  CreateAnswer: function(e){
+  UpdateAnswer: function(e){
     e.preventDefault();
-    //  $.ajax({type:"POST",
-    //       url: '/users/'+this.props.answer.ownerId+'/answers'+this.props.answer.answerId,
-    //       dataType:"json", 
-    //       data:{"answer":"delete"},
-    //       complete: function(){ $("#SlotAllocationForm").dialog("close");
-    //       alert("Deleted successfully");
-    //     }
-    //   });
-
-    //   $.ajax({
-    //   url: '/users/'+this.props.answer.ownerId+'/answers'+this.props.answer.answerId,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: {sender_id: user.id},
-    //   success: function(data) {
-
-    //     user.friendStatus = 'nil';
-    //     var index = this.state.users.indexOf(user);
-    //     var oldUsers=this.state.users;
-    //      oldUsers.splice(index,index+1);
-
-    //     this.setState({ users:oldUsers});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error('/individual_relationships/decline', status, err.toString());
-    // }
-    this.props.CreateAnswer();
+    this.props.UpdateAnswer(e.target.name);
   },
   render: function () {
     return (
         <div>
-          <a href="hello.com" onClick={this.CreateAnswer}>Create</a>
+          <a href="hello.com" name="edit" onClick={this.UpdateAnswer}>Edit</a> | <a href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</a>
         </div>
       )
   }
@@ -59,16 +33,16 @@ var EditLink  = React.createClass({
 
 var AnswerLinks = React.createClass({
   
-  CreateAnswer: function(){
-      this.props.CreateAnswer();
+  UpdateAnswer: function(name){
+      this.props.UpdateAnswer(name);
   },
   render: function () {
-    var create;
-    this.props.answer.pendingStatus ? create = <CreateLink answer={this.props.answer} CreateAnswer={this.CreateAnswer} /> : create = null
+    var Update;
+    this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
     return (
         <div>
           <EditLink answer={this.props.answer} />
-          {create}
+          {Update}
         </div>
       )
   }
@@ -81,8 +55,8 @@ var Answer = React.createClass({
     this.setState({answerContent:this.props.answer.answerContent});
 
   },
-  CreateAnswer: function(){
-          this.props.CreateAnswer(this.props.answer);
+  UpdateAnswer: function(name){
+          this.props.UpdateAnswer(this.props.answer,name);
   },
   updateLink: function(){
   ///this.props.answer['edit'] = true;
@@ -99,10 +73,10 @@ var Answer = React.createClass({
     var content;
     this.props.answerContent ? content = this.props.answerContent : content = 'write here!';
            if(this.props.answer.edit === false){
-             display = <div onDoubleClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a>   </div>
+             display = <div onClick={this.updateLink}> <p>{this.props.answerContent} </p>  <a>update</a>   </div>
            }
            else{
-            display = <div onDoubleClick={this.updateLink}> <textarea name="description" defaultValue={content} onChange={this.handleChange}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} CreateAnswer={this.CreateAnswer}  />  </div>
+            display = <div onDoubleClick={this.updateLink}> <textarea name="description" defaultValue={content} onChange={this.handleChange}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} UpdateAnswer={this.UpdateAnswer}  />  </div>
            }
     return (
         <div>
@@ -130,16 +104,17 @@ var Question = React.createClass({
 
 var Session = React.createClass({
 
-  CreateAnswer: function(answer) {
+  UpdateAnswer: function(answer,name) {
     //e.preventDefault();
-    this.props.CreateAnswer(answer);
+      this.props.UpdateAnswer(answer,name);
+    
   },
   render: function () {
-     //alert(JSON.stringify(this.props.answer));
+     ////alert(JSON.stringify(this.props.answer));
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
-           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} CreateAnswer={this.CreateAnswer} />
+           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
         </li>
       )
   }
@@ -159,44 +134,61 @@ var Sessions = React.createClass({
       ]
     };
   },
-   CreateAnswer: function(answer) {
+   UpdateAnswer: function(answer,name) {
     //e.preventDefault();
-    //alert(JSON.stringify(answer));
-     $.ajax({ type:"PATCH", 
-        url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,       
-        dataType:"json",        
-        data:{"answer":{"content":answer.answerContent}},        
-        success: function(data) {
-         //this.setState({users: data.users});
-         alert('success! Create Answer');
-         alert(JSON.stringify(data));
-         this.NewAnswers(answer);
-        }.bind(this),
-        error: function(xhr, status, err) {
-          alert('fail :(')
-          console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
-    }});//.bind(this)})
+    ////alert(JSON.stringify(answer));
+    if(name=="edit"){
+       $.ajax({ type:"PATCH", 
+          url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,       
+          dataType:"json",        
+          data:{"answer":{"content":answer.answerContent}},        
+          success: function(data) {
+           //this.setState({users: data.users});
+           //alert('success! Update Answer');
+           //alert(JSON.stringify(data));
+           this.componentDidMount();
+          }.bind(this),
+          error: function(xhr, status, err) {
+            //alert('fail :(')
+            console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
+      }});//.bind(this)})
+    }else if(name=="submit"){
+      $.ajax({ type:"POST", 
+          url:"/users/"+ answer.ownerId+"/answers/",       
+          dataType:"json",        
+          data:{"answer":{"content":answer.answerContent,"id":answer.answerId}},        
+          success: function(data) {
+           //this.setState({users: data.users});
+           //alert('success! Update Answer');
+           //alert(JSON.stringify(data));
+           this.componentDidMount();
+          }.bind(this),
+          error: function(xhr, status, err) {
+            //alert('fail :(')
+            console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
+      }});//.bin
+    }
   },
   NewAnswers: function(answer) {
     //e.preventDefault();
-    //alert(JSON.stringify(answer));
+    ////alert(JSON.stringify(answer));
      $.ajax({ type:"GET", 
         url:"/users/"+ answer.ownerId+"/answers/",       
         dataType:"json",        
         data:{"_method":"delete"},        
         success: function(data) {
          //this.setState({users: data.users});
-         alert('success! New Answer');
-         alert(JSON.stringify(data));
+         //alert('success! New Answer');
+         //alert(JSON.stringify(data));
          this.setState({users: data.users});
         }.bind(this),
         error: function(xhr, status, err) {
-          alert('fail :(')
+          //alert('fail :(')
           console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
     }.bind(this)})
   },
   // onDelete: function(user) {
-  //  // alert(user.id);
+  //  // //alert(user.id);
   //   $.ajax({
   //     url: '/individual_relationships/delete',
   //     dataType: 'json',
@@ -211,7 +203,7 @@ var Sessions = React.createClass({
   //   }.bind(this)})
   // },
   // onAccept: function(user) {
-  //  // alert(user.id);
+  //  // //alert(user.id);
   //   this.setState({ users:[user]});
   //   $.ajax({
   //     url: '/individual_relationships/accept',
@@ -229,9 +221,9 @@ var Sessions = React.createClass({
   // },
   // onDecline: function(user) {
 
-  //  //alert(JSON.stringify(this.state,undefined,0)); USE TO DEBUG!!!!!!!!!
+  //  ////alert(JSON.stringify(this.state,undefined,0)); USE TO DEBUG!!!!!!!!!
   //       var oldUsers=this.state.users;
-  //  //alert(JSON.stringify(oldUsers,undefined,0));USE TO DEBUG!!!!!!!!!
+  //  ////alert(JSON.stringify(oldUsers,undefined,0));USE TO DEBUG!!!!!!!!!
 
   //   $.ajax({
   //     url: '/individual_relationships/decline',
@@ -267,7 +259,7 @@ var Sessions = React.createClass({
     return(
       <ul >
         {this.state.answers.map(function (answer) {
-          return <Session answer={answer} CreateAnswer={self.CreateAnswer} />
+          return <Session answer={answer} UpdateAnswer={self.UpdateAnswer} />
         })}
       </ul>
     );
