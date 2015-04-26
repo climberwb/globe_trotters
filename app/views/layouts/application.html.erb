@@ -10,17 +10,17 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body>
+<!--instance variables added in class of <body> to selectively rendor javascript -->
+<body class="<%= @controller %> <%= @action %>">
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script src="http://d3js.org/topojson.v0.min.js"></script>
    <div class="container">
 
         <ul class="nav nav-tabs">
+           <!-- FriendBox component-->
           <% if show_menu_policy? %>
             <li id="FriendBox" style="margin-top:12px"></li>
           <% end %>
-        <!-- component -->
-        
         <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
         <%if current_user%>

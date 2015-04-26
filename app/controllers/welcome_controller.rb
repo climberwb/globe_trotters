@@ -1,6 +1,9 @@
 class WelcomeController < ApplicationController
   def index
-   # @team_pic = current_user.avatar.profile.url
+   # instance variables displayed in applcation.html.erb
+   # variables are meant to render globe only for welcome#index(root) page
+   @controller="welcome" 
+   @action="index" 
   end
 
   def about

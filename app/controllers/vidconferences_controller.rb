@@ -16,7 +16,13 @@ class VidconferencesController < ApplicationController
 
         @new_session.users << current_user
         @new_session.users << User.find(params[:vidconference][:users])
-        redirect_to @new_session
+        if @new_session.users.length == 2  
+          @new_session.save
+          redirect_to @new_session
+        else 
+          @new_session.destroy
+          redirect_to Vidconference.new
+        end
     end
 
     def show

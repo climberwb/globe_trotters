@@ -27,7 +27,7 @@ var EditLink  = React.createClass({
     return (
 
         <div>
-          <a href="hello.com">{JSON.stringify(this.props.answer)}</a>
+          <p>{this.props.answer.answerContent}</p>
         </div>
       )
   }
