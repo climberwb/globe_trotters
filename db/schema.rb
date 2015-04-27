@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411232047) do
+ActiveRecord::Schema.define(version: 20150427011222) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20150411232047) do
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
   add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
 
+  create_table "icebreaker_sessions", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "notebook_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "icebreaker_sessions", ["notebook_id"], name: "index_icebreaker_sessions_on_notebook_id"
+  add_index "icebreaker_sessions", ["question_id"], name: "index_icebreaker_sessions_on_question_id"
+
   create_table "individual_relationships", force: true do |t|
     t.datetime "accepted_at"
     t.datetime "rejected_at"
@@ -59,6 +69,14 @@ ActiveRecord::Schema.define(version: 20150411232047) do
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "notebooks", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id"
 
   create_table "questions", force: true do |t|
     t.string   "content"
@@ -103,12 +121,12 @@ ActiveRecord::Schema.define(version: 20150411232047) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -130,6 +148,7 @@ ActiveRecord::Schema.define(version: 20150411232047) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "travel_status"
+    t.boolean  "friendship_eligible",    default: false, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

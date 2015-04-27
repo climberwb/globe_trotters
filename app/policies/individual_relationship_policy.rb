@@ -3,12 +3,10 @@ class IndividualRelationshipPolicy < ApplicationPolicy
 
 
    def index?
-     scope.where(id: record.id).exists?
-     #binding.pry
-
+     scope.where(id: record.id).exists? && user.friendship_eligible?
    end
    def show?
-    user.present?#index?
+    user.present?
    end
    def accept?
    end
@@ -17,8 +15,7 @@ class IndividualRelationshipPolicy < ApplicationPolicy
    def delete?
    end
    def create?
-      # current_user.individual_relationship
       relationship = IndividualRelationship.where(sender: user).first
-      user.present? && relationship == nil
+      user.present? && relationship == nil && user.friendship_eligible?
    end
 end

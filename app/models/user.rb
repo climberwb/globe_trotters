@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   # has_many :teammates, class_name: "User", foreign_key: "captain_id"
   belongs_to :vidconference
-  validate :user_count_within_limit, :on => :update
+
 
   has_one :teammate_relationship, foreign_key: "receiver_id"
   has_one :teammate_relationship, foreign_key: "sender_id"
@@ -32,13 +32,20 @@ class User < ActiveRecord::Base
 
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
   
+  #TODO make validation not work for update of answers
+
+  # def user_count_within_limit
+  #   if vidconference && vidconference.users.count > 1
+  #     errors.add(:base, "Exceeded thing limit")
+  #   end
+  # end
+
+  # validate :user_count_within_limit, :on => :update
 
   has_many :answers
-  def user_count_within_limit
-    if vidconference && vidconference.users.count > 1
-      errors.add(:base, "Exceeded thing limit")
-    end
-  end
+
+  
+  
 
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates
@@ -90,6 +97,10 @@ attr_writer :address
   end
   def admin?
     role == 'admin'
+  end
+#friendship status
+  def friendship_eligible?
+    friendship_eligible == true
   end
 
 # travel status

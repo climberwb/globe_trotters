@@ -7,11 +7,11 @@ class AnswersController < ApplicationController
     @answer=Answer.find(params[:id])
     content=params[:answer][:content]
     @answer.update_attributes(:content=> content)
+    Answer.grant_friendship_access(current_user)
     render :json => { "answerContent"=> @answer.content}.to_json
   end
 
   def show
-    #@answers = current_user.answers
   end
 
   def index

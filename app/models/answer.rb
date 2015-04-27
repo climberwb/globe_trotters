@@ -29,4 +29,14 @@ belongs_to :question
        @answer_string["currentUser"]["answers"] = answers.sort_by { |row| [row['pendingStatus'] ? 0 : 1] }
        @answer_string
   end
+
+  def self.grant_friendship_access(user)
+    false_answer_count=0
+    user.answers.each do |answer|
+      false_answer_count=false_answer_count+1 if answer.pending==false
+    end
+    binding.pry
+    user.update_attributes(:friendship_eligible=>true) if user.answers.length == false_answer_count 
+  end 
+
 end
