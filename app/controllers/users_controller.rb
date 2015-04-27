@@ -10,10 +10,8 @@ def admin_show
   :bio => params[:user][:bio],
   :avatar => params[:user][:avatar]
  )
- #if @admin.present?
- #team1.teammates << @teammates
+
  redirect_to admin_show_path(current_user)
- # end
  end
 
   def admin_form
@@ -58,15 +56,17 @@ def admin_show
     #TODO: update user for individual account add pundit
 
       @questions = Question.all.shuffle
-      @questions.each_with_index do |question,index|
-        new_answer = Answer.create(:question_id=>question.id,:user_id=>current_user.id)
-        break if index == 3
+      if current_user.answers ==nil
+        @questions.each_with_index do |question,index|
+          new_answer = Answer.create(:question_id=>question.id,:user_id=>current_user.id)
+          break if index == 3
+        end
       end
      if current_user.save
 
-      #current_user.answers
      @user = current_user.update_attributes(user_params)
-        redirect_to individual_show_path(current_user)
+         redirect_to "#{user_answers_path(current_user)}/show"
+        #redirect_to individual_show_path(current_user)
      end
 
   end
