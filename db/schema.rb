@@ -37,16 +37,6 @@ ActiveRecord::Schema.define(version: 20150427011222) do
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
   add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
 
-  create_table "icebreaker_sessions", force: true do |t|
-    t.integer  "question_id"
-    t.integer  "notebook_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "icebreaker_sessions", ["notebook_id"], name: "index_icebreaker_sessions_on_notebook_id"
-  add_index "icebreaker_sessions", ["question_id"], name: "index_icebreaker_sessions_on_question_id"
-
   create_table "individual_relationships", force: true do |t|
     t.datetime "accepted_at"
     t.datetime "rejected_at"
@@ -69,14 +59,6 @@ ActiveRecord::Schema.define(version: 20150427011222) do
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
-
-  create_table "notebooks", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id"
 
   create_table "questions", force: true do |t|
     t.string   "content"
