@@ -22,6 +22,8 @@
 //= require bootstrap
 //= require react_bootstrap
 //= require react_bootstrap_style
+//=d3jsqueue
+//=d3topojson
 //= require jquery-readyselector
 //= require_tree .
 
