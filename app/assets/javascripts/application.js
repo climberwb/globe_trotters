@@ -17,6 +17,8 @@
 //= require react_ujs
 //= require components
 //= require d3
+//= require d3jsqueue
+//= require d3topojson
 //= require react
 //= require react_ujs
 //= require components
