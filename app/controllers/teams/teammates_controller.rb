@@ -7,7 +7,7 @@ class Teams::TeammatesController < ApplicationController
   end
 
   def create
-    Team = Team.create(
+     Team.create(
               :name => params[:team][:name],
               :location  => params[:team][:location],
               :sport  => params[:team][:sport]

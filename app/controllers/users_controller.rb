@@ -56,9 +56,9 @@ def admin_show
     #TODO: update user for individual account add pundit
 
       @questions = Question.all.shuffle
-      if current_user.answers ==nil
+      if current_user.answers ==[]
         @questions.each_with_index do |question,index|
-          new_answer = Answer.create(:question_id=>question.id,:user_id=>current_user.id)
+          Answer.create(:question_id=>question.id,:user_id=>current_user.id)
           break if index == 3
         end
       end
@@ -66,7 +66,6 @@ def admin_show
 
      @user = current_user.update_attributes(user_params)
          redirect_to "#{user_answers_path(current_user)}/show"
-        #redirect_to individual_show_path(current_user)
      end
 
   end
@@ -114,6 +113,6 @@ def admin_show
  private
 
   def user_params
-    params.require(:user).permit(:name,:avatar,:bio,:location)
+    params.require(:user).permit(:name,:avatar,:bio,:location,:travel_status)
   end
 end
