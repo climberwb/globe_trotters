@@ -45,14 +45,14 @@ var image = tooltip.append("img").attr("src","");
 d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
-//scales the svg
-var width = 960*1.5/2,
-    height = 500*2.3/2;
+//scales the svg remove *2 to scale it to normal. Remove -1 from shadow to retrieve shadow
+var width = 960*1.5*2/2,
+    height = 500*2.3*2/2;
 //takes care of the height and width of globe
 var proj = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(220*2.3/2);
+    .scale(220*2.3*2/2);
 //takes care of the height and width of globe
 var sky = d3.geo.orthographic()
     .translate([width / 2, height / 2])
@@ -123,7 +123,7 @@ function ready(error, world, places) {
   svg.append("ellipse")
     .attr("cx", 440*1.5).attr("cy", 450*1.5)
     .attr("rx", proj.scale()*.90*1.5)
-    .attr("ry", proj.scale()*.25*1.5)
+    .attr("ry", proj.scale()*.25*-1)//-1 moves shadow off of globe
     .attr("class", "noclicks")
     .style("fill", "url(#drop_shadow)");
 
