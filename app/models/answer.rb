@@ -36,6 +36,7 @@ belongs_to :question
       false_answer_count=false_answer_count+1 if answer.pending==false
     end
     user.update_attributes(:friendship_eligible=>true) if user.answers.length == false_answer_count 
+    user.answers.length == false_answer_count 
   end 
 
 end

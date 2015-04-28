@@ -11,6 +11,7 @@ class AnswersController < ApplicationController
   end
 
   def show
+    redirect_to root_path if current_user.friendship_eligible == true
   end
 
   def index
