@@ -23,7 +23,6 @@
 //= require bootstrap
 //= require react_bootstrap
 //= require react_bootstrap_style
-//= require jquery-readyselector
 //= require_tree .
 
 
