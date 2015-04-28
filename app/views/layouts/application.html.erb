@@ -9,11 +9,10 @@
    -->
 
   <%= csrf_meta_tags %>
+
 </head>
 <!--instance variables added in class of <body> to selectively rendor javascript -->
 <body class="<%= @controller %> <%= @action %>">
-  <script src="http://d3js.org/queue.v1.min.js"></script>
-  <script src="http://d3js.org/topojson.v0.min.js"></script>
    <div class="container">
 
         <ul class="nav nav-tabs">
@@ -49,7 +48,8 @@
       <%= yield %>
      </div>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
     <script src="/assets/components/friend_request_box.js"></script>
     <script src="/assets/components/notebook.js"></script>
 
