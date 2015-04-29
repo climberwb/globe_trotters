@@ -19,7 +19,9 @@ class ApplicationController < ActionController::Base
       # binding.pry
       if current_user.role.nil?  ## temporary solution
         #update_path(resource)
-        binary_selection_path(resource)
+        #binary_selection_path(resource) uncomment when teams are implemented
+
+        individual_form_path(resource)
       else
         root_path(resource)
       end

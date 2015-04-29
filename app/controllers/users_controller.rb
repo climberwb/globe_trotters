@@ -63,8 +63,10 @@ def admin_show
         end
       end
      if current_user.save
-
+             
      @user = current_user.update_attributes(user_params)
+     # Temporary for presentation delete when multiple roles come into play
+     current_user.update_attributes(:role=>"individual") 
          redirect_to "#{user_answers_path(current_user)}/show"
      end
 
@@ -77,6 +79,7 @@ def admin_show
     end
       @new_relationship = IndividualRelationship.new
   end
+
   def to_geo_json
     individual_hash = User.to_geojson
     # you can loop through users with this  individual_hash["features"][1]["properties"][0]
