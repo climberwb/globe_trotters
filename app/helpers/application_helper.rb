@@ -6,8 +6,9 @@ module ApplicationHelper
   end
 
   def show_menu_policy?
+    @Individual_Relationship = IndividualRelationship.where(receiver: current_user).first
     if user_signed_in?
-      current_user.individual_relationship.nil? ? false : policy(current_user.individual_relationship).index?
+      @Individual_Relationship.nil? ? false : true#policy(current_user).index?
     else
       false
     end

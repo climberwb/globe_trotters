@@ -209,24 +209,3 @@ $('#glyphicon').on('click', function(){
    $("#friend_drop").toggleClass("dropdown open");
 });
 
-// var i = 1;
-// $('#friend_request').on('mouseover',function(){
-//    //if(i == 2){
-//     var cnt = $("#FriendBox").contents();
-//    // alert(cnt);
-//     $('#friend_request').replaceWith(cnt);
-
-//   // }
-// });
-
-//var Menu = React.createClass({
-//   render: function() {
-//     return (
-//       <ul className="nav nav-tabs">
-//         <FriendBox />
-//         <li><li/>
-//       </ul>
-//     );
-//   }
-// });
-// React.render(<FriendBox />,  document.getElementById('FriendBox'));

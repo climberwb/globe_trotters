@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
 
   has_one :teammate_relationship, foreign_key: "receiver_id"
   has_one :teammate_relationship, foreign_key: "sender_id"
-
+  #TODO fix relationship when its made between sender and receiver
   has_one :individual_relationship, foreign_key: "receiver_id"
   has_one :individual_relationship, foreign_key: "sender_id"
 
   scope :captains, ->  { find Team.select(:captain_id).map(&:captain_id) }
-  
+
   #TODO make validation not work for update of answers
 
   # def user_count_within_limit
@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
 
   has_many :answers
 
-  
-  
+
+
 
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates

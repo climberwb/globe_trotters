@@ -8,7 +8,7 @@ var UpdateLink  = React.createClass({
   },
   render: function () {
     var submit;
-   
+
     this.props.answer.pendingStatus ? submit=<Button className="btn btn-success" href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</Button> : submit = null
     return (
         <div>
@@ -25,7 +25,6 @@ var EditLink  = React.createClass({
   render: function () {
 
     return (
-
         <div>
           <p>{this.props.answer.answerContent}</p>
         </div>
@@ -35,7 +34,7 @@ var EditLink  = React.createClass({
  });
 
 var AnswerLinks = React.createClass({
-  
+
   UpdateAnswer: function(name){
       this.props.UpdateAnswer(name);
   },
@@ -43,7 +42,7 @@ var AnswerLinks = React.createClass({
     var Update;
     var editNonPending;
     //this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
-    
+
     return (
         <div>
           <EditLink answer={this.props.answer} />
@@ -112,7 +111,7 @@ var Session = React.createClass({
   UpdateAnswer: function(answer,name) {
     //e.preventDefault();
       this.props.UpdateAnswer(answer,name);
-    
+
   },
   render: function () {
      ////alert(JSON.stringify(this.props.answer));
@@ -130,7 +129,7 @@ var Session = React.createClass({
 
 var Sessions = React.createClass({
 
-  
+
   getInitialState: function() {
     return {
       answers: [
@@ -143,22 +142,22 @@ var Sessions = React.createClass({
     //e.preventDefault();
     ////alert(JSON.stringify(answer));
     if(name=="edit"){
-       $.ajax({ type:"PATCH", 
-          url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,       
-          dataType:"json",        
-          data:{"answer":{"content":answer.answerContent}},        
+       $.ajax({ type:"PATCH",
+          url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,
+          dataType:"json",
+          data:{"answer":{"content":answer.answerContent}},
           success: function(data) {
-           
+
            this.componentDidMount();
           }.bind(this),
           error: function(xhr, status, err) {
             console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
       }});//.bind(this)})
     }else if(name=="submit"){
-      $.ajax({ type:"POST", 
-          url:"/users/"+ answer.ownerId+"/answers/",       
-          dataType:"json",        
-          data:{"answer":{"content":answer.answerContent,"id":answer.answerId}},        
+      $.ajax({ type:"POST",
+          url:"/users/"+ answer.ownerId+"/answers/",
+          dataType:"json",
+          data:{"answer":{"content":answer.answerContent,"id":answer.answerId}},
           success: function(data) {
            //this.setState({users: data.users});
            //alert('success! Update Answer');
@@ -174,10 +173,10 @@ var Sessions = React.createClass({
   NewAnswers: function(answer) {
     //e.preventDefault();
     ////alert(JSON.stringify(answer));
-     $.ajax({ type:"GET", 
-        url:"/users/"+ answer.ownerId+"/answers/",       
-        dataType:"json",        
-        data:{"_method":"delete"},        
+     $.ajax({ type:"GET",
+        url:"/users/"+ answer.ownerId+"/answers/",
+        dataType:"json",
+        data:{"_method":"delete"},
         success: function(data) {
          //this.setState({users: data.users});
          //alert('success! New Answer');
@@ -189,7 +188,7 @@ var Sessions = React.createClass({
           console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
     }.bind(this)})
   },
-  
+
   componentDidMount: function() {
     $.get(this.props.source, function(data) {
       data.currentUser.answers.map(function(answer){
