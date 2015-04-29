@@ -25,4 +25,3 @@
 //= require jquery-readyselector
 //= require_tree .
 
-alert('hello');
