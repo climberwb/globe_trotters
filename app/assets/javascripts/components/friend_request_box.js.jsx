@@ -70,13 +70,13 @@ var FriendInfo = React.createClass({
     var friend;
     if(this.props.user.friendStatus == 'true') {
       decision = <span> my friend! <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
-      friend = <span><img src={this.props.user.avatar}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
+      friend = <span><img src={this.props.user.avatar.avatar.url}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
 
     }
     else if(this.props.user.friendStatus == 'false') {
 
       decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
-      friend = <span><img src={this.props.user.avatar}></img> <a href={this.props.user.url}>{this.props.user.name}</a> </span>;
+      friend = <span><img src={this.props.user.avatar.avatar.url}></img> <a href={this.props.user.url}>{this.props.user.name}</a> </span>;
 
     }
     return (

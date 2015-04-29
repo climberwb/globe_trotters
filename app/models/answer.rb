@@ -26,7 +26,7 @@ belongs_to :question
             end
        end
        answers.delete_if{|answer| answer==nil}
-       @answer_string["currentUser"]["answers"] = answers.sort_by { |row| [row['pendingStatus'] ? 0 : 1] }
+       @answer_string["currentUser"]["answers"] = answers.sort_by { |row| [row['pendingStatus'] ? 1 : 0] }
        @answer_string
   end
 
