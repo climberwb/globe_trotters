@@ -39,7 +39,6 @@ class VidconferencesController < ApplicationController
         @token = opentok.generate_token(vidconference)
 
         #        opentok.generate_token(@videoconference)
-
     end
 
 end

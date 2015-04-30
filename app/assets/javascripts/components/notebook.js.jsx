@@ -36,7 +36,7 @@ var EditLink  = React.createClass({
 var AnswerLinks = React.createClass({
 
   UpdateAnswer: function(name){
-      this.props.UpdateAnswer(name);
+    this.props.UpdateAnswer(name);
   },
   render: function () {
     var Update;
@@ -60,7 +60,7 @@ var Answer = React.createClass({
 
   },
   UpdateAnswer: function(name){
-          this.props.UpdateAnswer(this.props.answer,name);
+    this.props.UpdateAnswer(this.props.answer,name);
   },
   updateLink: function(){
   ///this.props.answer['edit'] = true;
@@ -109,12 +109,9 @@ var Question = React.createClass({
 var Session = React.createClass({
 
   UpdateAnswer: function(answer,name) {
-    //e.preventDefault();
-      this.props.UpdateAnswer(answer,name);
-
+    this.props.UpdateAnswer(answer,name);
   },
   render: function () {
-     ////alert(JSON.stringify(this.props.answer));
     return (
         <li>
           <Question questionContent={this.props.answer.questionContent} />
@@ -139,8 +136,7 @@ var Sessions = React.createClass({
     };
   },
    UpdateAnswer: function(answer,name) {
-    //e.preventDefault();
-    ////alert(JSON.stringify(answer));
+    
     if(name=="edit"){
        $.ajax({ type:"PATCH",
           url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,
@@ -159,33 +155,25 @@ var Sessions = React.createClass({
           dataType:"json",
           data:{"answer":{"content":answer.answerContent,"id":answer.answerId}},
           success: function(data) {
-           //this.setState({users: data.users});
-           //alert('success! Update Answer');
-           //alert(JSON.stringify(data));
+          
            this.componentDidMount();
           }.bind(this),
           error: function(xhr, status, err) {
-            //alert('fail :(')
             console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
-      }});//.bin
+      }});
     }
   },
   NewAnswers: function(answer) {
-    //e.preventDefault();
-    ////alert(JSON.stringify(answer));
+    
      $.ajax({ type:"GET",
         url:"/users/"+ answer.ownerId+"/answers/",
         dataType:"json",
         data:{"_method":"delete"},
         success: function(data) {
-         //this.setState({users: data.users});
-         //alert('success! New Answer');
-         //alert(JSON.stringify(data));
          this.setState({users: data.users});
         }.bind(this),
         error: function(xhr, status, err) {
-          //alert('fail :(')
-          console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
+        console.error("/users/"+ answer.ownerId+"/answers/", status, err.toString());
     }.bind(this)})
   },
 
@@ -224,7 +212,3 @@ var NoteBook = React.createClass({
 });
 
 React.render(<NoteBook />,  document.getElementById('notebook'));
-// $('#glyphicon').on('click', function(){
-
-//    $("#friend_drop").toggleClass("dropdown open");
-// });

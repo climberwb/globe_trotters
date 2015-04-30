@@ -29,6 +29,7 @@ class AnswersController < ApplicationController
     @answer.update_attributes(:content=> content,:pending=>false)
     Answer.grant_friendship_access(current_user)
     render :json => { "updateStatus"=> true}.to_json
+  
   end
 
   def destroy

@@ -1,4 +1,6 @@
 
+
+//TODO incorporate react-bootstrap from commented code 
 // var Navbar = ReactBootstrap.Navbar;
 // var Nav = ReactBootstrap.Nav;
 // var NavItem = ReactBootstrap.NavItem;
@@ -116,7 +118,6 @@ var FriendsInfo = React.createClass({
     }.bind(this)})
   },
   onAccept: function(user) {
-   // alert(user.id);
     this.setState({ users:[user]});
     $.ajax({
       url: '/individual_relationships/accept',
@@ -134,9 +135,7 @@ var FriendsInfo = React.createClass({
   },
   onDecline: function(user) {
 
-   //alert(JSON.stringify(this.state,undefined,0)); USE TO DEBUG!!!!!!!!!
         var oldUsers=this.state.users;
-   //alert(JSON.stringify(oldUsers,undefined,0));USE TO DEBUG!!!!!!!!!
 
     $.ajax({
       url: '/individual_relationships/decline',
@@ -176,7 +175,6 @@ var FriendsInfo = React.createClass({
   }
 });
 
-//React.render(<FriendsInfo source="/individual_relationships/show" />,  document.getElementById('FriendBox'));
 
 
 var DropDown = React.createClass({
