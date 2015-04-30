@@ -55,6 +55,7 @@ class IndividualRelationshipsController < ApplicationController
   def delete
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
+    Vidconference.find(current_user.vidconference_id).destroy
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
     individual_relationships = IndividualRelationship.where(receiver: current_user)
     relationship_display = []
