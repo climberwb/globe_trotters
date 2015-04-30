@@ -78,14 +78,15 @@ class IndividualRelationshipsController < ApplicationController
   def accept
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
+    sender = User.find(sender_id)
    # sender_name = IndividualRelationship.find(sender_id).name
     # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     #TODO redirect to at Vidconferences controller and have route display json string
-    
+
     @relationship.update_attributes(:accepted_at=> Time.new)
-    @relationship.save! 
-    
+    @relationship.save!
+    Vidconference.create_vidconference(sender,current_user)
     render :json => {:status => "Accept",:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #
   end
