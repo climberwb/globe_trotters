@@ -104,18 +104,25 @@ var FriendsInfo = React.createClass({
   },
   onDelete: function(user) {
    // alert(user.id);
-    $.ajax({
-      url: '/individual_relationships/delete',
-      dataType: 'json',
-      type: 'POST',
-      data: {sender_id: user.id},
-      success: function(data) {
+    function deleteCall(){
+      $.ajax({
+        url: '/individual_relationships/delete',
+        dataType: 'json',
+        type: 'POST',
+        data: {sender_id: user.id},
+        success: function(data) {
+          alert('your friend has been deleted you can now choose other friends!');
+          window.location.href = '/';
           this.setState({users: data.users});
-      }.bind(this),
-      error: function(xhr, status, err) {
-
-        console.error('/individual_relationships/delete', status, err.toString());
-    }.bind(this)})
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error('/individual_relationships/delete', status, err.toString());
+      }.bind(this)})
+    }
+    var r = confirm("are you sure you want to end your friend request?");
+    if (r == true) {
+        deleteCall();
+    } 
   },
   onAccept: function(user) {
     this.setState({ users:[user]});
