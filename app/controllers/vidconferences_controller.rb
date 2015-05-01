@@ -26,14 +26,14 @@ class VidconferencesController < ApplicationController
     end
 
     def show
-     # binding.pry
+     # 
       vidconference = current_user.vidconference.session
        # Replace with your OpenTok API key:
        @session = vidconference
         api_key = ENV['OPENTOK_KEY']
         # Replace with your OpenTok API secret:
         api_secret = ENV['OPENTOK_SECRET_KEY']
-        #binding.pry
+        #
         opentok = OpenTok::OpenTok.new api_key, api_secret
        # @videoconference = opentok.create_session.session_id
         @token = opentok.generate_token(vidconference)

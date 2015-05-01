@@ -16,10 +16,9 @@ class ApplicationController < ActionController::Base
      devise_parameter_sanitizer.for(:account_update) << :role
    end
    def after_sign_in_path_for(resource)
-      # binding.pry
+      # 
       if current_user.role.nil?  ## temporary solution
-        #update_path(resource)
-        #binary_selection_path(resource) uncomment when teams are implemented
+        
 
         individual_form_path(resource)
       else

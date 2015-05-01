@@ -14,13 +14,12 @@ class IndividualRelationshipsController < ApplicationController
   def show
     #TODO Finish json sting then use index controller instead of show
     #TODO make sure if there is an  accepted at it does not make it to the view
-    #binding.pry
     individual_relationships = IndividualRelationship.where(receiver: current_user)
     authorize individual_relationships
 
     relationship_display = []
     relationships = {"users" => []}
-   # binding.pry
+   # 
     if individual_relationships.where.not(accepted_at: nil).length > 0
       #bindig.pry
       friend = individual_relationships.where.not(accepted_at: nil).first
@@ -29,7 +28,7 @@ class IndividualRelationshipsController < ApplicationController
       render :json => relationships.to_json
 
     else
-        #binding.pry
+        #
         relationship_display = individual_relationships.each do |relationship|
           #friend.accepted_at ? friendStatus = true : friendStatus = false
           if relationship.rejected_at == nil
@@ -46,7 +45,7 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def create
-    #binding.pry
+    #
     @relationship = IndividualRelationship.create!(message_params)
     @relationship.save
     render :json => {:status => "Request Sent" }.to_json
@@ -80,8 +79,7 @@ class IndividualRelationshipsController < ApplicationController
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
     sender = User.find(sender_id)
-   # sender_name = IndividualRelationship.find(sender_id).name
-    # @relationship = IndividualRelationship.where(params[individual_relationships][:sender_id]).where(params[individual_relationships][:receiver_id]).first
+  
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     #TODO redirect to at Vidconferences controller and have route display json string
 
@@ -95,7 +93,7 @@ class IndividualRelationshipsController < ApplicationController
   def decline
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
-    #binding.pry
+    #
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first
     @relationship_accept = @relationship.update_attributes(:rejected_at=> Time.new)
     render :json => {:status => "Decline" }.to_json

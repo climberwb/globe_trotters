@@ -6,13 +6,13 @@ belongs_to :question
     # sorted_list = user.answers.sort { |a, b|  a.id <=> b.id }
      @answer_string = {
                         "currentUser"=> {
-                        "name"=> user.name,
-                        "answers"=>[]
+                          "name"=> user.name,
+                          "answers"=>[]
                                         }
                       } 
       pendingCount = 0 #initialize the count of pending object 
 
-      answers = user.answers.order(:id).map do |answer|
+      answers = user.answers.order(:id).map.with_index do |answer,index|
            pendingCount=pendingCount+1 if answer.pending == true
 
            if pendingCount < 2 || answer.pending == false
@@ -21,7 +21,8 @@ belongs_to :question
               "questionContent"=> answer.question.content,
               "pendingStatus"=>answer.pending,
               "answerId"=>answer.id,
-              "ownerId"=>user.id
+              "ownerId"=>user.id,
+              "lastAnswer"=> user.answers.length-1 == index ? true : false
               }
             end
        end

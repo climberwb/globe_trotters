@@ -69,7 +69,7 @@ attr_writer :address
   end
   def self.to_geojson
    # json_string_start = {"type" => "FeatureCollection", "features" => [{"type" => "Feature","properties" => [{"TeamName" => nil,"TeamSport" => nil, "TeamAddress" => nil  }], "geometry" => {"type" => "Point" , "coordinates" => [nil,nil]}}]}
-   # binding.pry
+   # 
     geo = {"type" => "FeatureCollection", "features" => []}
     User.select([:latitude, :longitude]).distinct.each do |coords|
       users = User.where(latitude: coords.latitude, longitude: coords.longitude).order("RANDOM()").map do |user|

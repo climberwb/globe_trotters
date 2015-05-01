@@ -10,7 +10,7 @@ class TeamRelationshipsController < ApplicationController
   end
 
   def create
-    #binding.pry
+    #
     @team_relationship = TeamRelationship.create!(message_params)
     @team_relationship.save
     render :json => {:status => "Request Sent" }.to_json

@@ -57,7 +57,6 @@ var Answer = React.createClass({
   handleChange: function(event) {
     this.props.answer.answerContent=event.target.value;
     this.setState({answerContent:this.props.answer.answerContent});
-
   },
   UpdateAnswer: function(name){
     this.props.UpdateAnswer(this.props.answer,name);
@@ -155,8 +154,17 @@ var Sessions = React.createClass({
           dataType:"json",
           data:{"answer":{"content":answer.answerContent,"id":answer.answerId}},
           success: function(data) {
-          
-           this.componentDidMount();
+            //TODO replace below logic with modal that says congrates make friends
+
+            //length is the remaining length of the route ie. localhost:300/users/1/answers/show
+            var urlArray = window.location.href.split('/');
+            var length = window.location.href.split('/').length;
+            if(urlArray[length-1] == "show" && urlArray[length-2] == "answers" && answer.lastAnswer){
+              window.location.href = '/'; //redirects to different page if last answer is hit
+            }
+            else{
+            this.componentDidMount();
+          }
           }.bind(this),
           error: function(xhr, status, err) {
             console.error("/users/"+ answer.ownerId+"/answers/"+answer.answerId, status, err.toString());
