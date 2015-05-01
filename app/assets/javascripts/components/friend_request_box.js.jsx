@@ -104,6 +104,7 @@ var FriendsInfo = React.createClass({
   },
   onDelete: function(user) {
    // alert(user.id);
+   var oldthis = this;
     function deleteCall(){
       $.ajax({
         url: '/individual_relationships/delete',
@@ -111,9 +112,9 @@ var FriendsInfo = React.createClass({
         type: 'POST',
         data: {sender_id: user.id},
         success: function(data) {
+          oldthis.setState({users: data.users});
           alert('your friend has been deleted you can now choose other friends!');
           window.location.href = '/';
-          this.setState({users: data.users});
         }.bind(this),
         error: function(xhr, status, err) {
           console.error('/individual_relationships/delete', status, err.toString());
