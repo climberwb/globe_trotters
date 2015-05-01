@@ -127,6 +127,9 @@ var FriendsInfo = React.createClass({
       success: function(data) {
         user.friendStatus = 'true';
         this.setState({ users:[user]});
+        alert('friend request complete. You will now redirect to a video chat with your new friend');
+        //redirects to viconference
+        window.location.href = '/vidconferences/'+data.vidconference_id; 
       }.bind(this),
       error: function(xhr, status, err) {
 

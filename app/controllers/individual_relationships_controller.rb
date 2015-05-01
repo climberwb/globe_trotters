@@ -85,8 +85,8 @@ class IndividualRelationshipsController < ApplicationController
 
     @relationship.update_attributes(:accepted_at=> Time.new)
     @relationship.save!
-    Vidconference.create_vidconference(sender,current_user)
-    render :json => {:status => "Accept",:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
+    Vidconference.create_vidconference(sender,current_user.id)
+    render :json => {:status => "Accept",:vidconference_id =>sender.vidconference_id,:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #
   end
 

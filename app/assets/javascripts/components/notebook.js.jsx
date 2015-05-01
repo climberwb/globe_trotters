@@ -160,6 +160,7 @@ var Sessions = React.createClass({
             var urlArray = window.location.href.split('/');
             var length = window.location.href.split('/').length;
             if(urlArray[length-1] == "show" && urlArray[length-2] == "answers" && answer.lastAnswer){
+              alert('you have completed the notebook. Time to find a friend!!');
               window.location.href = '/'; //redirects to different page if last answer is hit
             }
             else{
