@@ -22,7 +22,6 @@ class IndividualRelationshipsController < ApplicationController
     relationships = {"users" => []}
    # 
     if individual_relationships.where.not(accepted_at: nil).length > 0
-      #bindig.pry
       friend = individual_relationships.where.not(accepted_at: nil).first
       friendStatus = true
       if current_user.host?
@@ -61,7 +60,7 @@ class IndividualRelationshipsController < ApplicationController
       sender_id = current_user.id 
       receiver_id = params[:delete_friend][:user_id].to_i
     elsif current_user.host?
-      sender_id = params[:delete_friend][:sender_id].to_i
+      sender_id = params[:delete_friend][:user_id].to_i
       receiver_id = current_user.id
     end
 
