@@ -24,6 +24,6 @@ class IndividualRelationshipPolicy < ApplicationPolicy
    
    def create?
       relationship = IndividualRelationship.where(sender: user).first
-      user.present? && relationship == nil && user.friendship_eligible?
+      user.present? && relationship == nil && user.friendship_eligible? && user.traveler?
    end
 end

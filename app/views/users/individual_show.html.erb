@@ -22,11 +22,11 @@ Name:<%= @user.name%>
       <%= f.text_field :receiver_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_individual_relationship',value: "#{@user.id}" %>
     </div>
     <div class = "form-group">
-       <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
-        <%if @current_relationship == nil %>
-          Add Friend
-        <%end%>
-       </button>
+       <%if  policy(IndividualRelationship.new).create?%>
+         <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
+            Add Friend
+         </button>
+      <%end%>
     </div>
   <%end%>
   <%else%>
