@@ -27,17 +27,45 @@ var Decline = function (sender,receiver, cb) {
     cb,
     "json");
 };
+var Remove = function (sender,receiver,element) {
+  $.ajax({
+        url: '/individual_relationships/destroy',
+        dataType: 'json',
+        type: 'DELETE',
+        data: {"individual_relationships":{"sender_id": sender, "receiver_id": receiver}},
+        success: function(cb) {
+          console.log(cb);
+          $(element)[0].innerHTML = "FriendRemoved";
+          $(element).attr("disabled","disabled");
+        },
+        error: function(xhr, status, err) {
+          console.error('/individual_relationships/delete', status, err.toString());
+      }
+    })
+}
+   
 
 $(function() {
 
   $('#AddFriend').click(function( event ) {
-
+      var self = this;
       event.preventDefault();
       var sender_team = $("#sender_individual_relationship")[0].value;
       var receiver_team = $("#receiver_individual_relationship")[0].value;
       IndividualRelationship(sender_team,receiver_team, function(status){
-         document.getElementById('AddFriend').innerHTML = "Request Sent"
+        
+        $(self)[0].innerHTML = "Request Sent";
+        $(self).attr("disabled","disabled");
+         
     });
+
+   });
+  $('#RemoveFriend').click(function( event ) {
+
+      event.preventDefault();
+      var sender_team = $("#sender_individual_relationship")[0].value;
+      var receiver_team = $("#receiver_individual_relationship")[0].value;
+      Remove(sender_team,receiver_team,this);
 
    });
 
