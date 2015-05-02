@@ -14,7 +14,8 @@ class IndividualRelationshipsController < ApplicationController
   def show
     #TODO Finish json sting then use index controller instead of show
     #TODO make sure if there is an  accepted at it does not make it to the view
-    individual_relationships = IndividualRelationship.where(receiver: current_user)
+    #individual_relationships =IndividualRelationship.where(receiver: current_user)
+    individual_relationships = IndividualRelationship.where("receiver_id = ? OR sender_id = ? ", current_user, current_user)
     authorize individual_relationships
 
     relationship_display = []
@@ -24,7 +25,11 @@ class IndividualRelationshipsController < ApplicationController
       #bindig.pry
       friend = individual_relationships.where.not(accepted_at: nil).first
       friendStatus = true
-      relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s,"friendStatus"=>friendStatus.to_s}
+      if current_user.host?
+        relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.sender.travel_status}
+      elsif current_user.traveler?
+        relationships["users"] << {"name"=>friend.receiver.name, "url"=>individual_show_path(friend.receiver), "avatar"=>friend.receiver.avatar, "id"=>friend.receiver.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.receiver.travel_status}
+      end
       render :json => relationships.to_json
 
     else
@@ -32,7 +37,7 @@ class IndividualRelationshipsController < ApplicationController
         relationship_display = individual_relationships.each do |relationship|
           #friend.accepted_at ? friendStatus = true : friendStatus = false
           if relationship.rejected_at == nil
-            relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false"}
+            relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false","travel_status"=>current_user.travel_status}
           end
        # friendStatus ?
         end
@@ -52,8 +57,14 @@ class IndividualRelationshipsController < ApplicationController
 
   end
   def delete
-    sender_id = params[:sender_id].to_i
-    receiver_id = current_user.id
+    if current_user.traveler?
+      sender_id = current_user.id 
+      receiver_id = params[:delete_friend][:user_id].to_i
+    elsif current_user.host?
+      sender_id = params[:delete_friend][:sender_id].to_i
+      receiver_id = current_user.id
+    end
+
     Vidconference.find(current_user.vidconference_id).destroy
     @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
     individual_relationships = IndividualRelationship.where(receiver: current_user)

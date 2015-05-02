@@ -6,11 +6,12 @@ module ApplicationHelper
   end
 
   def show_menu_policy?
-    @Individual_Relationship = IndividualRelationship.where(receiver: current_user).first
     if user_signed_in?
-      @Individual_Relationship.nil? ? false : true#policy(current_user).index?
+       @Individual_Relationship =  IndividualRelationship.where("sender_id = ? OR receiver_id = ? ", current_user.id, current_user.id).first
+      ((@Individual_Relationship.nil? ? false : true ) && current_user.host?) || (current_user.traveler? && @Individual_Relationship && @Individual_Relationship.accepted_at)   #policy(current_user).index?
     else
       false
     end
   end
+
 end
