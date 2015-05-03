@@ -21,7 +21,8 @@ class AnswersController < ApplicationController
   def index
     # TODO Commented code does not work make pundit recognize application_policy and delete hack
     #authorize @user,:index?
-    redirect_to root_path if current_user.friendship_eligible == true || @user != current_user
+
+    redirect_to root_path if current_user.friendship_eligible == true 
 
     if current_user && current_user.answers
       render :json => Answer.answer_string(current_user).to_json
