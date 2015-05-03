@@ -49,11 +49,14 @@ def admin_show
    end
 
   def individual_form
-    @user = current_user
+    @user = User.find(params[:id])
+    authorize @user
   end
 
   def individual_form_post
     #TODO: update user for individual account add pundit
+      @user = User.find(params[:id])
+      authorize @user
 
       @questions = Question.all.shuffle
       if current_user.answers ==[]
@@ -73,7 +76,10 @@ def admin_show
   end
 
   def individual_show
+    
     @user = User.find(params[:id])
+    authorize @user
+
     if current_user
       @current_relationship = IndividualRelationship.where(sender_id: current_user.id).first
     end
@@ -116,6 +122,6 @@ def admin_show
  private
 
   def user_params
-    params.require(:user).permit(:name,:avatar,:bio,:location,:travel_status)
+    params.require(:user).permit(:name,:avatar,:bio,:location,:travel_status,:id)
   end
 end
