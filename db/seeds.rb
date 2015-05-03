@@ -7,6 +7,19 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 if Rails.env.production?
+  questions = ["What is your favorite sport?",
+    "What is your dream job?",
+    "What is your favorite type of music?",
+    "What is your favorite hobby?",
+    "If you could be anyone who would it be?",
+    "What inspires you?",
+    "Who was your biggest hero?",
+    "Where do you see yourself in ten years?"]
+
+  questions.each do |question|
+    Question.new(:content=>question})
+    question.save
+  end
 
 
 else 
