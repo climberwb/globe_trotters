@@ -81,7 +81,8 @@ attr_writer :address
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)
-    address = Geocoder.address(coordinates)
+    round_coordinates = coordinates.map{|coord| coord.round(6)}
+    address = Geocoder.address(round_coordinates)
   end
 
 ## role for user
