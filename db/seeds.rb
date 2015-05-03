@@ -17,7 +17,7 @@ if Rails.env.production?
     "Where do you see yourself in ten years?"]
 
   questions.each do |question|
-    Question.new(:content=>question})
+    Question.new(:content=>question)
     question.save
   end
 
