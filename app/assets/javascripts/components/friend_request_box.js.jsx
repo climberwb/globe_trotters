@@ -213,7 +213,10 @@ var FriendBox = React.createClass({
   }
 });
 
-React.render(<FriendBox />,  document.getElementById('FriendBox'));
+if (document.getElementById('FriendBox')) {
+  React.render(<FriendBox />,  document.getElementById('FriendBox'));
+}
+
 $('#glyphicon').on('click', function(){
 
    $("#friend_drop").toggleClass("dropdown open");

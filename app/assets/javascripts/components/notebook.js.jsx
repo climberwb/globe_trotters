@@ -220,4 +220,6 @@ var NoteBook = React.createClass({
   }
 });
 
-React.render(<NoteBook />,  document.getElementById('notebook'));
+if (document.getElementById('notebook')) {
+  React.render(<NoteBook />,  document.getElementById('notebook'));
+}
