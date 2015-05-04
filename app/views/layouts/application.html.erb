@@ -11,6 +11,9 @@
   <%= csrf_meta_tags %>
 
 </head>
+<% if flash[:notice] %>
+  <p class="flash-notice alert alert-success"><%= flash[:notice] %></p>
+<%end%>
 <!--instance variables added in class of <body> to selectively rendor javascript -->
 <body class="<%= @controller %> <%= @action %>">
    <div class="container">
