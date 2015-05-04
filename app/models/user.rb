@@ -44,16 +44,13 @@ class User < ActiveRecord::Base
 
   has_many :answers
 
-
-
-
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates
 
 reverse_geocoded_by :latitude, :longitude
 
 attr_writer :address
-
+  #TODO Round down to 6 digits in location lat and longitude
   def address
     @address || location
   end
@@ -72,7 +69,8 @@ attr_writer :address
    # 
     geo = {"type" => "FeatureCollection", "features" => []}
     User.select([:latitude, :longitude]).distinct.each do |coords|
-      users = User.where(latitude: coords.latitude, longitude: coords.longitude).order("RANDOM()").map do |user|
+      # users = User.where(latitude: coords.latitude, longitude: coords.longitude).order("RANDOM()").map do |user|
+      users = User.near([coords.latitude, coords.longitude], 2, :units => :km).order("RANDOM()").map do |user|
         {"TeamName" => user.name,  "TeamAddress"=> user.location, "TeamPicUrl"=> user.avatar.profile.url, "TeamProfileUrl"=>Rails.application.routes.url_helpers.individual_show_path(user.id),"TravelStatus"=>user.travel_status }
       end
       geo["features"] << {"type" => "Feature", "properties" => users, "geometry" => {"type" => "Point", "coordinates" => [coords.longitude, coords.latitude]}}
