@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module GlobeTrotters
   class Application < Rails::Application
 
-    config.action_dispatch.default_headers = {
+    Rails.config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOWALL'
 }
     # Settings in config/environments/* take precedence over those specified here.
