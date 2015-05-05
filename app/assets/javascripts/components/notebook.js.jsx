@@ -96,6 +96,7 @@ var Question = React.createClass({
     return (
         <div>
           <h1>{this.props.questionContent} </h1>
+          // IMPORTANT! add s in front of https otherwise video will not rendor
           <iframe className="youtube-player" 
 width="320" height="195" src="https://www.youtube.com/embed/W-Q7RMpINVo"
 frameBorder="0"></iframe>
