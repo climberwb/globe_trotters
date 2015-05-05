@@ -104,8 +104,7 @@ def admin_show
    def location_search
     p params
     location = params[:location]
-
-    render :json => User.location_search(location).to_json
+     render :json => User.location_search(location).to_json
   end
 
   def new

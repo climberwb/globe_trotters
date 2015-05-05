@@ -42,15 +42,13 @@ class User < ActiveRecord::Base
 
   # validate :user_count_within_limit, :on => :update
 
-  has_many :answers
-
+has_many :answers
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates
 
 reverse_geocoded_by :latitude, :longitude
 
 attr_writer :address
-  #TODO Round down to 6 digits in location lat and longitude
   def address
     @address || location
   end
@@ -79,8 +77,7 @@ attr_writer :address
   end
   def self.validate_address(location)
     coordinates = Geocoder.coordinates(location)
-    round_coordinates = coordinates.map{|coord| coord.round(6)}
-    address = Geocoder.address(round_coordinates)
+    address = Geocoder.address(coordinates)
   end
 
 ## role for user
