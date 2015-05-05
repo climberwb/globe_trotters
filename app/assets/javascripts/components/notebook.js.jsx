@@ -97,7 +97,7 @@ var Question = React.createClass({
         <div>
           <h1>{this.props.questionContent} </h1>
           <iframe className="youtube-player" 
-width="320" height="195" src="http://www.youtube.com/embed/W-Q7RMpINVo"
+width="320" height="195" src="https://www.youtube.com/embed/W-Q7RMpINVo"
 frameBorder="0"></iframe>
         </div>
       )
