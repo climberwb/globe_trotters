@@ -87,8 +87,6 @@ Rails.application.configure do
 GlobeTrotters::Application.configure do
   config.react.variant = :production
 end
-config.action_dispatch.default_headers = {
-    'X-Frame-Options' => 'ALLOWALL'
-}
+
 
 end
