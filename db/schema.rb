@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427011222) do
+ActiveRecord::Schema.define(version: 20150506054858) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150427011222) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "video_url",  default: "", null: false
   end
 
   create_table "team_relationships", force: true do |t|
