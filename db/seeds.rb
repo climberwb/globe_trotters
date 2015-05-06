@@ -16,10 +16,22 @@ if Rails.env.production?
     "Who was your biggest hero?",
     "Where do you see yourself in ten years?"]
 
-  questions.each do |question|
-    myquestion = Question.new(:content=>question)
+  videos = [
+      "https://youtu.be/rHZkw_AYlag",
+      "https://youtu.be/U_uR9LkWM7A",
+      "https://youtu.be/wBhfm9hZmgA",
+      "https://youtu.be/ETKvnMyrssI",
+      "https://youtu.be/xEhaVhta7sI",
+      "https://youtu.be/tntOCGkgt98",
+      "https://youtu.be/nRzsgCp60YU",
+      "https://youtu.be/RtWw3OtdBkw"
+  ]
+
+  questions.each_with_index do |question,index|
+    myquestion = Question.new(:content=>question,:video_url=>videos[index])
     myquestion.save
   end
+  
 
 
 else 
