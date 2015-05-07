@@ -17,14 +17,14 @@ if Rails.env.production?
     "Where do you see yourself in ten years?"]
 
   videos = [
-      "https://youtu.be/rHZkw_AYlag",
-      "https://youtu.be/U_uR9LkWM7A",
-      "https://youtu.be/wBhfm9hZmgA",
-      "https://youtu.be/ETKvnMyrssI",
-      "https://youtu.be/xEhaVhta7sI",
-      "https://youtu.be/tntOCGkgt98",
-      "https://youtu.be/nRzsgCp60YU",
-      "https://youtu.be/RtWw3OtdBkw"
+      "https://www.youtube.com/embed/NyK5SG9rwWI",
+      "https://www.youtube.com/embed/oRdxUFDoQe0",
+      "https://www.youtube.com/embed/41zCI_PQOfk",
+      "https://www.youtube.com/embed/qp4vf6wHoq4",
+      "https://www.youtube.com/embed/mPmmLRR9wTI",
+      "https://www.youtube.com/embed/VUTE5x-ghd8",
+      "https://www.youtube.com/embed/fV1eAAvAQVc",
+      "https://www.youtube.com/embed/eSes8Qydm94"
   ]
 
   questions.each_with_index do |question,index|

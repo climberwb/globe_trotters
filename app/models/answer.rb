@@ -19,6 +19,7 @@ belongs_to :question
              {
               "answerContent"=> answer.content ? answer.content : "",
               "questionContent"=> answer.question.content,
+              "videoUrl"=>answer.question.video_url,
               "pendingStatus"=>answer.pending,
               "answerId"=>answer.id,
               "ownerId"=>user.id,

@@ -90,15 +90,16 @@ var Answer = React.createClass({
 
  });
 ////////////////////////////////////////////////
+  // IMPORTANT! add s in front of https otherwise video will not rendor
+
 var Question = React.createClass({
 
   render: function () {
     return (
         <div>
           <h1>{this.props.questionContent} </h1>
-          // IMPORTANT! add s in front of https otherwise video will not rendor
           <iframe className="youtube-player" 
-width="320" height="195" src="https://www.youtube.com/embed/W-Q7RMpINVo"
+width="320" height="195" src={this.props.videoUrl}
 frameBorder="0"></iframe>
         </div>
       )
@@ -117,7 +118,7 @@ var Session = React.createClass({
   render: function () {
     return (
         <li>
-          <Question questionContent={this.props.answer.questionContent} />
+          <Question questionContent={this.props.answer.questionContent} videoUrl={this.props.answer.videoUrl} />
            <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
         </li>
       )
