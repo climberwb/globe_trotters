@@ -19,7 +19,7 @@ class IndividualRelationshipsController < ApplicationController
 
     relationship_display = []
     relationships = {"users" => []}
-   # 
+   #
     if individual_relationships.where.not(accepted_at: nil).length > 0
       friend = individual_relationships.where.not(accepted_at: nil).first
       friendStatus = true
@@ -56,7 +56,7 @@ class IndividualRelationshipsController < ApplicationController
   end
   def delete
     if current_user.traveler?
-      sender_id = current_user.id 
+      sender_id = current_user.id
       receiver_id = params[:delete_friend][:user_id].to_i
     elsif current_user.host?
       sender_id = params[:delete_friend][:user_id].to_i
@@ -94,9 +94,8 @@ class IndividualRelationshipsController < ApplicationController
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
     sender = User.find(sender_id)
-    relationships = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id) 
+    relationships = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id)
     @relationship = relationships.first
-
     @relationship.update_attributes(:accepted_at=> Time.new)
 
     @relationship.save!
@@ -105,8 +104,10 @@ class IndividualRelationshipsController < ApplicationController
     # creates video conference
     Vidconference.create_vidconference(sender,current_user.id)
     #sends email alerting of video conference
-    IndividualRelationship.mail(sender)
-    
+    # TODO get sendgrid username and pw for work computer
+    # take care of exception that it still saves user if sendgrid fails
+    # IndividualRelationship.mail(sender)
+
     render :json => {:status => "Accept",:vidconference_id =>sender.vidconference_id,:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #
   end

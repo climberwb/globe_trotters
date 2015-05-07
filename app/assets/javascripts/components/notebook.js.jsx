@@ -98,7 +98,7 @@ var Question = React.createClass({
     return (
         <div>
           <h1>{this.props.questionContent} </h1>
-          <iframe className="youtube-player" 
+          <iframe className="youtube-player"
 width="320" height="195" src={this.props.videoUrl}
 frameBorder="0"></iframe>
         </div>
@@ -140,7 +140,7 @@ var Sessions = React.createClass({
     };
   },
    UpdateAnswer: function(answer,name) {
-    
+
     if(name=="edit"){
        $.ajax({ type:"PATCH",
           url:"/users/"+ answer.ownerId+"/answers/"+answer.answerId,
@@ -178,7 +178,7 @@ var Sessions = React.createClass({
     }
   },
   NewAnswers: function(answer) {
-    
+
      $.ajax({ type:"GET",
         url:"/users/"+ answer.ownerId+"/answers/",
         dataType:"json",

@@ -11,9 +11,10 @@ class IndividualRelationship < ActiveRecord::Base
       errors.add(:base, "Exceeded request limit")
     end
   end
-
-  def self.mail(sender)
-    client = SendGrid::Client.new(api_user: ENV['SENDGRID_USERNAME'], api_key: ENV['SENDGRID_PASSWORD'])
-    client.send(SendGrid::Mail.new(to: sender.email, from: 'BeGoodGlobal', subject: 'You have a friend!', html: '<a href="hello.com">Hi there!</a>'))
-  end
+  # TODO get sendgrid username and pw for work computer
+  # take care of exception that it still saves user if sendgrid fails
+  # def self.mail(sender)
+  #   client = SendGrid::Client.new(api_user: ENV['SENDGRID_USERNAME'], api_key: ENV['SENDGRID_PASSWORD'])
+  #   client.send(SendGrid::Mail.new(to: sender.email, from: 'BeGoodGlobal', subject: 'You have a friend!', html: '<a href="hello.com">Hi there!</a>'))
+  # end
 end

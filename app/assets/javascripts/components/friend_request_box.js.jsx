@@ -1,6 +1,6 @@
 
 
-//TODO incorporate react-bootstrap from commented code 
+//TODO incorporate react-bootstrap from commented code
 // var Navbar = ReactBootstrap.Navbar;
 // var Nav = ReactBootstrap.Nav;
 // var NavItem = ReactBootstrap.NavItem;
@@ -124,7 +124,7 @@ var FriendsInfo = React.createClass({
     var r = confirm("are you sure you want to end your friend request?");
     if (r == true) {
         deleteCall();
-    } 
+    }
   },
   onAccept: function(user) {
     this.setState({ users:[user]});
@@ -138,7 +138,7 @@ var FriendsInfo = React.createClass({
         this.setState({ users:[user]});
         alert('friend request complete. You will now redirect to a video chat with your new friend');
         //redirects to viconference
-        window.location.href = '/vidconferences/'+data.vidconference_id; 
+        window.location.href = '/vidconferences/'+data.vidconference_id;
       }.bind(this),
       error: function(xhr, status, err) {
 
@@ -167,10 +167,17 @@ var FriendsInfo = React.createClass({
         console.error('/individual_relationships/decline', status, err.toString());
     }.bind(this)})
   },
-  componentDidMount: function() {
+  loadRelationshipsFromServer: function() {
     $.get(this.props.source, function(data) {
       this.setState({users: data.users});
     }.bind(this));
+
+  },
+  componentDidMount: function() {
+
+    this.loadRelationshipsFromServer();
+    //setInterval(alert('dfdf'), this.props.pollInterval);
+    window.setInterval(this.loadRelationshipsFromServer, this.props.pollInterval);
 
   },
 
@@ -207,7 +214,7 @@ var FriendBox = React.createClass({
     return (
       <li className="dropdown" id="friend_drop" >
         <DropDown />
-        <FriendsInfo source="/individual_relationships/show"/>
+        <FriendsInfo source="/individual_relationships/show" pollInterval={2000}/>
       </li>
     );
   }
