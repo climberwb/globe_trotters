@@ -15,6 +15,8 @@ if Rails.env.production?
     "What inspires you?",
     "Who was your biggest hero?",
     "Where do you see yourself in ten years?"]
+    # IMPORTANT! add s in front of https otherwise video will not rendor
+    # IMPORTANT! for all youtube videos use embeded urls
 
   videos = [
       "https://www.youtube.com/embed/NyK5SG9rwWI",

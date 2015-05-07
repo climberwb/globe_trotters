@@ -91,7 +91,7 @@ var Answer = React.createClass({
  });
 ////////////////////////////////////////////////
   // IMPORTANT! add s in front of https otherwise video will not rendor
-
+  // IMPORTANT! for all youtube videos use embeded urls
 var Question = React.createClass({
 
   render: function () {
