@@ -90,6 +90,7 @@ class IndividualRelationshipsController < ApplicationController
   end
 
   def accept
+
     sender_id = params[:sender_id].to_i
     receiver_id = current_user.id
     sender = User.find(sender_id)
@@ -103,6 +104,9 @@ class IndividualRelationshipsController < ApplicationController
     IndividualRelationship.where(receiver_id: receiver_id).where.not(sender_id: sender_id).each{|relationship| relationship.destroy}
     # creates video conference
     Vidconference.create_vidconference(sender,current_user.id)
+    #sends email alerting of video conference
+    IndividualRelationship.mail(sender)
+    
     render :json => {:status => "Accept",:vidconference_id =>sender.vidconference_id,:individual =>{:link =>"Individuals/#{sender_id}", :name => @relationship.sender.name} }.to_json
    #
   end
