@@ -56,11 +56,9 @@ var Decide = React.createClass({
 
 var FriendInfo = React.createClass({
   deleteFriend: function() {
-    console.log(this.props)
     this.props.onDelete(this.props.user);
   },
   handleSubmitAccept: function() {
-    console.log(this.props)
     this.props.onAccept(this.props.user);
   },///new////////
  //
@@ -70,7 +68,6 @@ var FriendInfo = React.createClass({
   render: function () {
     var decision;
     var friend;
-    console.log(JSON.stringify(this.props.user));
     if(this.props.user.friendStatus == 'true') {
       decision = <span> my friend! <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
       friend = <span><img style={{margin:'0 10px 0 10px'}} src={this.props.user.avatar.avatar.small.url}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
@@ -183,12 +180,13 @@ var FriendsInfo = React.createClass({
 
   render: function() {
     var self = this;
-      // console.log(JSON.stringify(this.state));
 
     return (
-      <ul className="dropdown-menu" id="friend-menu">
+      <ul className="dropdown-menu" id="friend-menu" >
+        
         {this.state.users.map(function (user) {
-          return <FriendInfo key={user.id} user={user} onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
+          //TODO Implement self.friendBoxVisible(user)) conditional;
+          return <FriendInfo key={user.id} user={user}  onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
         })}
       </ul>
     );
@@ -208,6 +206,20 @@ var DropDown = React.createClass({
   }
 });
 var FriendBox = React.createClass({
+  //TODO Implement code below for FriendsBox info! add function to friendsBox that calls the function below
+         //then write a conditional to yield Dropdown and FriendsInfo!
+
+  // friendBoxVisible: function(user){
+  //   //user.travel_status == "traveler" implies the current_user is a host
+  //   //because a traveler sends requests to a host. A host sees requests from travelers
+  //  if((user.travel_status == "traveler" && user.friendStatus == "true")|| user.travel_status=="host"){
+  //   return true;
+  //  }else{
+  //    return false;
+  //    ;
+  //  }
+
+  // },
 
   render: function() {
     return (
