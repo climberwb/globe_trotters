@@ -70,9 +70,10 @@ var FriendInfo = React.createClass({
   render: function () {
     var decision;
     var friend;
+    console.log(JSON.stringify(this.props.user));
     if(this.props.user.friendStatus == 'true') {
       decision = <span> my friend! <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
-      friend = <span><img src={this.props.user.avatar.avatar.url}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
+      friend = <span><img style={{margin:'0 10px 0 10px'}} src={this.props.user.avatar.avatar.small.url}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
 
     }
     else if(this.props.user.friendStatus == 'false') {
@@ -178,11 +179,11 @@ var FriendsInfo = React.createClass({
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
     window.setInterval(this.loadRelationshipsFromServer, this.props.pollInterval);
-
   },
 
   render: function() {
     var self = this;
+      // console.log(JSON.stringify(this.state));
 
     return (
       <ul className="dropdown-menu" id="friend-menu">
@@ -197,12 +198,10 @@ var FriendsInfo = React.createClass({
 
 
 var DropDown = React.createClass({
-
-
   render: function() {
 
     return (
-      <a className="dropdown-toggle" href="#" data-toggle="">
+      <a className="dropdown-toggle" href="#" data-toggle="" >
         <span className="glyphicon glyphicon-user" id="glyphicon" ></span>
       </a>
     );
