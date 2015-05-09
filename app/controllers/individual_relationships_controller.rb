@@ -18,7 +18,7 @@ class IndividualRelationshipsController < ApplicationController
     authorize individual_relationships
 
     relationship_display = []
-    relationships = {"users" => []}
+    relationships = {"travel_status"=>current_user.travel_status,"users" => []}
    #
     if individual_relationships.where.not(accepted_at: nil).length > 0
       friend = individual_relationships.where.not(accepted_at: nil).first

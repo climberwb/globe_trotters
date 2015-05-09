@@ -76,7 +76,7 @@ var FriendInfo = React.createClass({
     else if(this.props.user.friendStatus == 'false') {
 
       decision = <Decide onSubmitAccept={this.handleSubmitAccept} onSubmitDecline={this.handleSubmitDecline} />
-      friend = <span><img src={this.props.user.avatar.avatar.url}></img> <a href={this.props.user.url}>{this.props.user.name}</a> </span>;
+      friend = <span><img src={this.props.user.avatar.avatar.small.url}></img> <a href={this.props.user.url}>{this.props.user.name}</a> </span>;
 
     }
     return (
@@ -90,9 +90,77 @@ var FriendInfo = React.createClass({
 })
 
 var FriendsInfo = React.createClass({
+  
+  onAccept: function(user){
+    this.props.onAccept(user);
+  },
+
+  onDecline: function(user){
+    this.props.onDecline(user);
+  },
+
+  onDelete: function(user){
+    this.props.onDelete(user);
+  },
 
 
-  getInitialState: function() {
+  render: function() {
+    var self = this;
+
+    return (
+      <ul className="dropdown-menu" id="friend-menu" >
+        
+        {this.props.users.map(function (user) {
+          //TODO Implement self.friendBoxVisible(user)) conditional;
+          //self.friendBoxVisible(user);
+          return <FriendInfo key={user.id} user={user}  onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
+        })}
+      </ul>
+    );
+  }
+});
+
+
+
+var DropDown = React.createClass({
+  render: function() {
+    
+    return (
+
+      <a className="dropdown-toggle" href="#" data-toggle="" style={{display:this.props.style}}>
+        <span className="glyphicon glyphicon-user" id="glyphicon" ></span>
+      </a>
+    );
+  }
+});
+var FriendBox = React.createClass({
+  //TODO Implement code below for FriendsBox info! add function to friendsBox that calls the function below
+         //then write a conditional to yield Dropdown and FriendsInfo!
+
+  // friendBoxVisible: function(user){
+  //   //user.travel_status == "traveler" implies the current_user is a host
+  //   //because a traveler sends requests to a host. A host sees requests from travelers
+  //  // console.log('dfd');
+
+  //  if((user.travel_status == "traveler" )|| user.travel_status=="host"&& user.friendStatus == "true"){
+  //   console.log('true');
+  //   console.log(user);
+     
+   
+  //  }else{
+
+  //   // console.log('false');
+  //    // console.log('false');
+  //    //     //console.log(user);
+  //    //     this.setProps = user;
+  //    //     console.log(this.props);
+  //   // this.setState({friendState:true}).bind(this);
+  //    ;
+  //  }
+
+
+ // },
+ getInitialState: function() {
     return {
       users: [
         // {id:1, url:"", name:"test user", friendStatus: false},
@@ -166,8 +234,8 @@ var FriendsInfo = React.createClass({
     }.bind(this)})
   },
   loadRelationshipsFromServer: function() {
-    $.get(this.props.source, function(data) {
-      this.setState({users: data.users});
+    $.get("/individual_relationships/show", function(data) {
+      this.setState({travel_status: data.travel_status,users: data.users});
     }.bind(this));
 
   },
@@ -175,59 +243,30 @@ var FriendsInfo = React.createClass({
 
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
-    window.setInterval(this.loadRelationshipsFromServer, this.props.pollInterval);
+    window.setInterval(this.loadRelationshipsFromServer, 2000);
   },
 
   render: function() {
-    var self = this;
+   // console.log(this.state);
+    //console.log(this.props);
+    var userInfo = this.state;
+    var dropDown;
+    //console.log(JSON.stringify(userInfo.travel_status));
+   // console.log(( userInfo.travel_status=="traveler"));]
+    if( userInfo.users &&userInfo.users.length == 1 && userInfo.travel_status=="traveler" && userInfo.users[0].friendStatus =="true"||(userInfo.users && userInfo.users.length == 1 && userInfo.travel_status=="host")){
+       dropDown = <DropDown style={'block'} />
+    }
+    else{
+      dropDown = <DropDown style={'none'} />
+            // console.log('df');
 
-    return (
-      <ul className="dropdown-menu" id="friend-menu" >
-        
-        {this.state.users.map(function (user) {
-          //TODO Implement self.friendBoxVisible(user)) conditional;
-          return <FriendInfo key={user.id} user={user}  onAccept={self.onAccept} onDecline={self.onDecline} onDelete={self.onDelete} />
-        })}
-      </ul>
-    );
-  }
-});
-
-
-
-var DropDown = React.createClass({
-  render: function() {
-
-    return (
-      <a className="dropdown-toggle" href="#" data-toggle="" >
-        <span className="glyphicon glyphicon-user" id="glyphicon" ></span>
-      </a>
-    );
-  }
-});
-var FriendBox = React.createClass({
-  //TODO Implement code below for FriendsBox info! add function to friendsBox that calls the function below
-         //then write a conditional to yield Dropdown and FriendsInfo!
-
-  // friendBoxVisible: function(user){
-  //   //user.travel_status == "traveler" implies the current_user is a host
-  //   //because a traveler sends requests to a host. A host sees requests from travelers
-  //  if((user.travel_status == "traveler" && user.friendStatus == "true")|| user.travel_status=="host"){
-  //   return true;
-  //  }else{
-  //    return false;
-  //    ;
-  //  }
-
-  // },
-
-  render: function() {
-    return (
-      <li className="dropdown" id="friend_drop" >
-        <DropDown />
-        <FriendsInfo source="/individual_relationships/show" pollInterval={2000}/>
-      </li>
-    );
+    }
+      return (
+        <li className="dropdown" id="friend_drop" >
+          {dropDown}
+          <FriendsInfo  users={this.state.users} onAccept={this.onAccept} onDecline={this.onDecline} onDelete={this.onDelete}/>
+        </li>
+      );
   }
 });
 
