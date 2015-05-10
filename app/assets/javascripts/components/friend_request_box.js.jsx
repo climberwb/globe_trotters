@@ -31,7 +31,6 @@
 
 
 
-
 // TODO Refactor & Style
 var Decide = React.createClass({
 
@@ -160,10 +159,10 @@ var FriendBox = React.createClass({
 
 
  // },
- getInitialState: function() {
+  getInitialState: function() {
     return {
       users: [
-        // {id:1, url:"", name:"test user", friendStatus: false},
+         {id:1, url:"", name:"test user", friendStatus: false},
         // {id:2, url:"", name:"test user 2", friendStatus: true}
       ]
     };
@@ -243,7 +242,17 @@ var FriendBox = React.createClass({
 
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
-    window.setInterval(this.loadRelationshipsFromServer, 2000);
+    window.setInterval(this.loadRelationshipsFromServer, 5000);
+  },
+
+  redirectHome: function(userInfo){
+    var url = window.location.href.match(/vidconference/g);
+          console.log(url);
+       console.log(userInfo.users.length);
+     if(userInfo.users.length==0&&url && url[0]==="vidconference"){
+      alert('your friendship has been deleted. Please find a new friend!')
+       window.location.href = '/'
+     }
   },
 
   render: function() {
@@ -251,28 +260,28 @@ var FriendBox = React.createClass({
     //console.log(this.props);
     var userInfo = this.state;
     var dropDown;
-    //console.log(JSON.stringify(userInfo.travel_status));
-   // console.log(( userInfo.travel_status=="traveler"));]
-    if( userInfo.users &&userInfo.users.length == 1 && userInfo.travel_status=="traveler" && userInfo.users[0].friendStatus =="true"||(userInfo.users && userInfo.users.length == 1 && userInfo.travel_status=="host")){
+    var friendsInfo;
+    //console.log(( userInfo.travel_status=="traveler"));]
+    if(userInfo.users.length >0&&(userInfo.users && userInfo.travel_status=="traveler" && userInfo.users[0].friendStatus =="true"||(userInfo.users && userInfo.users.length == 1 && userInfo.travel_status=="host"))){
        dropDown = <DropDown style={'block'} />
+       friendsInfo = <FriendsInfo  users={this.state.users} onAccept={this.onAccept} onDecline={this.onDecline} onDelete={this.onDelete}/>
     }
     else{
       dropDown = <DropDown style={'none'} />
+      this.redirectHome(userInfo);
             // console.log('df');
 
     }
       return (
         <li className="dropdown" id="friend_drop" >
           {dropDown}
-          <FriendsInfo  users={this.state.users} onAccept={this.onAccept} onDecline={this.onDecline} onDelete={this.onDelete}/>
+          {friendsInfo}
         </li>
       );
   }
 });
 
-if (document.getElementById('FriendBox')) {
   React.render(<FriendBox />,  document.getElementById('FriendBox'));
-}
 
 $('#glyphicon').on('click', function(){
 
