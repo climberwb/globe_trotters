@@ -245,13 +245,16 @@ var FriendBox = React.createClass({
     window.setInterval(this.loadRelationshipsFromServer, 5000);
   },
 
-  redirectHome: function(userInfo){
-    var url = window.location.href.match(/vidconference/g);
-          console.log(url);
-       console.log(userInfo.users.length);
-     if(userInfo.users.length==0&&url && url[0]==="vidconference"){
+  redirect: function(userInfo){
+    var urlVideo = window.location.href.match(/vidconference/g);
+
+     if(userInfo.users.length==0&&urlVideo && urlVideo[0]==="vidconference"){
       alert('your friendship has been deleted. Please find a new friend!')
        window.location.href = '/'
+     }//TODO put || or in if else for production environment
+     else if(userInfo.users.length>0&&userInfo.users[0].friendStatus=== "true" && window.location.href == 'http://localhost:3000/'  ){
+        alert('you now have a friend. You will be redirected to a video chat!');
+        window.location.href = '/'
      }
   },
 
@@ -268,7 +271,7 @@ var FriendBox = React.createClass({
     }
     else{
       dropDown = <DropDown style={'none'} />
-      this.redirectHome(userInfo);
+      this.redirect(userInfo);
             // console.log('df');
 
     }
