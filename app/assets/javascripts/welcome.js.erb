@@ -71,11 +71,12 @@ var links = [],
     arcLines = [];
 
 var svg = d3.select("body").append("svg")
+            .attr("id", "background_globe")
             .attr("width", width)
             .attr("height", height).attr("class",'img-responsive')
             .on("mousedown", mousedown);
 queue()
-    .defer(d3.json, 
+    .defer(d3.json,
       "<%= asset_path('world-110m.json') %>"
     )
     .defer(d3.json, "/to_geo_json")//TODO make if else for /teams/to_geo_json
