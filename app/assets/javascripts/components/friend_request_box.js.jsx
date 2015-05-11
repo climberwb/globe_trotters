@@ -68,7 +68,7 @@ var FriendInfo = React.createClass({
     var decision;
     var friend;
     if(this.props.user.friendStatus == 'true') {
-      decision = <span> my friend! <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
+      decision = <span> <a href={this.props.user.conference_url}>chat!</a> | <a  onClick={this.deleteFriend}>unfriend :(</a></span>;
       friend = <span><img style={{margin:'0 10px 0 10px'}} src={this.props.user.avatar.avatar.small.url}></img><a href={this.props.user.url}>{this.props.user.name}</a></span>;
 
     }
@@ -162,7 +162,8 @@ var FriendBox = React.createClass({
   getInitialState: function() {
     return {
       users: [
-         {id:1, url:"", name:"test user", friendStatus: false},
+         {id:1, url:"", name:"test user", friendStatus: "false"},
+         //{id:2, url:"", name:"test user", friendStatus: "false"}
         // {id:2, url:"", name:"test user 2", friendStatus: true}
       ]
     };
@@ -242,20 +243,21 @@ var FriendBox = React.createClass({
 
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
-    window.setInterval(this.loadRelationshipsFromServer, 5000);
+    window.setInterval(this.loadRelationshipsFromServer, 15000);
   },
 
   redirect: function(userInfo){
     var urlVideo = window.location.href.match(/vidconference/g);
-
+    console.log('dfd');
+    //debugger;
      if(userInfo.users.length==0&&urlVideo && urlVideo[0]==="vidconference"){
-      alert('your friendship has been deleted. Please find a new friend!')
+      //alert('your friendship has been deleted. Please find a new friend!')
        window.location.href = '/'
      }//TODO put || or in if else for production environment
-     else if(userInfo.users.length>0&&userInfo.users[0].friendStatus=== "true" && window.location.href == 'http://localhost:3000/'  ){
-        alert('you now have a friend. You will be redirected to a video chat!');
-        window.location.href = '/'
-     }
+     // else if(window.location.href == 'http://localhost:3000/'  && userInfo.users.length==1 && userInfo.users.friendStatus=="true"){
+     //    alert('you now have a friend. You will be redirected to a video chat!');
+     //    window.location.href = '/'
+     // }
   },
 
   render: function() {

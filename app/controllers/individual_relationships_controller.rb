@@ -24,9 +24,9 @@ class IndividualRelationshipsController < ApplicationController
       friend = individual_relationships.where.not(accepted_at: nil).first
       friendStatus = true
       if current_user.host?
-        relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.sender.travel_status}
+        relationships["users"] << {"name"=>friend.sender.name, "url"=>individual_show_path(friend.sender), "avatar"=>friend.sender.avatar, "id"=>friend.sender.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.sender.travel_status,"conference_url"=>vidconference_path(current_user.vidconference)}
       elsif current_user.traveler?
-        relationships["users"] << {"name"=>friend.receiver.name, "url"=>individual_show_path(friend.receiver), "avatar"=>friend.receiver.avatar, "id"=>friend.receiver.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.receiver.travel_status}
+        relationships["users"] << {"name"=>friend.receiver.name, "url"=>individual_show_path(friend.receiver), "avatar"=>friend.receiver.avatar, "id"=>friend.receiver.id.to_s,"friendStatus"=>friendStatus.to_s,"travel_status"=>friend.receiver.travel_status,"conference_url"=>vidconference_path(current_user.vidconference)}
       end
       render :json => relationships.to_json
 
