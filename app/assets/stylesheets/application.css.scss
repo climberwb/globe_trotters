@@ -1,11 +1,22 @@
  @import "bootstrap";
 
 
+.hidden-label{
+  display:none;
+}
+
+/******* above is style for idndividual show path *******/
+#profile-pick{
+  height:30px;
+  width:40px;
+
+}
  #background_globe{
   background-color:black;
   margin: 0 auto 0 auto;
 }
-/* above is custom style */
+/*******  above is custom style   *******/
+
 .user-info {
    margin-top: 9px;
  }

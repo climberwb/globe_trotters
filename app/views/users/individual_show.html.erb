@@ -1,24 +1,24 @@
 <h1>Indiviual#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
-Name:<%= @user.name%>
 </br>
 <% if @user.avatar? %>
         <div class="">
           <p>Current avatar</p>
-          <%= image_tag( @user.avatar.profile.url ) %>
+          <%= image_tag( @user.avatar.profile.url, size: "100" )  %>
         </div>
 <% end %>
+Name:<%= @user.name%></br>
 <%= @user.bio%>
 
 <%= form_for :individual_relationship, url: @relationship, method: :post,:html => { :id => 'new_individual_relationship'} do |f|
  %>
     <div class = "form-group">
-      <%= f.label :sender_id %>
-      <%= f.text_field :sender_id, class: 'form-control', placeholder: "Enter wiki title", id:'sender_individual_relationship',value: "#{current_user.id}" %>
+      <%= f.label :sender_id, class: 'hidden-label' %>
+      <%= f.hidden_field :sender_id, class: 'form-control', placeholder: "Enter wiki title", id:'sender_individual_relationship',value: "#{current_user.id}" %>
     </div>
     <div class = "form-group">
-      <%= f.label :receiver_id %>
-      <%= f.text_field :receiver_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_individual_relationship',value: "#{@user.id}" %>
+      <%= f.label :receiver_id, class: 'hidden-label' %>
+      <%= f.hidden_field :receiver_id, class: 'form-control', placeholder: "Enter wiki title!", id:'receiver_individual_relationship',value: "#{@user.id}" %>
     </div>
     <div class = "form-group">
        <%if  policy(IndividualRelationship.new).create?%>
