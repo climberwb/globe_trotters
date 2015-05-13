@@ -18,13 +18,35 @@
 
 #tool_tip{
   
-  width:10%;
+  width:14%;
   margin: none;
   padding:5px;
+  background-color: black;
+  opacity:.8;
 }
+
+#tool_tip div a{
+  float:left;
+ }
+ #tool_tip div a{
+  float:right;
+ }
 #tool_tip div strong{
   color:red;
+  margin-bottom:10%;
  }
+ #tool_tip div:first-child, #tool_tip div img{
+  margin-bottom:5%;
+ }
+ #tool_tip div:first-child{
+  margin:0 22% 5% 20%;
+
+ 
+ }
+ #tool_tip div img{
+  margin-bottom:5%;
+ }
+
  #tool_tip div{
   padding-left:5px;
  }
