@@ -49,10 +49,8 @@ var AnswerLinks = React.createClass({
 
     return (
         <div>
-        <Col xsOffset={3}>
           <EditLink answer={this.props.answer} />
           <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
-        </Col>
         </div>
       )
   }
@@ -88,9 +86,9 @@ var Answer = React.createClass({
             display = <div onDoubleClick={this.updateLink}> <textarea name="description" defaultValue={content} onChange={this.handleChange}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} UpdateAnswer={this.UpdateAnswer}  />  </div>
            }
     return (
-        <div>
+        <Col xsOffset={3}>
           {display}
-        </div>
+        </Col>
       )
   }
 
@@ -102,12 +100,12 @@ var Question = React.createClass({
 
   render: function () {
     return (
-        <div>
+        <Col xsOffset={3}>
           <h1>{this.props.questionContent} </h1>
           <iframe className="youtube-player"
 width="320" height="195" src={this.props.videoUrl}
 frameBorder="0"></iframe>
-        </div>
+        </Col>
       )
   }
 
