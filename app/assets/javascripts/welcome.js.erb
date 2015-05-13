@@ -193,12 +193,66 @@ function ready(error, world, places) {
           var test = $('#test').text();
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
-
+          
+          $('#tool_tip').css("top",d3.event.pageY);
+          $('#tool_tip').css("left",d3.event.pageX);
+          $('#tool_tip').css("visibility", "visible");
+          $('#tool_tip img').css("visibility", "visible");
+      var tooltip_html = " <div><strong>"+d.properties[0].TeamAddress+"</strong></div>";
         d.properties.forEach(function(a) {
+
+          //tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+          
+         tooltip_html = tooltip_html + " <div>"+"<a href="+a.TeamProfileUrl+"> "+a.TeamName+" </a> "+"<img src = "+a.TeamPicUrl+">"+"</div>"
+
           //alert(d.properties.length);
-          switch(a){
-            case d.properties[0]:
-            //  alert('hello');
+          // switch(a){
+          //   case d.properties[0]:
+          //   //  alert('hello');
+          //     $('#tool_tip').css("top",d3.event.pageY);
+          //     $('#tool_tip').css("left",d3.event.pageX);
+
+          //     $('#tool_tip').css("visibility", "visible");
+          //     $('#tool_tip img').css("visibility", "visible");
+
+          //     $('#tool_tip2').css("visibility", "hidden");
+          //     $('#tool_tip2 img').css("visibility", "hidden");
+
+          //     $('#tool_tip3').css("visibility", "hidden");
+          //     $('#tool_tip3 img').css("visibility", "hidden");
+
+
+          //     tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+          //     if(d.properties.length == 1){
+          //       break;
+          //     }
+          //   case d.properties[1]:
+
+          //     $('#tool_tip2').css("top",d3.event.pageY-52);
+          //     $('#tool_tip2').css("left",d3.event.pageX-52);
+
+          //     $('#tool_tip2').css("visibility", "visible");
+          //     $('#tool_tip2 img').css("visibility", "visible");
+
+          //     $('#tool_tip3').css("visibility", "hidden");
+          //     $('#tool_tip3 img').css("visibility", "hidden");
+
+
+          //     tooltip2.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+          //     if(d.properties.length == 2){
+          //       break;
+          //     }
+          //   case d.properties[2]:
+          //     $('#tool_tip3').css("top",d3.event.pageY-50);
+          //     $('#tool_tip3').css("left",d3.event.pageX+52);
+
+          //     $('#tool_tip3').css("visibility", "visible");
+          //     $('#tool_tip3 img').css("visibility", "visible");
+
+          //     tooltip3.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
+          //     break;
+          //   }
+          });
               $('#tool_tip').css("top",d3.event.pageY);
               $('#tool_tip').css("left",d3.event.pageX);
 
@@ -210,39 +264,8 @@ function ready(error, world, places) {
 
               $('#tool_tip3').css("visibility", "hidden");
               $('#tool_tip3 img').css("visibility", "hidden");
-
-
-              tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
-              if(d.properties.length == 1){
-                break;
-              }
-            case d.properties[1]:
-
-              $('#tool_tip2').css("top",d3.event.pageY-52);
-              $('#tool_tip2').css("left",d3.event.pageX-52);
-
-              $('#tool_tip2').css("visibility", "visible");
-              $('#tool_tip2 img').css("visibility", "visible");
-
-              $('#tool_tip3').css("visibility", "hidden");
-              $('#tool_tip3 img').css("visibility", "hidden");
-
-
-              tooltip2.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
-              if(d.properties.length == 2){
-                break;
-              }
-            case d.properties[2]:
-              $('#tool_tip3').css("top",d3.event.pageY-50);
-              $('#tool_tip3').css("left",d3.event.pageX+52);
-
-              $('#tool_tip3').css("visibility", "visible");
-              $('#tool_tip3 img').css("visibility", "visible");
-
-              tooltip3.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
-              break;
-            }
-          });
+              tooltip.html(tooltip_html);
+          
       });
 // append information upon hover above ////////////////////
 
