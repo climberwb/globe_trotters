@@ -31,7 +31,7 @@ var tooltip3 = d3.select("body")
     .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
 
 var image = tooltip.append("img").attr("src","");
-   
+
 
     tooltip.text("my tooltip text");
 //spining globe
@@ -193,7 +193,7 @@ function ready(error, world, places) {
           var test = $('#test').text();
           div.innerHTML = "";
           div.innerHTML = div.innerHTML + d3.event.pageY+ ' X:'+d3.event.pageX +'<img src='+test+'>';
-          
+
           $('#tool_tip').css("top",d3.event.pageY);
           $('#tool_tip').css("left",d3.event.pageX);
           $('#tool_tip').css("visibility", "visible");
@@ -202,7 +202,7 @@ function ready(error, world, places) {
         d.properties.forEach(function(a) {
 
           //tooltip.html("<a href="+a.TeamProfileUrl+">"+a.TeamName+"</a>"+"<img src = "+a.TeamPicUrl+">");
-          
+
          tooltip_html = tooltip_html + " <div>"+"<a href="+a.TeamProfileUrl+"> "+a.TeamName+" </a> "+"<img src = "+a.TeamPicUrl+">"+"</div>"
 
           //alert(d.properties.length);
@@ -265,7 +265,7 @@ function ready(error, world, places) {
               $('#tool_tip3').css("visibility", "hidden");
               $('#tool_tip3 img').css("visibility", "hidden");
               tooltip.html(tooltip_html);
-          
+
       });
 // append information upon hover above ////////////////////
 

@@ -89,7 +89,7 @@ var FriendInfo = React.createClass({
 })
 
 var FriendsInfo = React.createClass({
-  
+
   onAccept: function(user){
     this.props.onAccept(user);
   },
@@ -108,7 +108,7 @@ var FriendsInfo = React.createClass({
 
     return (
       <ul className="dropdown-menu" id="friend-menu" >
-        
+
         {this.props.users.map(function (user) {
           //TODO Implement self.friendBoxVisible(user)) conditional;
           //self.friendBoxVisible(user);
@@ -123,7 +123,7 @@ var FriendsInfo = React.createClass({
 
 var DropDown = React.createClass({
   render: function() {
-    
+
     return (
 
       <a className="dropdown-toggle" href="#" data-toggle="" style={{display:this.props.style}}>
@@ -144,8 +144,8 @@ var FriendBox = React.createClass({
   //  if((user.travel_status == "traveler" )|| user.travel_status=="host"&& user.friendStatus == "true"){
   //   console.log('true');
   //   console.log(user);
-     
-   
+
+
   //  }else{
 
   //   // console.log('false');
@@ -250,7 +250,7 @@ var FriendBox = React.createClass({
     var urlVideo = window.location.href.match(/vidconference/g);
     console.log('dfd');
     //debugger;
-     if(userInfo.users.length==0&&urlVideo && urlVideo[0]==="vidconference"){
+     if( userInfo && userInfo.users&&userInfo.users.length==0&&urlVideo && urlVideo[0]==="vidconference"){
       //alert('your friendship has been deleted. Please find a new friend!')
        window.location.href = '/'
      }//TODO put || or in if else for production environment
@@ -267,7 +267,7 @@ var FriendBox = React.createClass({
     var dropDown;
     var friendsInfo;
     //console.log(( userInfo.travel_status=="traveler"));]
-    if(userInfo.users.length >0&&(userInfo.users && userInfo.travel_status=="traveler" && userInfo.users[0].friendStatus =="true"||(userInfo.users && userInfo.users.length == 1 && userInfo.travel_status=="host"))){
+    if(userInfo && userInfo.users&&userInfo.users.length >0&&(userInfo.users && userInfo.travel_status=="traveler" && userInfo.users[0].friendStatus =="true"||(userInfo.users && userInfo.users.length == 1 && userInfo.travel_status=="host"))){
        dropDown = <DropDown style={'block'} />
        friendsInfo = <FriendsInfo  users={this.state.users} onAccept={this.onAccept} onDecline={this.onDecline} onDelete={this.onDelete}/>
     }

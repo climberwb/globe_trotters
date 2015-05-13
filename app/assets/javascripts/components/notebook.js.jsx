@@ -1,4 +1,8 @@
 //TODO incorporate https://facebook.github.io/react/docs/forms.html
+
+var Col = ReactBootstrap.Col;
+// var md = ReactBootstrap.Col.propTypes.md;
+// var xsOffset = ReactBootstrap.Col.propTypes.xsOffset;
 var Button = ReactBootstrap.Button;
 var UpdateLink  = React.createClass({
 
@@ -25,7 +29,7 @@ var EditLink  = React.createClass({
   render: function () {
 
     return (
-        <div>
+        <div xsOffset={6}>
           <p>{this.props.answer.answerContent}</p>
         </div>
       )
@@ -45,8 +49,10 @@ var AnswerLinks = React.createClass({
 
     return (
         <div>
+        <Col xsOffset={3}>
           <EditLink answer={this.props.answer} />
           <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
+        </Col>
         </div>
       )
   }
