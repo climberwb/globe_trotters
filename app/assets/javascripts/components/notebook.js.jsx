@@ -29,7 +29,7 @@ var EditLink  = React.createClass({
   render: function () {
 
     return (
-        <div xsOffset={6}>
+        <div>
           <p>{this.props.answer.answerContent}</p>
         </div>
       )
@@ -86,9 +86,9 @@ var Answer = React.createClass({
             display = <div onDoubleClick={this.updateLink}> <textarea name="description" defaultValue={content} onChange={this.handleChange}></textarea> <a>show</a> <AnswerLinks answer={this.props.answer} UpdateAnswer={this.UpdateAnswer}  />  </div>
            }
     return (
-        <Col xsOffset={3}>
+        <div>
           {display}
-        </Col>
+        </div>
       )
   }
 
@@ -100,12 +100,12 @@ var Question = React.createClass({
 
   render: function () {
     return (
-        <Col xsOffset={3}>
+        <div>
           <h1>{this.props.questionContent} </h1>
           <iframe className="youtube-player"
 width="320" height="195" src={this.props.videoUrl}
 frameBorder="0"></iframe>
-        </Col>
+        </div>
       )
   }
 
@@ -121,10 +121,14 @@ var Session = React.createClass({
   },
   render: function () {
     return (
-        <li>
-          <Question questionContent={this.props.answer.questionContent} videoUrl={this.props.answer.videoUrl} />
-           <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
-        </li>
+        <div className="row">
+            <Col md={4} xsOffset={2}>
+              <Question questionContent={this.props.answer.questionContent} videoUrl={this.props.answer.videoUrl} />
+            </Col>
+            <Col md={4} className="answer">
+              <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
+            </Col>
+        </div>
       )
   }
 
@@ -208,11 +212,11 @@ var Sessions = React.createClass({
   render: function() {
     var self = this;
     return(
-      <ul >
+      <div >
         {this.state.answers.map(function (answer) {
           return <Session key={answer.answerId} answer={answer} UpdateAnswer={self.UpdateAnswer} />
         })}
-      </ul>
+      </div>
     );
   }
 });
@@ -222,7 +226,7 @@ var NoteBook = React.createClass({
 
   render: function() {
     return (
-      <div  >
+      <div >
         <Sessions source="/users/1/answers"/>
       </div>
     );

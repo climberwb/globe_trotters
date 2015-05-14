@@ -1,6 +1,18 @@
  @import "bootstrap";
 
 
+.answer p, .answer a{
+  margin-left:40%;
+}
+.answer{
+  margin-top:50px;
+  padding:60px;
+  z-index:20;
+  background: url(http://www.freeimageslive.com/galleries/workplace/office2/preview/notebook.jpg);
+}
+
+
+/*************** above is notebook style ****************/
 .hidden-label{
   display:none;
 }
@@ -9,7 +21,6 @@
 #profile-pick{
   height:30px;
   width:40px;
-
 }
  #background_globe{
   background-color:black;
@@ -18,7 +29,7 @@
 
 #tool_tip{
 
-  width:11%;
+  width:18%;
   margin: none;
   padding:5px;
   background-color: black;
