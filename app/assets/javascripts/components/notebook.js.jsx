@@ -13,7 +13,7 @@ var UpdateLink  = React.createClass({
   render: function () {
     var submit;
 
-    this.props.answer.pendingStatus ? submit=<Button className="btn btn-success" href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</Button> : submit = null
+    this.props.answer.pendingStatus ? submit=<Button className="btn btn-success submit_answer_btn" href="hello.com" name="submit" onClick={this.UpdateAnswer}>Submit</Button> : submit = null
     return (
         <div>
           <Button className="btn" href="hello.com" name="edit" onClick={this.UpdateAnswer}>Edit</Button> {submit}
