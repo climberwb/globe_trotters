@@ -1,11 +1,23 @@
  @import "bootstrap";
-
-
-.answer p, .answer a{
+.session_box h2{
+  margin-bottom:40px;
+}
+.session_box{
+    padding-top:30px;
+    border-bottom-width:5px; 
+    border-bottom-style:groove;
+}
+.answer p, .answer a,.answer textarea{
   margin-left:40%;
 }
+.answer textarea{
+  width:82%;
+  height: 150px;
+}
 .answer{
-  margin-top:50px;
+ // margin-top:65px;
+  margin-bottom:30px;
+  margin-left:2%;
   padding:60px;
   z-index:20;
   background: url(http://www.freeimageslive.com/galleries/workplace/office2/preview/notebook.jpg);

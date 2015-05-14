@@ -96,12 +96,11 @@ var Answer = React.createClass({
 ////////////////////////////////////////////////
   // IMPORTANT! add s in front of https otherwise video will not rendor
   // IMPORTANT! for all youtube videos use embeded urls
-var Question = React.createClass({
+var Video = React.createClass({
 
   render: function () {
     return (
         <div>
-          <h1>{this.props.questionContent} </h1>
           <iframe className="youtube-player"
 width="320" height="195" src={this.props.videoUrl}
 frameBorder="0"></iframe>
@@ -121,13 +120,18 @@ var Session = React.createClass({
   },
   render: function () {
     return (
-        <div className="row">
-            <Col md={4} xsOffset={2}>
-              <Question questionContent={this.props.answer.questionContent} videoUrl={this.props.answer.videoUrl} />
-            </Col>
-            <Col md={4} className="answer">
-              <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
-            </Col>
+        <div className="row session_box">
+            <div className="row">
+              <h2>{this.props.answer.questionContent}</h2>
+            </div>
+            <div className="row">
+              <Col md={4} xsOffset={2}>
+                <Video videoUrl={this.props.answer.videoUrl} />
+              </Col>
+              <Col md={4} className="answer">
+                <Answer answerContent={this.props.answer.answerContent} answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
+              </Col>
+            </div>
         </div>
       )
   }
