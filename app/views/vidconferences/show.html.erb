@@ -10,12 +10,39 @@
   var session = OT.initSession(apiKey, sessionId);
 
   session.on("streamCreated", function(event) {
-    session.subscribe(event.stream);
+    var newSession = session.subscribe(event.stream);
+
+    newSession;
+    function resizeSession() {
+      console.log(newSession.id);
+      var sessElement = document.getElementById(newSession.id);
+      sessElement.style.width = "100px";
+      sessElement.style.height = "100px";
+      sessElement.style.marginLeft = "100px";
+      sessElement.style.zIndex = 100;
+      sessElement.style.top = "-100px";
+      sessElement.style.left = "795px";
+    }
+    resizeSession();
   });
+
+
+
 
   session.connect(token, function(error) {
     var publisher = OT.initPublisher();
     session.publish(publisher);
+
+    
+    function resizePublisher() {
+      var pubElement = document.getElementById(publisher.id);
+      pubElement.style.width = "1000px";
+      pubElement.style.height = "750px";
+      pubElement.style.height = -1;
+    }
+    resizePublisher();
+
   });
+
 </script>
 
