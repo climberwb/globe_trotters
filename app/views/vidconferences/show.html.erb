@@ -16,12 +16,15 @@
     function resizeSession() {
       console.log(newSession.id);
       var sessElement = document.getElementById(newSession.id);
-      sessElement.style.width = "100px";
-      sessElement.style.height = "100px";
-      sessElement.style.marginLeft = "100px";
-      sessElement.style.zIndex = 100;
-      sessElement.style.top = "-100px";
-      sessElement.style.left = "795px";
+
+      sessElement.style.width = "500px";
+      sessElement.style.height = "500px";
+      sessElement.style.marginLeft = "auto";
+      sessElement.style.marginRight = "auto";
+      sessElement.style.bottom = "20px";
+      sessElement.style.height = -1;
+
+      
     }
     resizeSession();
   });
@@ -36,9 +39,15 @@
     
     function resizePublisher() {
       var pubElement = document.getElementById(publisher.id);
-      pubElement.style.width = "1000px";
-      pubElement.style.height = "750px";
-      pubElement.style.height = -1;
+      
+      pubElement.style.width = "120px";
+      pubElement.style.height = "120px";
+      pubElement.style.marginLeft = "100px";
+      pubElement.style.zIndex = 100;
+      pubElement.style.top = "480px";
+      pubElement.style.left = "625px";
+
+      
     }
     resizePublisher();
 
