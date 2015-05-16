@@ -1,4 +1,7 @@
 
+//TODO implement D3 zoom function found in example http://marcneuwirth.com/blog/2012/06/24/creating-the-earth-with-d3-js/ online 114 move function
+//and line 44 where the zoom behavior is set up. 
+
 
 // replaced document with classes for controller and action.
 // displays globe for only the welcom#index view
@@ -123,11 +126,11 @@ function ready(error, world, places) {
     .attr("class", "noclicks")
     .style("fill", "url(#drop_shadow)");
 
-  // svg.append("circle")
-  //   .attr("cx", width / 2).attr("cy", height / 2)
-  //   .attr("r", proj.scale())
-  //   .attr("class", "noclicks")
-  //   .style("fill", "url(#ocean_fill)");
+  svg.append("circle")
+     .attr("cx", width / 2).attr("cy", height / 2)
+     .attr("r", proj.scale())
+     .attr("class", "noclicks")
+     .style("fill", "black");
 
   svg.append("path")
     .datum(topojson.object(world, world.objects.land))
@@ -253,6 +256,12 @@ function refresh() {
     .attr("opacity", function(d) {
       return fade_at_edge(d)
     })
+    
+  // update positions of starts according to modified projection
+  stars.attr("d", function(d){
+    spacePath.pointRadius(d.properties.radius);
+    return spacePath(d);
+  });
 }
 
 function fade_at_edge(d) {
@@ -299,6 +308,10 @@ function mousemove() {
             o1[1];
     proj.rotate(o1);
     sky.rotate(o1);
+    
+    // update projection for the stars according to rotation
+    space.rotate([o1[0] * -1, o1[1] * -1]);
+    
     refresh();
   }
 }
@@ -344,7 +357,7 @@ function createStars(number){
    function randomLonLat(){
             return [Math.random() * 360 - 180, Math.random() * 180 - 90];
         }
-var space = d3.geo.azimuthalEquidistant
+var space = d3.geo.azimuthalEquidistant()
             // .mode("equidistant")
             // .translate([width / 2, height / 2]);
  
@@ -355,7 +368,7 @@ var spacePath = d3.geo.path()
 var starList = createStars(300);
                 
         var stars = svg.append("g")
-            .selectAll("g")
+            .selectAll("path")
             .data(starList)
             .enter()
             .append("path")
@@ -366,11 +379,7 @@ var starList = createStars(300);
                 });
  
  
-        svg.append("rect")
-            .attr("class", "frame")
-            .attr("width", width)
-            .attr("height", height);
-
+       
 
 
 
@@ -389,6 +398,8 @@ function startAnimation() {
     if(!mousemove() || !mouseup() || !mousedown()){
     proj.rotate([y,-18]);
     sky.rotate([y,-18]);
+    // rotate projection for stars in opposite direction
+    space.rotate([-y,18]);
   //d3.event.preventDefault();
     y++;
     refresh();

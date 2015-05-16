@@ -7,26 +7,26 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 if Rails.env.production?
-  questions = ["What is your favorite sport?",
-    "What is your dream job?",
-    "What is your favorite type of music?",
-    "What is your favorite hobby?",
-    "If you could be anyone who would it be?",
-    "What inspires you?",
-    "Who was your biggest hero?",
-    "Where do you see yourself in ten years?"]
+  questions = ["What country does this story orginate? (Japan)",
+    "Think about your life as it is right now. There's a lot going on huh? Now think about the single most exciting possibility you can accomplish over the next five years. What is it?",
+    "What is your favorite animal?",
+    "Who in your life has helped you like the boy? What did they do?",
+    "The girl in the video loves her father. Who do you love?",
+    "The world is a big place, full of beauty and wonder. What is one place you would like to visit?, Why?",
+    "Which is your favorite Albert Einstein quote?, Why?",
+    "Which quote inspires you the most?, Why?"]
     # IMPORTANT! add s in front of https otherwise video will not rendor
     # IMPORTANT! for all youtube videos use embeded urls
 
   videos = [
-      "https://www.youtube.com/embed/NyK5SG9rwWI",
-      "https://www.youtube.com/embed/oRdxUFDoQe0",
-      "https://www.youtube.com/embed/41zCI_PQOfk",
-      "https://www.youtube.com/embed/qp4vf6wHoq4",
-      "https://www.youtube.com/embed/mPmmLRR9wTI",
-      "https://www.youtube.com/embed/VUTE5x-ghd8",
-      "https://www.youtube.com/embed/fV1eAAvAQVc",
-      "https://www.youtube.com/embed/eSes8Qydm94"
+      "https://www.youtube.com/embed/IGMW6YWjMxw",
+      "https://www.youtube.com/embed/EdQ5HT0LK8g",
+      "https://www.youtube.com/embed/4B_RDrGdINY?list=PLdMisKontG3gHkeGlECyYfgt62bYjN5vN",
+      "https://www.youtube.com/embed/2x_Fl3NQVd4?list=PLdMisKontG3gHkeGlECyYfgt62bYjN5vN",
+      "https://www.youtube.com/embed/Y2mk_zZCZVE?list=PLdMisKontG3gHkeGlECyYfgt62bYjN5vN",
+      "https://www.youtube.com/embed/Ip2ZGND1I9Q?list=PLdMisKontG3gHkeGlECyYfgt62bYjN5vN",
+      "http://www.stumbleupon.com/su/3bA1d0/dVW9ndUi:49WCd1A4/parentpalace.com/2012/09/albert-einstein-quotes/",
+      "http://www.stumbleupon.com/su/6qad5B/e8zNJr2q:49WCd1A4/addicted2success.com/quotes/40-rare-motivational-inspirational-picture-quotes/"
   ]
 
   questions.each_with_index do |question,index|
