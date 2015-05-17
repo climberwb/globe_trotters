@@ -11,7 +11,8 @@ ready = function() {
 
   $(document).on('click','#individual-location-list li',function(event){
        $('#individual_location').val($(this)[0].innerHTML);
-
+       $('#individual-location-list li').css('color','black');
+       $(this).css('color','red');
        $(document).on('click','#save-individual-address',function(event){
           $('#individual_form').submit();
       });
