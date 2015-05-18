@@ -20,25 +20,26 @@
 
         <ul class="nav nav-tabs">
            <!-- FriendBox component-->
-           <li id="FriendBox" style="margin-top:12px"></li>
-        <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
-        <li><%= link_to "About", welcome_about_path %></li>
-         <!--<%if current_user && current_user.role =="captain" && TeamRelationship.where(receiver_team_id: current_user.team_id ).first%>
-               <li><%= link_to "Friend Requested!",team_relationships_path %></li>
-         <%end%>
-         <%if current_user  && IndividualRelationship.where(receiver_id: current_user.id ).first%>
-               <li><%= link_to "Friend Requested!",individual_relationships_path %></li>
-         <%end%>-->
-        <div class="pull-right user-info">
-           <% if current_user %>
-              <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
-             Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          <li id="FriendBox" style="margin-top:12px"></li>
+          <li><%= link_to "Globe Trotter's", welcome_index_path %></li>
+          <li><%= link_to "notebook", "/users/#{current_user.id}/answers/show"%></li>
+          <li><%= link_to "About", welcome_about_path %></li>
+           <!--<%if current_user && current_user.role =="captain" && TeamRelationship.where(receiver_team_id: current_user.team_id ).first%>
+                 <li><%= link_to "Friend Requested!",team_relationships_path %></li>
+           <%end%>
+           <%if current_user  && IndividualRelationship.where(receiver_id: current_user.id ).first%>
+                 <li><%= link_to "Friend Requested!",individual_relationships_path %></li>
+           <%end%>-->
+          <div class="pull-right user-info">
+             <% if current_user %>
+                <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
+               Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
 
-           <% else %>
-             <%= link_to "Sign In", new_user_session_path %> or
-             <%= link_to "Sign Up", new_user_registration_path %>
-           <% end %>
-         </div>
+             <% else %>
+               <%= link_to "Sign In", new_user_session_path %> or
+               <%= link_to "Sign Up", new_user_registration_path %>
+             <% end %>
+           </div>
       </ul>
 
 
