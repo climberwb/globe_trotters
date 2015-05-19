@@ -25,6 +25,8 @@ Name:<%= @user.name%></br>
            <button type="button" id ="AddFriend" class="btn btn-primary btn-lg" >
               Add Friend
            </button>
+      <%elsif current_user.friendship_eligible== false%>
+        Please finish all four questions in your <a href=<%= "/users/#{current_user.id}/answers/show"%>>notebook!</a>
       <%end%>
     </div>
   <%end%>
