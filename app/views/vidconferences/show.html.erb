@@ -10,7 +10,7 @@
   var sessionId = '<%= @session %>';
 
   var session = OT.initSession(apiKey, sessionId);
-
+  // The person you are viewing
   session.on("streamCreated", function(event) {
     var newSession = session.subscribe(event.stream);
 
@@ -30,10 +30,7 @@
     }
     resizeSession();
   });
-
-
-
-
+  // You
   session.connect(token, function(error) {
     var publisher = OT.initPublisher();
     session.publish(publisher);
@@ -47,7 +44,7 @@
       pubElement.style.marginLeft = "100px";
       pubElement.style.zIndex = 100;
       pubElement.style.top = "480px";
-      pubElement.style.left = "625px";
+      pubElement.style.left = "638px";
 
       
     }
