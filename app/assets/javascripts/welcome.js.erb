@@ -17,7 +17,6 @@ $( ".welcome.index" ).ready(function() {
 
   //conditional so svg will not load multiple globes
   //TODO see if more elegant solution can be applied to all the javascript in app
-  if($('#tool_tip').length==0){
     //adding tool-tip
     var tooltip = d3.select("body")
         .append("div").attr("id", "tool_tip").style("position", "absolute")
@@ -41,6 +40,7 @@ $( ".welcome.index" ).ready(function() {
 
 
         tooltip.text("my tooltip text");
+if($('svg').length===0){
     //spining globe
     d3.select(window)
         .on("mousemove", mousemove)
@@ -75,6 +75,7 @@ $( ".welcome.index" ).ready(function() {
                 .attr("width", width)
                 .attr("height", height).attr("class",'img-responsive')
                 .on("mousedown", mousedown);
+}
     queue()
         .defer(d3.json,
           "<%= asset_path('world-110m.json') %>"
@@ -413,7 +414,7 @@ $( ".welcome.index" ).ready(function() {
       });
 
     }
-  }
+ 
 });
 
 
