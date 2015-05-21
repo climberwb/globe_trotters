@@ -4,6 +4,18 @@
 <script src="//static.opentok.com/v2/js/opentok.min.js" ></script>
 
 <script type="text/javascript">
+
+ navigator.browser= (function(){
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE ';
+    }
+    return M[1]
+    
+})();
+  var currentBrowser = navigator.browser;
   var apiKey    = <%= ENV['OPENTOK_KEY']%>;
  // alert(<%= "#{@videoconference}" %>
   var token = '<%= @token %>';
@@ -16,7 +28,6 @@
 
     newSession;
     function resizeSession() {
-      console.log(newSession.id);
       var sessElement = document.getElementById(newSession.id);
 
       sessElement.style.width = "500px";
@@ -44,8 +55,12 @@
       pubElement.style.marginLeft = "100px";
       pubElement.style.zIndex = 100;
       pubElement.style.top = "480px";
-      pubElement.style.left = "655px";
-
+      if(currentBrowser ==="Firefox"){
+        pubElement.style.left = "635px";
+      }
+      else{
+        pubElement.style.left = "655px";
+      }
       
     }
     resizePublisher();
