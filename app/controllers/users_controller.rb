@@ -62,7 +62,7 @@ def admin_show
       if current_user.answers ==[]
         @questions.each_with_index do |question,index|
           Answer.create(:question_id=>question.id,:user_id=>current_user.id)
-          break if index == 3
+          break if index == 7
         end
       end
      if current_user.save
