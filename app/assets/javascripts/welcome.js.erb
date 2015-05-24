@@ -68,7 +68,7 @@ if($('svg').length===0){
 }
     queue()
         .defer(d3.json,
-          "<%= asset_path('world-110m.json') %>"
+          "<%= asset_path('world-110simplified.json') %>"
         )
         .defer(d3.json, "/to_geo_json")//TODO make if else for /teams/to_geo_json
         .await(ready);
@@ -313,7 +313,7 @@ if($('svg').length===0){
     }
     function mouseup() {
       if (m0) {
-        mousemove();
+       // mousemove();
         m0 = null;
       }
     }
@@ -397,8 +397,8 @@ if($('svg').length===0){
         space.rotate([-y,18]);
       //d3.event.preventDefault();
         y+=1;
-        refresh();
-        return false;
+        return refresh();
+        //return false;
       }else{
         return true;
       }
