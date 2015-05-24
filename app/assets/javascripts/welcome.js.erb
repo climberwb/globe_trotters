@@ -24,17 +24,7 @@ $( ".welcome.index" ).ready(function() {
         .style("background-color", "black")
         .text("a simple tooltip");
 
-    var tooltip2 = d3.select("body")
-        .append("div").attr("id", "tool_tip2").style("position", "absolute")
-        .style("visibility", "hidden")
-        .style("background-color", "#FFFFCC")//.style("top","100px").style("left","20px")
-        .text("a simple tooltip");
-
-    var tooltip3 = d3.select("body")
-        .append("div").attr("id", "tool_tip3").style("position", "absolute")
-        .style("visibility", "hidden")
-        .style("background-color", "#FFFFCC")//.style("top","100px").style("left","20px")
-        .text("a simple tooltip");//.append("img").attr("src","http://www.metmuseum.org/~/media/Images/Metpublication/Cover/2004/Echoing_Images_Couples_in_African_Sculpture.jpg");
+   
 
     var image = tooltip.append("img").attr("src","");
 
@@ -172,8 +162,9 @@ if($('svg').length===0){
       });
 
       // build geoJSON features from links array
+      var feature;
       links.forEach(function(e,i,a) {
-        var feature =   { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [e.source,e.target] }}
+        feature =  { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [e.source,e.target] }}
         arcLines.push(feature)
       })
 
@@ -370,7 +361,7 @@ if($('svg').length===0){
                 .projection(space)
                 .pointRadius(1);
 
-    var starList = createStars(300);
+    var starList = createStars(200);
                     
             var stars = svg.append("g")
                 .selectAll("path")
@@ -393,11 +384,10 @@ if($('svg').length===0){
 
 
 
-
     startAnimation();
     function startAnimation() {
       var y = 1;
-      done=false;
+     // done=false;
 
       d3.timer(function() {
         if(!mousemove() || !mouseup() || !mousedown()){
@@ -406,9 +396,9 @@ if($('svg').length===0){
         // rotate projection for stars in opposite direction
         space.rotate([-y,18]);
       //d3.event.preventDefault();
-        y++;
+        y+=1.5;
         refresh();
-        return done;
+        return false;
       }
 
       });
