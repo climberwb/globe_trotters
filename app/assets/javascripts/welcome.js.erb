@@ -396,9 +396,11 @@ if($('svg').length===0){
         // rotate projection for stars in opposite direction
         space.rotate([-y,18]);
       //d3.event.preventDefault();
-        y+=1.5;
+        y+=1;
         refresh();
         return false;
+      }else{
+        return true;
       }
 
       });
