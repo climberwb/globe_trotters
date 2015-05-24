@@ -183,6 +183,9 @@ var FriendBox = React.createClass({
           window.location.href = '/';
         }.bind(this),
         error: function(xhr, status, err) {
+          $('.loading').css('display','none');
+          $('#friend-error').css('display','block');
+          $('#friend-error')[0].innerHTML="There was an error in deleting your friend. Please try again!";
           console.error('/individual_relationships/delete', status, err.toString());
       }.bind(this)})
    // }
@@ -208,7 +211,9 @@ var FriendBox = React.createClass({
         window.location.href = '/vidconferences/'+data.vidconference_id;
       }.bind(this),
       error: function(xhr, status, err) {
-        $('.loading').css('display','none');
+          $('.loading').css('display','none');
+          $('#friend-error').css('display','block');
+          $('#friend-error')[0].innerHTML="There was an error in accepting your friend. Please try again!";
         console.error('/individual_relationships/accept', status, err.toString());
     }.bind(this)})
   },
