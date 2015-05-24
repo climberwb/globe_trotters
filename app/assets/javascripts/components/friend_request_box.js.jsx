@@ -170,9 +170,9 @@ var FriendBox = React.createClass({
   },
   onDelete: function(user) {
    // alert(user.id);
-   var oldthis = this;
-
-    function deleteCall(){
+    var oldthis = this;
+    //function deleteCall(){
+      $('.loading').css('display','block');
       $.ajax({
         url: '/individual_relationships/delete',
         dataType: 'json',
@@ -180,20 +180,20 @@ var FriendBox = React.createClass({
         data: {delete_friend:{user_id: user.id}},
         success: function(data) {
           oldthis.setState({users: data.users});
-          alert('your friend has been deleted you can now choose other friends!');
           window.location.href = '/';
         }.bind(this),
         error: function(xhr, status, err) {
           console.error('/individual_relationships/delete', status, err.toString());
       }.bind(this)})
-    }
-    var r = confirm("are you sure you want to end your friend request?");
-    if (r == true) {
-        deleteCall();
-    }
+   // }
+    // var r = confirm("are you sure you want to end your friend request?");
+    // if (r == true) {
+    //     deleteCall();
+    // }
   },
   onAccept: function(user) {
     this.setState({ users:[user]});
+    $('.loading').css('display','block');
     $.ajax({
       url: '/individual_relationships/accept',
       dataType: 'json',
@@ -202,12 +202,13 @@ var FriendBox = React.createClass({
       success: function(data) {
         user.friendStatus = 'true';
         this.setState({ users:[user]});
-        alert('friend request complete. You will now redirect to a video chat with your new friend');
+        
+       // alert('friend request complete. You will now redirect to a video chat with your new friend');
         //redirects to viconference
         window.location.href = '/vidconferences/'+data.vidconference_id;
       }.bind(this),
       error: function(xhr, status, err) {
-
+        $('.loading').css('display','none');
         console.error('/individual_relationships/accept', status, err.toString());
     }.bind(this)})
   },
@@ -243,7 +244,7 @@ var FriendBox = React.createClass({
 
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
-    window.setInterval(this.loadRelationshipsFromServer, 15000);
+    window.setInterval(this.loadRelationshipsFromServer, 8000);
   },
 
   redirect: function(userInfo){
