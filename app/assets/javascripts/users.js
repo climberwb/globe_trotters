@@ -31,7 +31,13 @@ $(document).ready(function() {
       function possibleLocations(element, index, array) {
           $("<li>"+element+"</li>").appendTo('#individual-location-list');
         }
-      locations.forEach(possibleLocations);
+
+      if(locations.length ===0){
+        alert('your search yielded no results. Please hit close on the modal and search again')
+      }
+      else{
+        locations.forEach(possibleLocations);
+      }
 
     });
     ready();

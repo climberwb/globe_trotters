@@ -45,7 +45,6 @@ class User < ActiveRecord::Base
 has_many :answers
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates
-
 reverse_geocoded_by :latitude, :longitude
 
 attr_writer :address
@@ -54,7 +53,7 @@ attr_writer :address
   end
 
   def self.location_search(location)
-    Geocoder.configure(:timeout => 6000)
+    Geocoder.configure(:timeout => 4)
 
     Geocoder.search(location).map do |loc|
       city = "#{loc.city}, " if loc.city

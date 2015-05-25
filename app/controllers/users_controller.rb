@@ -66,13 +66,16 @@ def admin_show
         end
       end
      if current_user.save
-             
-     @user = current_user.update_attributes(user_params)
-     # Temporary for presentation delete when multiple roles come into play
-     current_user.update_attributes(:role=>"individual") 
-         redirect_to "#{user_answers_path(current_user)}/show"
-     end
-
+       @user = current_user.update_attributes(user_params)
+       # Temporary for presentation delete when multiple roles come into play
+        if current_user.latitude==nil || current_user.longitude==nil || current_user.location == ""
+          redirect_to :back
+          flash[:error] = 'Your location was blank please try saving again!'
+        else
+       current_user.update_attributes(:role=>"individual") 
+           redirect_to "#{user_answers_path(current_user)}/show"
+      end
+    end
   end
 
   def individual_show
@@ -104,7 +107,7 @@ def admin_show
    def location_search
     p params
     location = params[:location]
-     render :json => User.location_search(location).to_json
+    render :json => User.location_search(location).to_json
   end
 
   def new

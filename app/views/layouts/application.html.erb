@@ -14,6 +14,9 @@
 <% if flash[:notice] %>
   <p class="flash-notice alert alert-success"><%= flash[:notice] %></p>
 <%end%>
+<% if flash[:error] %>
+  <p class="flash-notice alert alert-danger"><%= flash[:error] %></p>
+<%end%>
 <p id="friend-error" class="flash-notice alert alert-danger" style="display:none"></p>
 <!--instance variables added in class of <body> to selectively rendor javascript -->
 <body class="<%= @controller %> <%= @action %>">
