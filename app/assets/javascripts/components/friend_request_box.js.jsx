@@ -171,6 +171,7 @@ var FriendBox = React.createClass({
   onDelete: function(user) {
    // alert(user.id);
     var oldthis = this;
+
     //function deleteCall(){
       $('.loading').css('display','block');
       $.ajax({
@@ -180,12 +181,14 @@ var FriendBox = React.createClass({
         data: {delete_friend:{user_id: user.id}},
         success: function(data) {
           oldthis.setState({users: data.users});
+         // debugger;
           window.location.href = '/';
+           //alert('djdjd');
         }.bind(this),
         error: function(xhr, status, err) {
           $('.loading').css('display','none');
           $('#friend-error').css('display','block');
-          $('#friend-error')[0].innerHTML="There was an error in deleting your friend. Please try again!";
+           $('#friend-error')[0].innerHTML="There was an error in deleting your friend. Please try again!";
           console.error('/individual_relationships/delete', status, err.toString());
       }.bind(this)})
    // }
@@ -249,13 +252,12 @@ var FriendBox = React.createClass({
 
     this.loadRelationshipsFromServer();
     //setInterval(alert('dfdf'), this.props.pollInterval);
-    window.setInterval(this.loadRelationshipsFromServer, 8000);
+    window.setInterval(this.loadRelationshipsFromServer, 10000);
   },
 
   redirect: function(userInfo){
     var urlVideo = window.location.href.match(/vidconference/g);
     console.log('dfd');
-    //debugger;
      if( userInfo && userInfo.users&&userInfo.users.length==0&&urlVideo && urlVideo[0]==="vidconference"){
       //alert('your friendship has been deleted. Please find a new friend!')
        window.location.href = '/'

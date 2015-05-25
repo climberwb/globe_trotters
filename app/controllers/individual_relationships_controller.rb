@@ -62,8 +62,8 @@ class IndividualRelationshipsController < ApplicationController
       sender_id = params[:delete_friend][:user_id].to_i
       receiver_id = current_user.id
     end
-
-      @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
+     # binding.pry
+      @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).where.not(accepted_at: nil).first.destroy
       individual_relationships = IndividualRelationship.where(receiver: current_user)
       relationship_display = []
       relationships = {"users" => []}
