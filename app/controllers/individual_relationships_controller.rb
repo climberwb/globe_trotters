@@ -63,18 +63,17 @@ class IndividualRelationshipsController < ApplicationController
       receiver_id = current_user.id
     end
 
-    Vidconference.find(current_user.vidconference_id).destroy
-    @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
-    individual_relationships = IndividualRelationship.where(receiver: current_user)
-    relationship_display = []
-    relationships = {"users" => []}
-    relationship_display = individual_relationships.each do |relationship|
-          #friend.accepted_at ? friendStatus = true : friendStatus = false
-          if relationship.rejected_at == nil
-            relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false"}
+      @relationship = IndividualRelationship.where(sender_id: sender_id, receiver_id: receiver_id).first.destroy
+      individual_relationships = IndividualRelationship.where(receiver: current_user)
+      relationship_display = []
+      relationships = {"users" => []}
+      relationship_display = individual_relationships.each do |relationship|
+            #friend.accepted_at ? friendStatus = true : friendStatus = false
+            if relationship.rejected_at == nil
+              relationships["users"] << {"name"=>relationship.sender.name, "url"=>individual_show_path(relationship.sender), "avatar"=>relationship.sender.avatar, "id"=>relationship.sender.id.to_s,"friendStatus"=>"false"}
+            end
+         # friendStatus ?
           end
-       # friendStatus ?
-        end
     render :json => relationships.to_json
   end
   def destroy
@@ -102,7 +101,12 @@ class IndividualRelationshipsController < ApplicationController
     # destroys all other relationships not accepted
     IndividualRelationship.where(receiver_id: receiver_id).where.not(sender_id: sender_id).each{|relationship| relationship.destroy}
     # creates video conference
-    Vidconference.create_vidconference(sender,current_user.id)
+   # Vidconference.create_vidconference(sender,current_user.id)
+    Vidconference.create_vidconference(sender,current_user)
+    vidconf_id = User.find(sender.id).vidconference_id
+    vidconf = Vidconference.find(vidconf_id)
+    @relationship.vidconference = vidconf 
+    #@relationship.vidconference.create_vidconference(sender,current_user.id)
     #sends email alerting of video conference
     # TODO get sendgrid username and pw for work computer
     # take care of exception that it still saves user if sendgrid fails

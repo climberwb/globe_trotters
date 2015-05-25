@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506054858) do
+ActiveRecord::Schema.define(version: 20150525013041) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -24,18 +24,18 @@ ActiveRecord::Schema.define(version: 20150506054858) do
 
   add_index "answers", ["user_id", "question_id"], name: "index_answers_on_user_id_and_question_id", unique: true
 
-  create_table "conversations", force: true do |t|
-    t.integer  "sender_id"
-    t.integer  "recipient_id"
+# Could not dump table "conversations" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "icebreaker_sessions", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "notebook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
-    t.integer  "home_team_id"
-    t.integer  "visiting_team_id"
   end
 
-  add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
-  add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
+  add_index "icebreaker_sessions", ["notebook_id"], name: "index_icebreaker_sessions_on_notebook_id"
+  add_index "icebreaker_sessions", ["question_id"], name: "index_icebreaker_sessions_on_question_id"
 
   create_table "individual_relationships", force: true do |t|
     t.datetime "accepted_at"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(version: 20150506054858) do
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "notebooks", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id"
 
   create_table "questions", force: true do |t|
     t.string   "content"
@@ -139,7 +147,12 @@ ActiveRecord::Schema.define(version: 20150506054858) do
   add_index "users", ["vidconference_id"], name: "index_users_on_vidconference_id"
 
   create_table "vidconferences", force: true do |t|
-    t.string "session"
+    t.string  "session"
+    t.integer "vidconference_id"
+    t.integer "individual_relationship_id"
   end
+
+  add_index "vidconferences", ["individual_relationship_id"], name: "index_vidconferences_on_individual_relationship_id"
+  add_index "vidconferences", ["vidconference_id"], name: "index_vidconferences_on_vidconference_id"
 
 end

@@ -1,5 +1,6 @@
 class Vidconference < ActiveRecord::Base
 has_many :users
+belongs_to :individual_relationship
 
 # put this validates_presence_of :body, :conversation_id, :user_id
 validates_presence_of :session
