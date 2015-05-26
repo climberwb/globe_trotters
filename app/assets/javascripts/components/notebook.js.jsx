@@ -30,7 +30,7 @@ var EditLink  = React.createClass({
 
     return (
         <div>
-          <p>{this.props.answer.answerContent}</p>
+          <p className="displayPara">{this.props.answer.answerContent}</p>
         </div>
       )
   }
@@ -48,9 +48,9 @@ var AnswerLinks = React.createClass({
     //this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
 
     return (
-        <div>
+        <div  style={{width:"100%", position:"relative",left:"70px"}} >
           <EditLink answer={this.props.answer} />
-          <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
+          <UpdateLink style={{marginLeft:"60px"}}answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
         </div>
       )
   }
