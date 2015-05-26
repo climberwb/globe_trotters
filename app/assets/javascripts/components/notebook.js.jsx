@@ -48,7 +48,7 @@ var AnswerLinks = React.createClass({
     //this.props.answer.pendingStatus ? Update = <UpdateLink answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} /> : Update = null
 
     return (
-        <div  style={{width:"100%", position:"relative",left:"70px"}} >
+        <div  style={{width:"100%", position:"relative",left:"78px"}} >
           <EditLink answer={this.props.answer} />
           <UpdateLink style={{marginLeft:"60px"}}answer={this.props.answer} UpdateAnswer={this.UpdateAnswer} />
         </div>
