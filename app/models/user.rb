@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   # validate :user_count_within_limit, :on => :update
 
-has_many :answers
+has_many :answers, dependent: :destroy
 geocoded_by :location   # can also be an IP address
 after_validation :geocode          # auto-fetch coordinates
 reverse_geocoded_by :latitude, :longitude
