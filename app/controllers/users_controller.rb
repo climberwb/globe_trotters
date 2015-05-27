@@ -68,9 +68,10 @@ def admin_show
      if current_user.save
        @user = current_user.update_attributes(user_params)
        # Temporary for presentation delete when multiple roles come into play
-        if current_user.latitude==nil || current_user.longitude==nil || current_user.location == ""
+        if current_user.travel_status == "" ||(current_user.latitude==nil || current_user.longitude==nil || current_user.location == "")
           redirect_to :back
           flash[:error] = 'Your location was blank please try saving again!'
+          flash[:error] = 'You have to pick host or traveler!' if current_user.travel_status==""
         else
        current_user.update_attributes(:role=>"individual") 
            redirect_to "#{user_answers_path(current_user)}/show"

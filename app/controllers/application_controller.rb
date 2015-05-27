@@ -17,9 +17,8 @@ class ApplicationController < ActionController::Base
    end
    def after_sign_in_path_for(resource)
       # 
-      if current_user.role.nil?  ## temporary solution
+      if current_user.role.nil? || current_user.travel_status=="" ## temporary solution
         
-
         individual_form_path(resource)
       else
         root_path(resource)
