@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_one :teammate_relationship, foreign_key: "receiver_id"
   has_one :teammate_relationship, foreign_key: "sender_id"
   #TODO fix relationship when its made between sender and receiver
+  #TODO look into dependent destory for user who deletes account with relationship
   has_one :individual_relationship, foreign_key: "receiver_id"
   has_one :individual_relationship, foreign_key: "sender_id"
 
